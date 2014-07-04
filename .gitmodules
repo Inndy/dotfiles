@@ -1,3 +1,21 @@
 [submodule "vim/bundle/vundle"]
 	path = vim/bundle/vundle
 	url = https://github.com/gmarik/vundle.git
+[submodule "vim/bundle/cscope_plus.vim"]
+	path = vim/bundle/cscope_plus.vim
+	url = https://github.com/vim-scripts/cscope_plus.vim.git
+[submodule "vim/bundle/HTML5-Syntax-File"]
+	path = vim/bundle/HTML5-Syntax-File
+	url = https://github.com/vim-scripts/HTML5-Syntax-File.git
+[submodule "vim/bundle/html5.vim"]
+	path = vim/bundle/html5.vim
+	url = https://github.com/vim-scripts/html5.vim.git
+[submodule "vim/bundle/nerdtree"]
+	path = vim/bundle/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
+[submodule "vim/bundle/php.vim"]
+	path = vim/bundle/php.vim
+	url = https://github.com/vim-scripts/php.vim.git
+[submodule "vim/bundle/Auto-Pairs"]
+	path = vim/bundle/Auto-Pairs
+	url = https://github.com/vim-scripts/Auto-Pairs.git
