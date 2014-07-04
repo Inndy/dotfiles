@@ -67,3 +67,6 @@ check_ohmyzsh
 for file in `echo $files | tr ' ' '\n'`; do
 	install_file $file
 done
+
+git submodule init
+git submodule update --recursive
