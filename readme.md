@@ -2,8 +2,8 @@
 
 ## Notice
 
-> I don't promise anything for these setting files.
-> So you should check all files before you install it.
+> I don't promise anything for these setting files,
+> so you should check all files before you install it.
 
 ## Install
 
