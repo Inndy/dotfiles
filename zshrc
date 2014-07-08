@@ -56,6 +56,18 @@ if [ -d /var/www ]; then
 	alias cdw="cd /var/www"
 fi
 
+if [ -x "`which iconv`" ]; then
+	function big5-2-utf8() {
+		iconv -f big5 -t utf-8 "$1" > "$1.tmp~"
+		mv "$1.tmp~" "$1"
+	}
+
+	function utf8-2-big5() {
+		iconv -f utf8 -t big5 "$1" > "$1.tmp~"
+		mv "$1.tmp~" "$1"
+	}
+fi
+
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
