@@ -33,7 +33,7 @@ autocmd FileType python setlocal et sta sw=4 sts=4
 " Key Mapping
 "nnoremap <silent> <c-x> :w<CR>
 "nnoremap <silent> <c-x> :x<CR>
-nnoremap <silent> <F3> :noh<CR>
+nnoremap <c-l> :noh<CR>
 "nnoremap <silent> <F4> :w<CR>
 "nnoremap <silent> <F6> :tabedit 
 nnoremap <silent> <F10> :NERDTree<CR>
