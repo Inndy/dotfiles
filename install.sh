@@ -27,6 +27,16 @@ function check_git() {
 	fi
 }
 
+function check_zsh() {
+	if [ -x "`which zsh`" ]; then
+		echo "You already have zsh. :D"
+		echo "Now we switch to zsh!!"
+		chsh -s /bin/zsh
+	else
+		echo "You may need zsh..."
+	fi
+}
+
 function check_ohmyzsh() {
 	if [ -d ~/.oh-my-zsh ]; then
 		echo "You already have oh-my-zsh. Good!"
@@ -70,3 +80,5 @@ done
 
 git submodule init
 git submodule update --recursive
+
+check_zsh
