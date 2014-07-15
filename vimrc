@@ -44,6 +44,8 @@ map t gt
 map T gT
 "map :tab :tabedit 
 
+map :Q :q
+
 " Run files
 autocmd BufRead *.py nmap <F5> :w !python % <CR>
 autocmd BufRead *.lisp nmap <F5> :w !clisp % <CR>
