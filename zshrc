@@ -120,6 +120,10 @@ elif [ `uname -s` = 'Darwin' ]; then
 	# gnu tools
 	export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 	export MANPATH="/usr/local/opt/gnu-sed/libexec/gnuman:$MANPATH"
+
+	if [ -x "`which mono`" ]; then
+		export MONO_GAC_PREFIX="/usr/local"
+	fi
 else
 	echo "Oops! What's your OS?" > /dev/stderr
 fi
@@ -148,10 +152,3 @@ fi
 if [ -d ~/.phpbrew ]; then
 	source ~/.phpbrew/bashrc
 fi
-
-function load-ssh-keys () {
-	eval `ssh-agent` > /dev/null
-	pushd ~/.ssh > /dev/null
-	ssh-add `ls | grep -v '.pub\|known_hosts'` 2> /dev/null
-	popd > /dev/null
-}
