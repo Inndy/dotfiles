@@ -68,4 +68,5 @@ color molokai
 "darkblue   desert     koehler    pablo      shine      zellner
 "default    elflord    morning    peachpuff  slate
 
+" Fix backspace in iTerm2
 set backspace=indent,eol,start
