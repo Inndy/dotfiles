@@ -1,4 +1,0 @@
-HISTSIZE=4000
-HISTFILESIZE=12000
-
-alias ll="ls -l"
