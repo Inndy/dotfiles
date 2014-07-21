@@ -221,6 +221,7 @@ func! s:Blocktag(blocktag, ind) "{{{
     return "foo"
 endfunc "}}}
 func! s:GetScriptType(str) "{{{
+    return "javascript"
     if a:str == "" || a:str =~ "java"
 	return "javascript"
     else
