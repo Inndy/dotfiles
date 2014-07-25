@@ -7,4 +7,4 @@
 
 ## Install
 
-`git clone https://github.com/Inndy/dotfiles.git --depth 1 && cd dotfiles && ./install.sh`
+`git clone https://github.com/Inndy/dotfiles.git .dotfiles --depth 1 && cd .dotfiles && ./install.sh`
