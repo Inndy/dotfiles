@@ -5,17 +5,20 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " Settings
-set number
 set autoindent
-set smartindent
+set colorcolumn=80
+set cursorline
+set expandtab
 set hlsearch
-set tabstop=4
-set shiftwidth=4
 set ignorecase
 set incsearch
+set number
+set ruler
+set shiftwidth=4
 set showcmd
-set cursorline
+set smartindent
 set t_Co=256
+set tabstop=4
 
 " Pathogen
 execute pathogen#infect()
@@ -31,13 +34,8 @@ autocmd FileType python setlocal et sta sw=4 sts=4
 "autocmd FileType jade setlocal et sw=2 sts=2
 
 " Key Mapping
-"nnoremap <silent> <c-x> :w<CR>
-"nnoremap <silent> <c-x> :x<CR>
 nnoremap <c-l> :noh<CR>
-"nnoremap <silent> <F4> :w<CR>
-"nnoremap <silent> <F6> :tabedit 
 nnoremap <silent> <F10> :NERDTree<CR>
-"nnoremap <silent> <F10> :q<CR>
 map <c-t>e :tabedit 
 map <c-t>n :tabnew<CR>
 map t gt
