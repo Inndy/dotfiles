@@ -34,13 +34,8 @@ autocmd FileType python setlocal et sta sw=4 sts=4
 "autocmd FileType jade setlocal et sw=2 sts=2
 
 " Key Mapping
-"nnoremap <silent> <c-x> :w<CR>
-"nnoremap <silent> <c-x> :x<CR>
 nnoremap <c-l> :noh<CR>
-"nnoremap <silent> <F4> :w<CR>
-"nnoremap <silent> <F6> :tabedit 
 nnoremap <silent> <F10> :NERDTree<CR>
-"nnoremap <silent> <F10> :q<CR>
 map <c-t>e :tabedit 
 map <c-t>n :tabnew<CR>
 map t gt
