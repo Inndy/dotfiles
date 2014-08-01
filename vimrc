@@ -5,17 +5,20 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " Settings
-set number
 set autoindent
-set smartindent
+set colorcolumn=80
+set cursorline
+set expandtab
 set hlsearch
-set tabstop=4
-set shiftwidth=4
 set ignorecase
 set incsearch
+set number
+set ruler
+set shiftwidth=4
 set showcmd
-set cursorline
+set smartindent
 set t_Co=256
+set tabstop=4
 
 " Pathogen
 execute pathogen#infect()
