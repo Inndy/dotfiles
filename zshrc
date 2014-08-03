@@ -31,11 +31,6 @@ elif [ -x "`which pbcopy`" ]; then
 	alias clip="pbcopy"
 fi
 
-# tree
-if [ -x "`which tree`" ]; then
-	alias tree="tree | less"
-fi
-
 # ctags for php
 if [ -x "`which ctags`" ]; then
 	alias phptags='ctags --langmap=php:.engine.inc.module.theme.php --php-kinds=cdf --languages=php'
