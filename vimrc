@@ -4,6 +4,15 @@ filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
+Bundle 'mileszs/ack.vim'
+Bundle 'vim-scripts/Auto-Pairs'
+Bundle 'vim-scripts/HTML5-Syntax-File'
+Bundle 'vim-scripts/cscope_plus.vim'
+Bundle 'vim-scripts/html5.vim'
+Bundle 'scrooloose/nerdtree'
+Bundle 'vim-scripts/php.vim'
+
+
 " Settings
 set autoindent
 set colorcolumn=80
