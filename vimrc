@@ -11,6 +11,7 @@ Bundle 'vim-scripts/cscope_plus.vim'
 Bundle 'vim-scripts/html5.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'vim-scripts/php.vim'
+Bundle 'mattn/emmet-vim'
 
 
 " Settings
