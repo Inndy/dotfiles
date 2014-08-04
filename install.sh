@@ -78,7 +78,7 @@ for file in `echo $files | tr ' ' '\n'`; do
 	install_file $file
 done
 
-git submodule init
-git submodule update --recursive
+echo "Install vim plugins"
+echo | vim
 
 check_zsh
