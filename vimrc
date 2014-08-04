@@ -1,3 +1,7 @@
+" Theme
+let g:rehash256 = 1
+color molokai
+
 " Vundle
 set nocompatible
 filetype off
@@ -86,10 +90,6 @@ let g:ctags_statusline = 1
 
 " Emmet
 let g:user_emmet_expandabbr_key = '<c-e>'
-
-" Theme
-let g:rehash256 = 1
-color molokai
 
 "color ron
 "blue       delek      evening    murphy     ron        torte
