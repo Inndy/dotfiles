@@ -30,6 +30,8 @@ Bundle 'vim-scripts/html5.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'vim-scripts/php.vim'
 Bundle 'mattn/emmet-vim'
+Bundle 'pangloss/vim-javascript'
+
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
     echo ""
