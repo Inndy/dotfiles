@@ -79,6 +79,6 @@ for file in `echo $files | tr ' ' '\n'`; do
 done
 
 echo "Install vim plugins"
-echo | vim
+vim +qall
 
 check_zsh
