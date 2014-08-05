@@ -20,22 +20,22 @@ if !filereadable(vundle_readme)
 endif
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
-Bundle 'gmarik/vundle'
 "Add your bundles here
-Bundle 'mileszs/ack.vim'
-Bundle 'vim-scripts/Auto-Pairs'
-Bundle 'vim-scripts/HTML5-Syntax-File'
-Bundle 'vim-scripts/cscope_plus.vim'
-Bundle 'vim-scripts/html5.vim'
-Bundle 'scrooloose/nerdtree'
-Bundle 'vim-scripts/php.vim'
-Bundle 'mattn/emmet-vim'
-Bundle 'pangloss/vim-javascript'
+Plugin 'gmarik/vundle'
+Plugin 'mileszs/ack.vim'
+Plugin 'vim-scripts/Auto-Pairs'
+Plugin 'vim-scripts/HTML5-Syntax-File'
+Plugin 'vim-scripts/cscope_plus.vim'
+Plugin 'vim-scripts/html5.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'vim-scripts/php.vim'
+Plugin 'mattn/emmet-vim'
+Plugin 'pangloss/vim-javascript'
 
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
     echo ""
-    :BundleInstall
+    :PluginInstall
 endif
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Setting up Vundle - the vim plugin bundler end "
