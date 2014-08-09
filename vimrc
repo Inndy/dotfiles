@@ -1,6 +1,7 @@
 " Theme
 let g:rehash256 = 1
 color molokai
+syntax on
 
 " Vundle
 set nocompatible
