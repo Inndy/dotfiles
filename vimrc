@@ -1,7 +1,6 @@
 " Theme
 let g:rehash256 = 1
 color molokai
-syntax on
 
 " Vundle
 set nocompatible
@@ -59,6 +58,7 @@ set smartindent
 set t_Co=256
 set tabstop=4
 
+syntax on
 
 "source ~/.vim/theme_jellybeans.vim
 
