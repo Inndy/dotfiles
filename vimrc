@@ -84,6 +84,7 @@ cab X x
 cab WQ wq
 cab Wq wq
 cab wQ wq
+cab Set set
 
 " Run files
 autocmd BufRead *.py nmap <F5> :w !python % <CR>
