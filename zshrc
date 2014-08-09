@@ -147,3 +147,7 @@ fi
 if [ -d ~/.phpbrew ]; then
 	source ~/.phpbrew/bashrc
 fi
+
+if [ -r ~/.zshrc.local ]; then
+    source ~/.zshrc.local
+fi
