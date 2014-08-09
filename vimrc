@@ -60,6 +60,7 @@ set t_Co=256
 set tabstop=4
 
 syntax on
+filetype plugin indent on
 
 "source ~/.vim/theme_jellybeans.vim
 
