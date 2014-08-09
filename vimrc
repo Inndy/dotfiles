@@ -30,6 +30,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'vim-scripts/php.vim'
 Plugin 'mattn/emmet-vim'
 Plugin 'pangloss/vim-javascript'
+Plugin 'junegunn/vim-easy-align'
 
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
