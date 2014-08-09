@@ -74,7 +74,12 @@ map t gt
 map T gT
 "map :tab :tabedit 
 
-map :Q :q
+cab Q q
+cab W w
+cab X x
+cab WQ wq
+cab Wq wq
+cab wQ wq
 
 " Run files
 autocmd BufRead *.py nmap <F5> :w !python % <CR>
