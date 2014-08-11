@@ -74,6 +74,7 @@ autocmd FileType python setlocal et sta sw=4 sts=4
 nnoremap <c-l> :noh<CR>
 inoremap <F10> <ESC>:NERDTreeToggle<CR>
 nnoremap <silent> <F10> :NERDTree<CR>
+vmap <Enter> <Plug>(EasyAlign)
 nmap <Tab> gt
 nmap <S-Tab> gT
 map <S-T> :tabedit 
