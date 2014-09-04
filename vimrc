@@ -65,6 +65,7 @@ filetype plugin indent on
 "source ~/.vim/theme_jellybeans.vim
 
 autocmd FileType python setlocal et sta sw=4 sts=4
+autocmd FileType ruby setlocal et sta sw=2 sts=2
 "autocmd FileType html setlocal et sw=2 sts=2
 "autocmd FileType php setlocal et sw=2 sts=2
 "autocmd FileType js setlocal et sw=2 sts=2
@@ -89,6 +90,7 @@ cab Set set
 
 " Run files
 autocmd BufRead *.py nmap <F5> :w !python % <CR>
+autocmd BufRead *.rb nmap <F5> :w !ruby % <CR>
 autocmd BufRead *.lisp nmap <F5> :w !clisp % <CR>
 autocmd BufRead *.sh nmap <F5> :w !bash % <CR>
 autocmd BufRead *.php nmap <F5> :w !php % <CR>
