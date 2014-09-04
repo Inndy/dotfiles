@@ -73,6 +73,7 @@ autocmd FileType ruby setlocal et sta sw=2 sts=2
 
 " Key Mapping
 nnoremap <c-l> :noh<CR>
+inoremap <c-l> <c-o>:noh<CR>
 inoremap <F10> <ESC>:NERDTreeToggle<CR>
 nnoremap <silent> <F10> :NERDTree<CR>
 vmap <Enter> <Plug>(EasyAlign)
