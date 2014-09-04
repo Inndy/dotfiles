@@ -95,6 +95,8 @@ autocmd BufRead *.rb nmap <F5> :w !ruby % <CR>
 autocmd BufRead *.lisp nmap <F5> :w !clisp % <CR>
 autocmd BufRead *.sh nmap <F5> :w !bash % <CR>
 autocmd BufRead *.php nmap <F5> :w !php % <CR>
+autocmd filetype c nnoremap <F5> :w <bar> exec '!gcc '.shellescape('%').' -O2 && ./a.out'<CR>
+autocmd filetype cpp nnoremap <F5> :w <bar> exec '!g++ '.shellescape('%').' -std=c++11 -O2 && ./a.out'<CR>
 
 " Ctags
 let g:ctags_statusline = 1
