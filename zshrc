@@ -65,6 +65,11 @@ if [ -x "`which iconv`" ]; then
 	}
 fi
 
+# minecraft path
+if [ -d "/Users/$USER/Library/Application Support/minecraft" ]; then
+    export MINECRAFT="/Users/$USER/Library/Application Support/minecraft"
+fi
+
 # python
 if [ -r ~/.pythonrc.py ]; then
     export PYTHONSTARTUP=~/.pythonrc.py
