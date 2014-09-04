@@ -1,6 +1,6 @@
 #!/bin/bash
 
-files='ctags gitconfig tmux.conf vim vimrc zshrc gitignore_global'
+files='ctags gitconfig tmux.conf vim vimrc zshrc gitignore_global pytonrc.py'
 
 function abspath() {
 	pushd . > /dev/null

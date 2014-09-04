@@ -63,6 +63,11 @@ if [ -x "`which iconv`" ]; then
 	}
 fi
 
+# python
+if [ -r ~/.pythonrc.py ]; then
+    export PYTHONSTARTUP=~/.pythonrc.py
+fi
+
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
