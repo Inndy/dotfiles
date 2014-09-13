@@ -63,6 +63,11 @@ function link() {
 	ln -s "$1" "$2"
 }
 
+function install_vim_plugin() {
+    echo "Install vim plugins"
+    vim +qall
+}
+
 function fix_prev() {
     echo "Fix previous bug..."
 
@@ -91,7 +96,5 @@ for file in `echo $files | tr ' ' '\n'`; do
 	install_file $file
 done
 
-echo "Install vim plugins"
-vim +qall
-
+install_vim_plugin
 check_zsh
