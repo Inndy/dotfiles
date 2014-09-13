@@ -25,13 +25,13 @@ Plugin 'mileszs/ack.vim'
 Plugin 'vim-scripts/Auto-Pairs'
 Plugin 'vim-scripts/HTML5-Syntax-File'
 Plugin 'vim-scripts/cscope_plus.vim'
-Plugin 'vim-scripts/html5.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-scripts/php.vim'
 Plugin 'mattn/emmet-vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'Inndy/nginx-vim-syntax'
+Plugin 'othree/html5.vim'
 
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
@@ -90,7 +90,7 @@ cab wQ wq
 cab Set set
 
 " Run files
-autocmd BufRead *.py nmap <F5> :w !python % <CR>
+autocmd BufRead *.py nmap <F5> :w !python3 % <CR>
 autocmd BufRead *.rb nmap <F5> :w !ruby % <CR>
 autocmd BufRead *.lisp nmap <F5> :w !clisp % <CR>
 autocmd BufRead *.sh nmap <F5> :w !bash % <CR>
