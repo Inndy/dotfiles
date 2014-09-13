@@ -1,6 +1,6 @@
 #!/bin/bash
 
-files='ctags gitconfig tmux.conf vim vimrc zshrc gitignore_global pytonrc.py'
+files='ctags gitconfig tmux.conf vim vimrc zshrc gitignore_global pythonrc.py'
 
 function abspath() {
 	pushd . > /dev/null
@@ -63,6 +63,18 @@ function link() {
 	ln -s "$1" "$2"
 }
 
+function fix_prev() {
+    echo "Fix previous bug..."
+
+    if [ -L ~/.pytonrc.py ]; then
+        echo -ne '~/.pytonrc.py found, do you want to remove it? (y)'
+        read rmf
+        if [ -z $rmf ] || [ $rmf == "Y" ] || [ $rmf == "y" ]; then
+            rm ~/.pytonrc.py
+        fi
+    fi
+}
+
 echo ""
 echo "  +------------------------------------------------+"
 echo "  |                                                |\\"
@@ -72,6 +84,7 @@ echo "  +------------------------------------------------+ |"
 echo "   \\________________________________________________\\|"
 echo ""
 
+fix_prev
 check_ohmyzsh
 
 for file in `echo $files | tr ' ' '\n'`; do
