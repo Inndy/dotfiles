@@ -127,7 +127,7 @@ elif [ `uname -s` = 'Darwin' ]; then
 	export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/cli-tool:$HOME/.composer/vendor/bin"
 
 	# gnu tools
-	export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+	export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 	export MANPATH="/usr/local/opt/gnu-sed/libexec/gnuman:$MANPATH"
 
 	if [ -x "`which mono`" ]; then
