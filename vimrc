@@ -33,6 +33,7 @@ Plugin 'junegunn/vim-easy-align'
 Plugin 'Inndy/nginx-vim-syntax'
 Plugin 'othree/html5.vim'
 Plugin 'tpope/vim-surround'
+Plugin 'xsbeats/vim-blade'
 
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
