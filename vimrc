@@ -91,6 +91,9 @@ cab Wq wq
 cab wQ wq
 cab Set set
 
+map :paste "*p
+map :copy "*y
+
 " Run files
 autocmd BufRead *.py nmap <F5> :w !python3 % <CR>
 autocmd BufRead *.rb nmap <F5> :w !ruby % <CR>
