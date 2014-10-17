@@ -21,6 +21,7 @@ alias less="less -R"
 alias grep="grep --color=auto"
 alias python2=python2.7
 alias python=python3
+alias v=vim
 
 # tmux
 if [ -x "`which tmux`" ]; then
