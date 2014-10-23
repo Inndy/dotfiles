@@ -160,10 +160,10 @@ export EDITOR='vim'
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-if [ -d ~/.phpbrew ]; then
-	source ~/.phpbrew/bashrc
-fi
-
 if [ -r ~/.zshrc.local ]; then
     source ~/.zshrc.local
+fi
+
+if [ -d ~/.phpbrew ]; then
+	source ~/.phpbrew/bashrc
 fi
