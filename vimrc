@@ -95,11 +95,11 @@ map :paste "*p
 map :copy "*y
 
 " Run files
-autocmd BufRead *.py nmap <F5> :w !python3 % <CR>
-autocmd BufRead *.rb nmap <F5> :w !ruby % <CR>
-autocmd BufRead *.lisp nmap <F5> :w !clisp % <CR>
-autocmd BufRead *.sh nmap <F5> :w !bash % <CR>
-autocmd BufRead *.php nmap <F5> :w !php % <CR>
+autocmd filetype ruby nnoremap <F5> :w <bar> exec '!ruby '.shellescape('%') <CR>
+autocmd filetype lisp nnoremap <F5> :w <bar> exec '!clisp '.shellescape('%') <CR>
+autocmd filetype shell nnoremap <F5> :w <bar> exec '!bash '.shellescape('%') <CR>
+autocmd filetype php nnoremap <F5> :w <bar> exec '!php -f '.shellescape('%') <CR>
+autocmd filetype python nnoremap <F5> :w <bar> exec '!python3 '.shellescape('%')<CR>
 autocmd filetype c nnoremap <F5> :w <bar> exec '!gcc '.shellescape('%').' -O2 && ./a.out'<CR>
 autocmd filetype cpp nnoremap <F5> :w <bar> exec '!g++ '.shellescape('%').' -std=c++11 -O2 && ./a.out'<CR>
 
