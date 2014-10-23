@@ -167,3 +167,10 @@ fi
 if [ -d ~/.phpbrew ]; then
 	source ~/.phpbrew/bashrc
 fi
+
+# zsh help
+if [ -f /usr/local/share/zsh/helpfiles ]; then
+    unalias run-help
+    autoload run-help
+    HELPDIR=/usr/local/share/zsh/helpfiles
+fi
