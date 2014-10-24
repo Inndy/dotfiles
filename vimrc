@@ -32,6 +32,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'Inndy/nginx-vim-syntax'
 Plugin 'othree/html5.vim'
+Plugin 'othree/html5-syntax.vim'
 Plugin 'tpope/vim-surround'
 Plugin 'xsbeats/vim-blade'
 
