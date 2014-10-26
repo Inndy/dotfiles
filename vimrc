@@ -99,8 +99,8 @@ cab Wq wq
 cab wQ wq
 cab Set set
 
-map :paste "*p
-map :copy "*y
+map ,p "*p
+map ,y "*y
 
 " Run files
 autocmd filetype ruby nnoremap <F5> :w <bar> exec '!ruby '.shellescape('%') <CR>
