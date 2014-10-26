@@ -8,3 +8,7 @@
 ## Install
 
 `git clone https://github.com/Inndy/dotfiles.git .dotfiles --depth 1 && cd .dotfiles && ./install.sh`
+
+## README for VIM
+
+[Here](README_VIM.md)
