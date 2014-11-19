@@ -117,6 +117,7 @@ plugins=(git history-substring-search zsh-syntax-highlighting tmux colored-man u
 
 source $ZSH/oh-my-zsh.sh
 
+export HISTSIZE=1000000
 setopt HIST_IGNORE_SPACE CORRECT
 
 # User configuration
