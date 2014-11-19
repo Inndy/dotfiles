@@ -20,6 +20,8 @@ if !filereadable(vundle_readme)
 endif
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
+Plugin 'vundle'
+
 "Add your bundles here
 Plugin 'mileszs/ack.vim'
 Plugin 'vim-scripts/Auto-Pairs'
