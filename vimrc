@@ -40,6 +40,8 @@ Plugin 'othree/yajs.vim'
 Plugin 'tpope/vim-surround'
 Plugin 'xsbeats/vim-blade'
 
+Plugin 'fidian/hexmode'
+
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
     echo ""
