@@ -131,3 +131,10 @@ let g:user_emmet_expandabbr_key = '<c-e>'
 
 " Fix backspace in iTerm2
 set backspace=indent,eol,start
+
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
