@@ -141,6 +141,10 @@ elif [ `uname -s` = 'Darwin' ]; then
 	if [ -x "`which mono`" ]; then
 		export MONO_GAC_PREFIX="/usr/local"
 	fi
+
+    function gadb {
+        $((ps aux | grep Genymotion | grep adb | grep -o -e '[^ ]\+adb'; echo adb) | head -n 1) $@
+    }
 else
 	echo "Oops! What's your OS?" > /dev/stderr
 fi
