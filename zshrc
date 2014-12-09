@@ -26,8 +26,7 @@ alias -g "tmux-mode= -t 'tmux ls > /dev/null && tmux a -t 0 || tmux'"
 
 # tmux
 if [ -x "`which tmux`" ]; then
-	alias tm="TERM=screen-256color-bce tmux -2"
-	alias tmux="TERM=screen-256color-bce tmux -2"
+	alias tm=tmux
 fi
 
 # clipboard
