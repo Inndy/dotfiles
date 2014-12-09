@@ -98,3 +98,9 @@ done
 
 install_vim_plugin
 check_zsh
+
+if [ -f ~/.zshrc.local ]; then
+    echo "~/.zshrc.local exists, please manual add cli-tools to \$PATH"
+else
+    echo "export PATH=\"\$PATH:$PWD/cli-tools\"" >> ~/.zshrc.local
+fi
