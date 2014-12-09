@@ -122,8 +122,6 @@ ZSH_TMUX_AUTOCONNECT=false
 ZSH_TMUX_AUTOSTART=true
 plugins=(git history-substring-search zsh-syntax-highlighting tmux colored-man urltools osx laravel brew composer)
 
-source $ZSH/oh-my-zsh.sh
-
 export HISTSIZE=1000000
 setopt HIST_IGNORE_SPACE CORRECT
 
@@ -190,3 +188,5 @@ if [ -f /usr/local/share/zsh/helpfiles ]; then
     autoload run-help
     HELPDIR=/usr/local/share/zsh/helpfiles
 fi
+
+source $ZSH/oh-my-zsh.sh
