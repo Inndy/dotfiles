@@ -17,6 +17,8 @@
 	b = branch
 	s = status
 	cm = commit -m
+	p = pull
+	pu = push
 [merge]
 	tool = vimdiff
 [core]
