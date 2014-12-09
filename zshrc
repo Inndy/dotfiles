@@ -118,7 +118,8 @@ fi
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-ZSH_TMUX_AUTOSTART=false
+ZSH_TMUX_AUTOCONNECT=false
+ZSH_TMUX_AUTOSTART=true
 plugins=(git history-substring-search zsh-syntax-highlighting tmux colored-man urltools osx laravel brew composer)
 
 source $ZSH/oh-my-zsh.sh
