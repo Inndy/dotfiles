@@ -179,6 +179,10 @@ if [ -d ~/.phpbrew ]; then
 	source ~/.phpbrew/bashrc
 fi
 
+if [ -d /usr/local/opt/android-sdk ]; then
+    export ANDROID_HOME=/usr/local/opt/android-sdk
+fi
+
 # zsh help
 if [ -f /usr/local/share/zsh/helpfiles ]; then
     unalias run-help
