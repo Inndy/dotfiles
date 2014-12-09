@@ -79,6 +79,11 @@ if [ -r ~/.pythonrc.py ]; then
     export PYTHONSTARTUP=~/.pythonrc.py
 fi
 
+# pygmentize
+if [ -x "`which pygmentize`" ]; then
+    alias highlight="pygmentize -O encoding=utf8,style=monokai -f 256"
+fi
+
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
