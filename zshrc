@@ -26,6 +26,7 @@ alias -g "tmux-mode= -t 'tmux ls > /dev/null && tmux a -t 0 || tmux'"
 
 # tmux
 if [ -x "`which tmux`" ]; then
+    alias t=tmux
 	alias tm=tmux
 fi
 
