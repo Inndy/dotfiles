@@ -14,6 +14,7 @@
 	grep = grep --break --heading --line-number --color=auto
 	d = diff --color=auto
 	diff = diff --color=auto
+	dc = diff --color=auto --cached
 	b = branch
 	s = status
 	cm = commit -m
