@@ -190,3 +190,7 @@ if [ -f /usr/local/share/zsh/helpfiles ]; then
 fi
 
 source $ZSH/oh-my-zsh.sh
+
+if [ -r ~/.zshrc.local.after ]; then
+    source ~/.zshrc.local.after
+fi
