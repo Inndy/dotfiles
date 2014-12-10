@@ -4,21 +4,21 @@
 [push]
 	default = matching
 [alias]
-	g = grep --break --heading --line-number --color=auto
-	st = status
-	c = commit
 	a = add
-	l = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%ai%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
-	co = checkout
-	cl = clone
-	grep = grep --break --heading --line-number --color=auto
-	d = diff --color=auto
-	diff = diff --color=auto
-	dc = diff --color=auto --cached
 	b = branch
-	s = status
+	c = commit
+	cl = clone
 	cm = commit -m
+	co = checkout
+	d = diff --color=auto
+	dc = diff --color=auto --cached
+	diff = diff --color=auto
+	g = grep --break --heading --line-number --color=auto
+	grep = grep --break --heading --line-number --color=auto
+	l = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%ai%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
 	p = pull
+	s = status
+	st = status
 [merge]
 	tool = vimdiff
 [core]
