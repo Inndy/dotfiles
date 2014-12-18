@@ -88,10 +88,10 @@ vmap <Enter> <Plug>(EasyAlign)
 nmap <Tab> gt
 nmap <S-Tab> gT
 map <S-T> :tabedit 
-nmap <c-n> :call emmet#moveNextPrev(0)<CR>
-imap <c-n> <esc>:call emmet#moveNextPrev(0)<CR>
-nmap <c-m> :call emmet#moveNextPrev(1)<CR>
-imap <c-m> <esc>:call emmet#moveNextPrev(1)<CR>
+nmap <c-j> :call emmet#moveNextPrev(0)<CR>
+imap <c-j> <esc>:call emmet#moveNextPrev(0)<CR>
+nmap <c-k> :call emmet#moveNextPrev(1)<CR>
+imap <c-k> <esc>:call emmet#moveNextPrev(1)<CR>
 nmap <ESC>h <c-w>h
 nmap <ESC>j <c-w>j
 nmap <ESC>k <c-w>k
