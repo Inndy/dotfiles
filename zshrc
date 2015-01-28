@@ -142,7 +142,7 @@ elif [ `uname -s` = 'Darwin' ]; then
 	fi
 
     function gadb {
-        $((ps aux | grep Genymotion | grep adb | grep -o -e '[^ ]\+adb'; echo adb) | head -n 1) $@
+        $( (ps aux | grep Genymotion | grep adb | grep -o -e '[^ ]\+adb'; echo adb) | head -n 1) $@
     }
 else
 	echo "Oops! What's your OS?" > /dev/stderr
