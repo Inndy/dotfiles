@@ -150,6 +150,7 @@ let g:user_emmet_expandabbr_key = '<c-e>'
 " Fix backspace in iTerm2
 set backspace=indent,eol,start
 
+" Highlight trailing spaces
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
