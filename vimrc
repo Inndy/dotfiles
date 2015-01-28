@@ -22,24 +22,40 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 Plugin 'gmarik/Vundle.vim'
 "Add your bundles here
+
+" Command Tool
 Plugin 'mileszs/ack.vim'
-Plugin 'vim-scripts/Auto-Pairs'
-Plugin 'vim-scripts/HTML5-Syntax-File'
 Plugin 'vim-scripts/cscope_plus.vim'
+
+
+" Useful Tool
 Plugin 'scrooloose/nerdtree'
-Plugin 'vim-scripts/php.vim'
-Plugin 'mattn/emmet-vim'
-Plugin 'pangloss/vim-javascript'
-Plugin 'junegunn/vim-easy-align'
+Plugin 'fidian/hexmode'
+
+
+" Syntax
 Plugin 'Inndy/nginx-vim-syntax'
+
+
+Plugin 'vim-scripts/Auto-Pairs'
+Plugin 'junegunn/vim-easy-align'
+Plugin 'tpope/vim-surround'
+
+
+" Front-End
+Plugin 'mattn/emmet-vim'
+
 Plugin 'othree/html5.vim'
 Plugin 'othree/html5-syntax.vim'
-" Yet Another Javascript Syntax
-Plugin 'othree/yajs.vim'
-Plugin 'tpope/vim-surround'
-Plugin 'xsbeats/vim-blade'
 
-Plugin 'fidian/hexmode'
+Plugin 'pangloss/vim-javascript'
+Plugin 'othree/yajs.vim'
+
+
+" For PHP
+Plugin 'vim-scripts/php.vim'
+Plugin 'stephpy/vim-php-cs-fixer'
+Plugin 'xsbeats/vim-blade'
 
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
