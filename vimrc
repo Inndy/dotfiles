@@ -59,6 +59,9 @@ Plugin 'vim-scripts/php.vim'
 Plugin 'stephpy/vim-php-cs-fixer'
 Plugin 'xsbeats/vim-blade'
 
+" For Python
+Plugin 'davidhalter/jedi-vim'
+
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
     echo ""
