@@ -13,8 +13,8 @@
 | Tab (I)             | Auto complete                                   | supertab  |
 | Ctrl - L            | Clean search highlight                          | (None)    |
 | Ctrl - E (I)        | Expand expression                               | emmet     |
-| Ctrl - B (I/N)      | Previous edit point                             | emmet     |
-| Ctrl - N (I/N)      | Next edit point                                 | emmet     |
+| Ctrl - K (I/N)      | Previous edit point                             | emmet     |
+| Ctrl - J (I/N)      | Next edit point                                 | emmet     |
 | Ctrl - ]            | Goto defination                                 | ctags.vim |
 | Ctrl - T            | Go back                                         | ctags.vim |
 | `,y`                | Copy to system clipboard                        | (None)    |
