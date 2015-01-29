@@ -48,6 +48,8 @@ Plugin 'mattn/emmet-vim'
 Plugin 'othree/html5.vim'
 Plugin 'othree/html5-syntax.vim'
 
+Plugin 'css3-syntax-plus'
+
 Plugin 'pangloss/vim-javascript'
 Plugin 'othree/yajs.vim'
 
