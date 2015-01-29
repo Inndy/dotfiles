@@ -1,7 +1,3 @@
-" Theme
-let g:rehash256 = 1
-color molokai
-
 " Vundle
 set nocompatible
 filetype off
@@ -74,6 +70,9 @@ endif
 " Setting up Vundle - the vim plugin bundler end "
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
+" Theme
+let g:rehash256 = 1
+color molokai
 
 " Settings
 set autoindent
