@@ -51,6 +51,7 @@ Plugin 'othree/html5.vim'
 Plugin 'othree/html5-syntax.vim'
 
 Plugin 'css3-syntax-plus'
+Plugin 'gorodinskiy/vim-coloresque'
 
 Plugin 'pangloss/vim-javascript'
 Plugin 'othree/yajs.vim'
