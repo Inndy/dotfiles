@@ -4,6 +4,7 @@ files='ctags
        gitconfig gitignore_global
        tmux.conf
        vim vimrc
+       nvim nvimrc
        zshrc
        pythonrc.py
 '
