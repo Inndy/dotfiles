@@ -37,6 +37,7 @@ Plugin 'fidian/hexmode'
 Plugin 'Inndy/nginx-vim-syntax'
 
 
+" Powerful Editing
 Plugin 'vim-scripts/Auto-Pairs'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'tpope/vim-surround'
