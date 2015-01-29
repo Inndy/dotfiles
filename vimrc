@@ -40,6 +40,7 @@ Plugin 'Inndy/nginx-vim-syntax'
 Plugin 'vim-scripts/Auto-Pairs'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'tpope/vim-surround'
+Plugin 'ervandew/supertab'
 
 
 " Front-End
