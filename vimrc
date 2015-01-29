@@ -93,7 +93,7 @@ filetype plugin indent on
 
 "source ~/.vim/theme_jellybeans.vim
 
-autocmd FileType python setlocal et sta sw=4 sts=4 cc=80
+autocmd FileType python setlocal et sta sw=4 sts=4 cc=80 completeopt-=preview
 autocmd FileType ruby setlocal et sta sw=2 sts=2
 autocmd FileType html setlocal et sw=2 sts=2
 autocmd FileType blade setlocal et sw=2 sts=2
