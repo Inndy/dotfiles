@@ -9,7 +9,6 @@
 
 `git clone https://github.com/Inndy/dotfiles.git .dotfiles --depth 1 && cd .dotfiles && ./install.sh`
 
-## About VIM
+## README for VIM
 
-- My environment use [neovim](https://github.com/neovim/neovim) by default
-- [README for VIM config](README_VIM.md)
+[Here](README_VIM.md)

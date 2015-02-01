@@ -14,12 +14,6 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-if [ -x "`which nvim`" ]; then
-    VIM=nvim
-else
-    VIM=vim
-fi
-
 alias ll="ls -l"
 alias la="ls -a"
 alias l="ls -alh"
@@ -27,9 +21,7 @@ alias less="less -R"
 alias grep="grep --color=auto"
 alias python2=python2.7
 alias python=python3
-alias v=$VIM
-alias vi=$VIM
-alias vim=$VIM
+alias v=vim
 alias -g "tmux-mode= -t 'tmux ls > /dev/null && tmux a -t 0 || tmux'"
 
 # tmux
@@ -170,7 +162,7 @@ fi
 # else
 #   export EDITOR='mvim'
 # fi
-export EDITOR='nvim'
+export EDITOR='vim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86"
