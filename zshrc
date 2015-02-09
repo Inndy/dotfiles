@@ -137,6 +137,9 @@ elif [ `uname -s` = 'Darwin' ]; then
 	export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 	export MANPATH="/usr/local/opt/gnu-sed/libexec/gnuman:$MANPATH"
 
+    export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+    export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+
 	if [ -x "`which mono`" ]; then
 		export MONO_GAC_PREFIX="/usr/local"
 	fi
