@@ -6,6 +6,8 @@ files='ctags
        vim vimrc
        nvim nvimrc
        zshrc
+       inputrc
+       bashrc
        pythonrc.py
 '
 
