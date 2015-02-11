@@ -114,3 +114,10 @@ else
     echo "Write cli-tools path to $HOME/.zshrc.local"
     echo "export PATH=\"\$PATH:$PWD/cli-tools\"" >> ~/.zshrc.local
 fi
+
+if [ -f ~/.bashrc.local ]; then
+    echo "~/.bashrc.local exists, please manual add cli-tools to \$PATH"
+else
+    echo "Write cli-tools path to $HOME/.bashrc.local"
+    echo "export PATH=\"\$PATH:$PWD/cli-tools\"" >> ~/.bashrc.local
+fi
