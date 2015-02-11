@@ -27,3 +27,7 @@ print_git_branch() {
 
 PS1="${fg_magenta}\u@\h ${fg_blue}\W${reset_color}\$(print_git_branch)\$ "
 alias ls="ls -G"
+
+if [ -f ~/.bashrc.local ]; then
+    source ~/.bashrc.local
+fi
