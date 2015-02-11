@@ -10,6 +10,7 @@
 	cl = clone
 	cm = commit -m
 	co = checkout
+	cp = cherry-pick
 	d = diff --color=auto
 	dc = diff --color=auto --cached
 	diff = diff --color=auto
