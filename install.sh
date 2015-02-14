@@ -119,7 +119,7 @@ if [ $? -ne 0 ]; then
     if [ $? -eq 0 ]; then
         echo -ne "You don't have oh-my-zsh, do you want to install? (y/n)"
         read install_ohmyzsh
-        if [ "$switch_to_zsh" = "y" ] || [ "$switch_to_zsh" = "Y" ]; then
+        if [ "$install_ohmyzsh" = "y" ] || [ "$install_ohmyzsh" = "Y" ]; then
             git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh --depth 1
         fi
     else
