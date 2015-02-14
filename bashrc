@@ -15,7 +15,7 @@ fg_cyan="\e[36m"
 fg_white="\e[37m"
 
 parse_git_branch() {
-    git branch --no-color 2> /dev/null | gawk '{ if ($1 == "*" ) { print substr($0, 3) } }'
+    git branch --no-color 2> /dev/null | awk '{ if ($1 == "*" ) { print substr($0, 3) } }'
 }
 
 print_git_branch() {
