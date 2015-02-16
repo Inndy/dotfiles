@@ -89,6 +89,7 @@ set shiftwidth=4
 set showcmd
 set smartindent
 set t_Co=256
+set tabpagemax=100
 set tabstop=4
 
 syntax on
