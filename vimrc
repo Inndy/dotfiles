@@ -27,6 +27,7 @@ Plugin 'vim-scripts/cscope_plus.vim'
 " Useful Tool
 Plugin 'scrooloose/nerdtree'
 Plugin 'fidian/hexmode'
+Plugin 'kien/ctrlp.vim'
 
 
 " Syntax
@@ -146,6 +147,12 @@ let g:ctags_statusline = 1
 
 " Emmet
 let g:user_emmet_expandabbr_key = '<c-e>'
+
+" CtrlP
+let g:ctrlp_custom_ignore = {
+	\ 'dir':  '\v[\/]\.(git|hg|svn)$',
+	\ 'file': '\v\.(exe|so|dll|swp|zip|7z|rar|gz|xz|apk|dmg|iso|jpg|png|pdf)$',
+	\ }
 
 "color ron
 "blue       delek      evening    murphy     ron        torte
