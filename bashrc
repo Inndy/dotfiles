@@ -28,6 +28,10 @@ print_git_branch() {
 PS1="${fg_magenta}\u@\h ${fg_blue}\W${reset_color}\$(print_git_branch)\$ "
 alias ls="ls -G --color=auto"
 
+if [ -f ~/.phpbrew/bashrc ]; then
+    source /Users/inndy/.phpbrew/bashrc
+fi
+
 if [ -f ~/.bashrc.local ]; then
     source ~/.bashrc.local
 fi
