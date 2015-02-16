@@ -21,11 +21,11 @@ parse_git_branch() {
 print_git_branch() {
     branch="$(parse_git_branch)"
     if [ -n "$branch" ]; then
-        echo -ne " (${fg_green}${branch}${reset_color})"
+        echo -ne " (${branch})"
     fi
 }
 
-PS1="${fg_magenta}\u@\h ${fg_blue}\W${reset_color}\$(print_git_branch)\$ "
+PS1="\[${fg_magenta}\]\u@\h \[${fg_blue}\]\W\[${reset_color}\]\[${fg_green}\]\$(print_git_branch)\[${reset_color}\]\$ "
 alias ls="ls -G --color=auto"
 
 if [ -f ~/.phpbrew/bashrc ]; then
