@@ -36,13 +36,6 @@ if [ -x "`which tmux`" ]; then
 	alias tm=tmux
 fi
 
-# clipboard
-if [ -x "`which xclip`" ]; then
-	alias clip="xclip -selection clipboard"
-elif [ -x "`which pbcopy`" ]; then
-	alias clip="pbcopy"
-fi
-
 # ctags for php
 if [ -x "`which ctags`" ]; then
 	alias phptags='ctags --langmap=php:.engine.inc.module.theme.php --php-kinds=cdf --languages=php'
