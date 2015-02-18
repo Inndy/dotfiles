@@ -6,9 +6,7 @@ ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 # ZSH_THEME="robbyrussell"
-if [ -z $ZSH_THEME ]; then
-    ZSH_THEME="alanpeabody"
-fi
+[ -z $ZSH_THEME ] && ZSH_THEME="alanpeabody"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -183,17 +181,11 @@ export EDITOR='vim'
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-if [ -r ~/.zshrc.local ]; then
-    source ~/.zshrc.local
-fi
+[ -r ~/.zshrc.local ] && source ~/.zshrc.local
 
-if [ -d ~/.phpbrew ]; then
-	source ~/.phpbrew/bashrc
-fi
+[ -d ~/.phpbrew ] && source ~/.phpbrew/bashrc
 
-if [ -d /usr/local/opt/android-sdk ]; then
-    export ANDROID_HOME=/usr/local/opt/android-sdk
-fi
+[ -d /usr/local/opt/android-sdk ] && export ANDROID_HOME=/usr/local/opt/android-sdk
 
 # zsh help
 if [ -f /usr/local/share/zsh/helpfiles ]; then
@@ -204,6 +196,4 @@ fi
 
 source $ZSH/oh-my-zsh.sh
 
-if [ -r ~/.zshrc.local.after ]; then
-    source ~/.zshrc.local.after
-fi
+[ -r ~/.zshrc.local.after ] && source ~/.zshrc.local.after
