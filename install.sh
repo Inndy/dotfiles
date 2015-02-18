@@ -1,7 +1,7 @@
 #!/bin/bash
 
 files='ctags
-       gitconfig gitignore_global
+       gitignore_global
        tmux.conf
        vim vimrc
        nvim nvimrc
@@ -100,6 +100,18 @@ fix_prev
 for file in `echo $files | tr ' ' '\n'`; do
     install_file $file
 done
+
+if [ "$(whoami)" = "inndy" ]; then
+    install_file gitconfig
+else
+    if [ -f ~/.gitconfig ]; then
+        echo "File conflict: ~/.gitconfig"
+    else
+        echo -ne "You are not Inndy, so you have to gitconfig manually "
+        echo "update gitconfig when git-pull."
+        awk '{if ($1 != "email" && $1 != "name") {print $0}}' gitconfig > ~/.gitconfig
+    fi
+fi
 
 install_vim_plugin
 
