@@ -55,6 +55,11 @@ if [ -x "`which iconv`" ]; then
 	}
 fi
 
+# pygmentize
+if [ -x "`which pygmentize`" ]; then
+    alias highlight="pygmentize -O encoding=utf8,style=monokai -f 256"
+fi
+
 # minecraft path
 if [ -d "/Users/$USER/Library/Application Support/minecraft" ]; then
     export MINECRAFT="/Users/$USER/Library/Application Support/minecraft"
@@ -63,11 +68,6 @@ fi
 # python
 if [ -r ~/.pythonrc.py ]; then
     export PYTHONSTARTUP=~/.pythonrc.py
-fi
-
-# pygmentize
-if [ -x "`which pygmentize`" ]; then
-    alias highlight="pygmentize -O encoding=utf8,style=monokai -f 256"
 fi
 
 # Set to this to use case-sensitive completion
