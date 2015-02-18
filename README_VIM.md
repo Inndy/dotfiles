@@ -4,8 +4,7 @@
 
 | Key                 | Function                                        | Plugin    |
 | ------------------- | ----------------------------------------------- | --------- |
-| F5                  | (Compile and ) Run current file.                | (None)    |
-|                     | Work for Ruby, clisp, bash, php, Python, C, C++ |           |
+| F5                  | (Compile and ) Run current file. (Read vimrc)   | (None)    |
 | F10                 | Toggle NERDTree                                 | NERDTree  |
 | Tab (N)             | Next tab                                        | (None)    |
 | Shift - Tab         | Previous tab                                    | (None)    |
