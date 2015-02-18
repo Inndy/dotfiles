@@ -135,6 +135,12 @@ cab Set set
 map ,p "*p
 map ,y "*y
 
+" Use hjkl :)
+nnoremap <left> :echo "Try to use `h`"<CR><left>
+nnoremap <right> :echo "Try to use `l`"<CR><right>
+nnoremap <up> :echo "Try to use `k`"<CR><up>
+nnoremap <down> :echo "Try to use `j`"<CR><down>
+
 " Run files
 autocmd filetype ruby nnoremap <F5> :w <bar> exec '!ruby '.shellescape('%') <CR>
 autocmd filetype javascript nnoremap <F5> :w <bar> exec '!nodejs '.shellescape('%') <CR>
