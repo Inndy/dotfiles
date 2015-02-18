@@ -109,7 +109,7 @@ COMPLETION_WAITING_DOTS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 ZSH_TMUX_AUTOCONNECT=false
 ZSH_TMUX_AUTOSTART=false
-plugins=(git history-substring-search zsh-syntax-highlighting tmux colored-man urltools osx laravel brew composer)
+plugins=(git history-substring-search zsh-syntax-highlighting tmux colored-man urltools laravel brew composer)
 
 export HISTSIZE=1000000
 setopt HIST_IGNORE_SPACE CORRECT
