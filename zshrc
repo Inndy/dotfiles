@@ -41,11 +41,6 @@ if [ -x "`which ctags`" ]; then
 	alias phptags='ctags --langmap=php:.engine.inc.module.theme.php --php-kinds=cdf --languages=php'
 fi
 
-# apt-get
-if [ -x "`which apt-get`" ]; then
-	alias apt-uu='sudo apt-get update; sudo apt-get upgrade'
-fi
-
 # underscore-cli (nodejs package)
 if [ -x "`which underscore`" ]; then
 	alias pjson='underscore print --color'
