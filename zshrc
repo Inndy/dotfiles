@@ -127,22 +127,32 @@ setopt HIST_IGNORE_SPACE CORRECT
 
 # User configuration
 
+prefix_path() { [ -d "$1" ] && export PATH="$1:$PATH" }
+extend_path() { [ -d "$1" ] && export PATH="$PATH:$1" }
+
+register_man_path() { [ -d "$1" ] && export MANPATH="$1:$MANPATH" }
+
+# preserve $PATH
 export _PATH="$PATH"
+
+# My CLI tools
+extend_path "$HOME/cli-tool"
+
+# Composer bin
+extend_path "$HOME/.composer/vendor/bin"
+
 if [ `uname -s` = 'Linux' ]; then
-	export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$HOME/cli-tool:$HOME/.composer/vendor/bin"
 elif [ `uname -s` = 'Darwin' ]; then
-	export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/cli-tool:$HOME/.composer/vendor/bin"
-
 	# gnu tools
-	export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
-	export MANPATH="/usr/local/opt/gnu-sed/libexec/gnuman:$MANPATH"
+    prefix_path "/usr/local/opt/gnu-tar/libexec/gnubin"
+    prefix_path "/usr/local/opt/gnu-sed/libexec/gnubin"
 
-    export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-    export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+    register_man_path "/usr/local/opt/gnu-sed/libexec/gnuman"
 
-	if [ -x "`which mono`" ]; then
-		export MONO_GAC_PREFIX="/usr/local"
-	fi
+    prefix_path "/usr/local/opt/coreutils/libexec/gnubin"
+    register_man_path "/usr/local/opt/coreutils/libexec/gnuman"
+
+	[ -x "`which mono`" ] && export MONO_GAC_PREFIX="/usr/local"
 
     function gadb {
         $( (ps aux | grep Genymotion | grep adb | grep -o -e '[^ ]\+adb'; echo adb) | head -n 1) $@
