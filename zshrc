@@ -60,6 +60,9 @@ if [ -x "`which pygmentize`" ]; then
     alias highlight="pygmentize -O encoding=utf8,style=monokai -f 256"
 fi
 
+# github-cli
+[ -x "`which hub`" ] && alias git=hub
+
 # minecraft path
 if [ -d "/Users/$USER/Library/Application Support/minecraft" ]; then
     export MINECRAFT="/Users/$USER/Library/Application Support/minecraft"
