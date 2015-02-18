@@ -29,7 +29,7 @@ PS1="\[${fg_magenta}\]\u@\h \[${fg_blue}\]\W\[${reset_color}\]\[${fg_green}\]\$(
 alias ls="ls -G --color=auto"
 
 if [ -f ~/.phpbrew/bashrc ]; then
-    source /Users/inndy/.phpbrew/bashrc
+    source ~/.phpbrew/bashrc
 fi
 
 if [ -f ~/.bashrc.local ]; then
