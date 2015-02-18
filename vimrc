@@ -19,6 +19,9 @@ call vundle#rc()
 Plugin 'gmarik/Vundle.vim'
 "Add your bundles here
 
+" Theme
+Plugin 'tomasr/molokai'
+
 " Command Tool
 Plugin 'mileszs/ack.vim'
 Plugin 'vim-scripts/cscope_plus.vim'
