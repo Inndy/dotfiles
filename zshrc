@@ -165,7 +165,7 @@ fi
 # else
 #   export EDITOR='mvim'
 # fi
-export EDITOR='nvim'
+export EDITOR=$VIM
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86"
