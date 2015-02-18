@@ -46,11 +46,6 @@ if [ -x "`which underscore`" ]; then
 	alias pjson='underscore print --color'
 fi
 
-# apache www directory
-if [ -d /var/www ]; then
-	alias cdw="cd /var/www"
-fi
-
 if [ -x "`which iconv`" ]; then
 	function big5-2-utf8() {
 		iconv -f big5 -t utf-8 "$1" > "$1.tmp~"
