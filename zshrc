@@ -152,6 +152,7 @@ elif [ `uname -s` = 'Darwin' ]; then
 
 	[ -x "`which mono`" ] && export MONO_GAC_PREFIX="/usr/local"
 
+    # Genymotion adb
     function gadb {
         $( (ps aux | grep Genymotion | grep adb | grep -o -e '[^ ]\+adb'; echo adb) | head -n 1) $@
     }
