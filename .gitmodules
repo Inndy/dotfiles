@@ -28,3 +28,6 @@
 [submodule "terminal-themes/color-theme-molokai"]
 	path = terminal-themes/color-theme-molokai
 	url = https://github.com/sona-tar/color-theme-molokai
+[submodule "cli-tools"]
+	path = cli-tools
+	url = https://github.com/inndy/cli-tools
