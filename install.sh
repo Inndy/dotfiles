@@ -75,8 +75,6 @@ function install_vim_plugin() {
 }
 
 function fix_prev() {
-    echo "Fix previous bug..."
-
     if [ -L ~/.pytonrc.py ]; then
         echo -ne '~/.pytonrc.py found, do you want to remove it? (y)'
         read rmf
@@ -112,6 +110,11 @@ else
         awk '{if ($1 != "email" && $1 != "name") {print $0}}' gitconfig > ~/.gitconfig
     fi
 fi
+
+echo "Install cli-tools..."
+git submodule init
+git submodule update
+git submodule status
 
 install_vim_plugin
 
