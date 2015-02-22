@@ -30,29 +30,29 @@ alias -g "tmux-mode= -t 'tmux ls > /dev/null && tmux a -t 0 || tmux'"
 
 # tmux
 if [ -x "`which tmux`" ]; then
-	alias tm=tmux
+    alias tm=tmux
 fi
 
 # ctags for php
 if [ -x "`which ctags`" ]; then
-	alias phptags='ctags --langmap=php:.engine.inc.module.theme.php --php-kinds=cdf --languages=php'
+    alias phptags='ctags --langmap=php:.engine.inc.module.theme.php --php-kinds=cdf --languages=php'
 fi
 
 # underscore-cli (nodejs package)
 if [ -x "`which underscore`" ]; then
-	alias pjson='underscore print --color'
+    alias pjson='underscore print --color'
 fi
 
 if [ -x "`which iconv`" ]; then
-	function big5-2-utf8() {
-		iconv -f big5 -t utf-8 "$1" > "$1.tmp~"
-		mv "$1.tmp~" "$1"
-	}
+    function big5-2-utf8() {
+    iconv -f big5 -t utf-8 "$1" > "$1.tmp~"
+    mv "$1.tmp~" "$1"
+}
 
-	function utf8-2-big5() {
-		iconv -f utf8 -t big5 "$1" > "$1.tmp~"
-		mv "$1.tmp~" "$1"
-	}
+function utf8-2-big5() {
+iconv -f utf8 -t big5 "$1" > "$1.tmp~"
+mv "$1.tmp~" "$1"
+    }
 fi
 
 # pygmentize
@@ -140,7 +140,7 @@ elif [ `uname -s` = 'Darwin' ]; then
     # brew
     prefix_path "/usr/local/sbin"
 
-	# gnu tools
+    # gnu tools
     prefix_path "/usr/local/opt/gnu-tar/libexec/gnubin"
     prefix_path "/usr/local/opt/gnu-sed/libexec/gnubin"
 
@@ -149,14 +149,14 @@ elif [ `uname -s` = 'Darwin' ]; then
     prefix_path "/usr/local/opt/coreutils/libexec/gnubin"
     register_man_path "/usr/local/opt/coreutils/libexec/gnuman"
 
-	[ -x "`which mono`" ] && export MONO_GAC_PREFIX="/usr/local"
+    [ -x "`which mono`" ] && export MONO_GAC_PREFIX="/usr/local"
 
     # Genymotion adb
     function gadb {
-        $( (ps aux | grep Genymotion | grep adb | grep -o -e '[^ ]\+adb'; echo adb) | head -n 1) $@
-    }
+    $( (ps aux | grep Genymotion | grep adb | grep -o -e '[^ ]\+adb'; echo adb) | head -n 1) $@
+}
 else
-	echo "Oops! What's your OS?" > /dev/stderr
+    echo "Oops! What's your OS?" > /dev/stderr
 fi
 
 # Android NDK
