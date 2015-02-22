@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 export HISTSIZE=100000
+export HISTFILESIZE=1600000
 export HISTCONTROL=erasedups
 shopt -s histappend
 
