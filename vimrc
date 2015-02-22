@@ -22,6 +22,11 @@ Plugin 'gmarik/Vundle.vim'
 " Theme
 Plugin 'tomasr/molokai'
 
+
+" Make Vim Powerful
+Plugin 'tpope/vim-repeat'
+
+
 " Command Tool
 Plugin 'mileszs/ack.vim'
 Plugin 'vim-scripts/cscope_plus.vim'
