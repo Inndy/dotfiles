@@ -34,6 +34,7 @@ Plugin 'vim-scripts/cscope_plus.vim'
 
 " Useful Tool
 Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'fidian/hexmode'
 Plugin 'kien/ctrlp.vim'
 
@@ -114,8 +115,8 @@ autocmd FileType blade setlocal et sw=2 sts=2
 " Key Mapping
 nnoremap <c-l> :noh<CR>
 inoremap <c-l> <c-o>:noh<CR>
-inoremap <F10> <ESC>:NERDTreeToggle<CR>
-nnoremap <silent> <F10> :NERDTreeToggle<CR>
+inoremap <F10> <ESC>:NERDTreeTabsToggle<CR>
+nnoremap <silent> <F10> :NERDTreeTabsToggle<CR>
 vmap <Enter> <Plug>(EasyAlign)
 nmap <Tab> gt
 nmap <S-Tab> gT
