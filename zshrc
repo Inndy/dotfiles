@@ -137,6 +137,9 @@ extend_path "$HOME/.composer/vendor/bin"
 
 if [ `uname -s` = 'Linux' ]; then
 elif [ `uname -s` = 'Darwin' ]; then
+    # brew
+    prefix_path "/usr/local/sbin"
+
 	# gnu tools
     prefix_path "/usr/local/opt/gnu-tar/libexec/gnubin"
     prefix_path "/usr/local/opt/gnu-sed/libexec/gnubin"
