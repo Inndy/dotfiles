@@ -121,8 +121,13 @@ extend_path() { [ -d "$1" ] && export PATH="$PATH:$1" }
 
 register_man_path() { [ -d "$1" ] && export MANPATH="$1:$MANPATH" }
 
-# preserve $PATH
-export _PATH="$PATH"
+
+# check and preserve $PATH
+if [ -z "$_PATH" ]; then
+    export _PATH="$PATH"
+else
+    export PATH="$_PATH"
+fi
 
 # My CLI tools
 extend_path "$HOME/cli-tool"
