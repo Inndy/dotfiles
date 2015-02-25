@@ -48,6 +48,7 @@ Plugin 'vim-scripts/Auto-Pairs'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'tpope/vim-surround'
 Plugin 'ervandew/supertab'
+Plugin 'edsono/vim-matchit'
 
 
 " Front-End
