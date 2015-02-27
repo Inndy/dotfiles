@@ -61,7 +61,7 @@ if [ -x "`which pygmentize`" ]; then
 fi
 
 # github-cli
-[ -x "`which hub`" ] && eval "$(hub alias -s)"
+# [ -x "`which hub`" ] && eval "$(hub alias -s)"
 
 # minecraft path
 if [ -d "/Users/$USER/Library/Application Support/minecraft" ]; then
