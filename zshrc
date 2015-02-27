@@ -63,6 +63,13 @@ fi
 # github-cli
 # [ -x "`which hub`" ] && eval "$(hub alias -s)"
 
+# 7z
+if [ -x "`which 7z`" ]; then
+    alias 8z=7z
+    alias zl="7z l"
+    alias zx="7z x"
+fi
+
 # minecraft path
 if [ -d "/Users/$USER/Library/Application Support/minecraft" ]; then
     export MINECRAFT="/Users/$USER/Library/Application Support/minecraft"
