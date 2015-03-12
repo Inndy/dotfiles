@@ -108,6 +108,7 @@ filetype plugin indent on
 autocmd FileType python setlocal et sta sw=4 sts=4 cc=80 completeopt-=preview
 autocmd FileType ruby setlocal et sta sw=2 sts=2
 autocmd FileType html setlocal et sw=2 sts=2
+autocmd FileType css setlocal et sw=2 sts=2
 autocmd FileType blade setlocal et sw=2 sts=2
 "autocmd FileType php setlocal et sw=2 sts=2
 "autocmd FileType js setlocal et sw=2 sts=2
