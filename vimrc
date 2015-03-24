@@ -128,7 +128,7 @@ nnoremap <silent> <F10> :NERDTreeTabsToggle<CR>
 vmap <Enter> <Plug>(EasyAlign)
 nmap <Tab> gt
 nmap <S-Tab> gT
-map <C-S-T> :tabedit 
+nmap <ESC>t :tabedit 
 nmap <c-j> :call emmet#moveNextPrev(0)<CR>
 imap <c-j> <esc>:call emmet#moveNextPrev(0)<CR>
 nmap <c-k> :call emmet#moveNextPrev(1)<CR>
