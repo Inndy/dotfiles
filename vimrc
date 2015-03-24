@@ -75,6 +75,9 @@ Plugin 'xsbeats/vim-blade'
 " For Python
 "Plugin 'davidhalter/jedi-vim'
 
+" For CoffeeScript
+Plugin 'kchmck/vim-coffee-script'
+
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
     echo ""
