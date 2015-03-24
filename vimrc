@@ -23,6 +23,9 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'tomasr/molokai'
 
 
+" UI
+Plugin 'bling/vim-airline'
+
 " Make Vim Powerful
 Plugin 'tpope/vim-repeat'
 
@@ -158,6 +161,16 @@ autocmd filetype php nnoremap <F5> :w <bar> exec '!php -f '.shellescape('%') <CR
 autocmd filetype python nnoremap <F5> :w <bar> exec '!python3 '.shellescape('%')<CR>
 autocmd filetype c nnoremap <F5> :w <bar> exec '!gcc '.shellescape('%').' -O2 && ./a.out'<CR>
 autocmd filetype cpp nnoremap <F5> :w <bar> exec '!g++ '.shellescape('%').' -std=c++11 -O2 && ./a.out'<CR>
+
+" Airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+set laststatus=2
+" enable tabline
+let g:airline#extensions#tabline#enabled = 1
+" show buffer number
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline_theme='powerlineish'
 
 " Ctags
 let g:ctags_statusline = 1
