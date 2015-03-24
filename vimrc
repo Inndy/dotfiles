@@ -196,6 +196,10 @@ let g:ctrlp_custom_ignore = {
 " Fix backspace in iTerm2
 set backspace=indent,eol,start
 
+" NoBackup
+set nobackup
+set nowritebackup
+
 " Highlight trailing spaces
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
