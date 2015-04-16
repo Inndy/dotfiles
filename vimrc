@@ -1,104 +1,52 @@
-" Vundle
-set nocompatible
-filetype off
+" _   _            ____                  _ _
+"| \ | | ___  ___ | __ ) _   _ _ __   __| | | ___
+"|  \| |/ _ \/ _ \|  _ \| | | | '_ \ / _` | |/ _ \
+"| |\  |  __/ (_) | |_) | |_| | | | | (_| | |  __/
+"|_| \_|\___|\___/|____/ \__,_|_| |_|\__,_|_|\___|
+"
 
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" Setting up Vundle - the vim plugin bundler     "
-""""""""""""""""""""""""""""""""""""""""""""""""""
-let iCanHazVundle=1
-let vundle_readme=expand('~/.vim/bundle/Vundle.vim/README.md')
-if !filereadable(vundle_readme)
-    echo "Installing Vundle.."
-    echo ""
-    silent !mkdir -p ~/.vim/bundle
-    silent !git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim --depth 1
-    let iCanHazVundle=0
+set nocompatible " Be iMproved
+if has('vim_starting')
+    set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#rc()
-Plugin 'gmarik/Vundle.vim'
-"Add your bundles here
+call neobundle#begin(expand('~/.vim/bundle/'))
+NeoBundleFetch 'Shougo/neobundle.vim'
 
-" Theme
-Plugin 'tomasr/molokai'
+" My Bundles here:
+" Refer to |:NeoBundle-examples|.
+" Note: You don't set neobundle setting in .gvimrc!
 
+call neobundle#end()
+filetype plugin indent on
+NeoBundleCheck
 
-" UI
-Plugin 'bling/vim-airline'
-
-" Make Vim Powerful
-Plugin 'tpope/vim-repeat'
-
-
-" Command Tool
-Plugin 'mileszs/ack.vim'
-Plugin 'vim-scripts/cscope_plus.vim'
+" _____ _
+"|_   _| |__   ___ _ __ ___   ___
+"  | | | '_ \ / _ \ '_ ` _ \ / _ \
+"  | | | | | |  __/ | | | | |  __/
+"  |_| |_| |_|\___|_| |_| |_|\___|
 
 
-" Useful Tool
-Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'fidian/hexmode'
-Plugin 'kien/ctrlp.vim'
-
-
-" Syntax
-Plugin 'Inndy/nginx-vim-syntax'
-
-
-" Powerful Editing
-Plugin 'vim-scripts/Auto-Pairs'
-Plugin 'junegunn/vim-easy-align'
-Plugin 'tpope/vim-surround'
-Plugin 'ervandew/supertab'
-Plugin 'edsono/vim-matchit'
-
-
-" Front-End
-Plugin 'mattn/emmet-vim'
-
-Plugin 'othree/html5.vim'
-Plugin 'othree/html5-syntax.vim'
-
-Plugin 'css3-syntax-plus'
-Plugin 'gorodinskiy/vim-coloresque'
-
-Plugin 'pangloss/vim-javascript'
-Plugin 'othree/yajs.vim'
-
-
-" For PHP
-Plugin 'vim-scripts/php.vim'
-Plugin 'stephpy/vim-php-cs-fixer'
-Plugin 'xsbeats/vim-blade'
-
-" For Python
-"Plugin 'davidhalter/jedi-vim'
-
-" For CoffeeScript
-Plugin 'kchmck/vim-coffee-script'
-
-if iCanHazVundle == 0
-    echo "Installing Bundles, please ignore key map error messages"
-    echo ""
-    :PluginInstall
-endif
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" Setting up Vundle - the vim plugin bundler end "
-""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Theme
 let g:rehash256 = 1
 color molokai
 
-" Settings
+" ____            _         ____             __ _
+"| __ )  __ _ ___(_) ___   / ___|___  _ __  / _(_) __ _
+"|  _ \ / _` / __| |/ __| | |   / _ \| '_ \| |_| |/ _` |
+"| |_) | (_| \__ \ | (__  | |__| (_) | | | |  _| | (_| |
+"|____/ \__,_|___/_|\___|  \____\___/|_| |_|_| |_|\__, |
+"                                                 |___/
+
 set autoindent
+set backspace=indent,eol,start
 set colorcolumn=100
 set cursorline
 set expandtab
 set hlsearch
 set ignorecase
 set incsearch
+set nobackup
+set nowritebackup
 set number
 set ruler
 set shiftwidth=4
@@ -111,33 +59,55 @@ set tabstop=4
 syntax on
 filetype plugin indent on
 
+" _____ _ _     _____                   ____      _       _           _
+"|  ___(_) | __|_   _|   _ _ __   ___  |  _ \ ___| | __ _| |_ ___  __| |
+"| |_  | | |/ _ \| || | | | '_ \ / _ \ | |_) / _ \ |/ _` | __/ _ \/ _` |
+"|  _| | | |  __/| || |_| | |_) |  __/ |  _ <  __/ | (_| | ||  __/ (_| |
+"|_|   |_|_|\___||_| \__, | .__/ \___| |_| \_\___|_|\__,_|\__\___|\__,_|
+"                    |___/|_|
+
 autocmd FileType python setlocal et sta sw=4 sts=4 cc=80 completeopt-=preview
 autocmd FileType ruby setlocal et sta sw=2 sts=2
 autocmd FileType html setlocal et sw=2 sts=2
 autocmd FileType css setlocal et sw=2 sts=2
 autocmd FileType blade setlocal et sw=2 sts=2
-"autocmd FileType php setlocal et sw=2 sts=2
-"autocmd FileType js setlocal et sw=2 sts=2
-"autocmd FileType jade setlocal et sw=2 sts=2
 
-" Key Mapping
+" _  __            __  __                   _
+"| |/ /___ _   _  |  \/  | __ _ _ __  _ __ (_)_ __   __ _
+"| ' // _ \ | | | | |\/| |/ _` | '_ \| '_ \| | '_ \ / _` |
+"| . \  __/ |_| | | |  | | (_| | |_) | |_) | | | | | (_| |
+"|_|\_\___|\__, | |_|  |_|\__,_| .__/| .__/|_|_| |_|\__, |
+"          |___/               |_|   |_|            |___/
+
+" clear search result
 nnoremap <c-l> :noh<CR>
 inoremap <c-l> <c-o>:noh<CR>
+
+" NERDTree
 inoremap <F10> <ESC>:NERDTreeTabsToggle<CR>
 nnoremap <silent> <F10> :NERDTreeTabsToggle<CR>
+
+" EasyAlign
 vmap <Enter> <Plug>(EasyAlign)
+
+" tabs
 nmap <Tab> gt
 nmap <S-Tab> gT
 nmap <ESC>t :tabedit 
+
+" emmet
 nmap <c-j> :call emmet#moveNextPrev(0)<CR>
 imap <c-j> <esc>:call emmet#moveNextPrev(0)<CR>
 nmap <c-k> :call emmet#moveNextPrev(1)<CR>
 imap <c-k> <esc>:call emmet#moveNextPrev(1)<CR>
+
+" move in panels
 nmap <ESC>h <c-w>h
 nmap <ESC>j <c-w>j
 nmap <ESC>k <c-w>k
 nmap <ESC>l <c-w>l
 
+" evil shift!
 cab Q q
 cab W w
 cab X x
@@ -146,16 +116,16 @@ cab Wq wq
 cab wQ wq
 cab Set set
 
+" integration with system clipboard
 map ,p "*p
 map ,y "*y
 
-" Use hjkl :)
-nnoremap <left> :echo "Try to use `h`"<CR><left>
-nnoremap <right> :echo "Try to use `l`"<CR><right>
-nnoremap <up> :echo "Try to use `k`"<CR><up>
-nnoremap <down> :echo "Try to use `j`"<CR><down>
+" _____                     _   _
+"| ____|_  _____  ___ _   _| |_(_) ___  _ __
+"|  _| \ \/ / _ \/ __| | | | __| |/ _ \| '_ \
+"| |___ >  <  __/ (__| |_| | |_| | (_) | | | |
+"|_____/_/\_\___|\___|\__,_|\__|_|\___/|_| |_|
 
-" Run files
 autocmd filetype ruby nnoremap <F5> :w <bar> exec '!ruby '.shellescape('%') <CR>
 autocmd filetype javascript nnoremap <F5> :w <bar> exec '!nodejs '.shellescape('%') <CR>
 autocmd filetype lisp nnoremap <F5> :w <bar> exec '!clisp '.shellescape('%') <CR>
@@ -165,19 +135,15 @@ autocmd filetype python nnoremap <F5> :w <bar> exec '!python3 '.shellescape('%')
 autocmd filetype c nnoremap <F5> :w <bar> exec '!gcc '.shellescape('%').' -O2 && ./a.out'<CR>
 autocmd filetype cpp nnoremap <F5> :w <bar> exec '!g++ '.shellescape('%').' -std=c++11 -O2 && ./a.out'<CR>
 
-" Airline
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-set laststatus=2
-" enable tabline
-let g:airline#extensions#tabline#enabled = 1
-" show buffer number
-let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline_theme='powerlineish'
+" ____  _             _              ____             __ _
+"|  _ \| |_   _  __ _(_)_ __  ___   / ___|___  _ __  / _(_) __ _
+"| |_) | | | | |/ _` | | '_ \/ __| | |   / _ \| '_ \| |_| |/ _` |
+"|  __/| | |_| | (_| | | | | \__ \ | |__| (_) | | | |  _| | (_| |
+"|_|   |_|\__,_|\__, |_|_| |_|___/  \____\___/|_| |_|_| |_|\__, |
+"               |___/                                      |___/
 
 " Ctags
 let g:ctags_statusline = 1
-"let g:ctags_regenerate = 0
 
 " Emmet
 let g:user_emmet_expandabbr_key = '<c-e>'
@@ -188,17 +154,11 @@ let g:ctrlp_custom_ignore = {
 	\ 'file': '\v\.(exe|so|dll|swp|zip|7z|rar|gz|xz|apk|dmg|iso|jpg|png|pdf)$',
 	\ }
 
-"color ron
-"blue       delek      evening    murphy     ron        torte
-"darkblue   desert     koehler    pablo      shine      zellner
-"default    elflord    morning    peachpuff  slate
-
-" Fix backspace in iTerm2
-set backspace=indent,eol,start
-
-" NoBackup
-set nobackup
-set nowritebackup
+"  ___  _   _
+" / _ \| |_| |__   ___ _ __
+"| | | | __| '_ \ / _ \ '__|
+"| |_| | |_| | | |  __/ |
+" \___/ \__|_| |_|\___|_|
 
 " Highlight trailing spaces
 highlight ExtraWhitespace ctermbg=red guibg=red
