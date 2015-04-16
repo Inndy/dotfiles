@@ -128,6 +128,7 @@ map ,y "*y
 
 autocmd filetype ruby nnoremap <F5> :w <bar> exec '!ruby '.shellescape('%') <CR>
 autocmd filetype javascript nnoremap <F5> :w <bar> exec '!nodejs '.shellescape('%') <CR>
+autocmd filetype java nnoremap <F5> :w <bar> exec '!javac '.shellescape('%').'&&java '.shellescape('%:r') <CR>
 autocmd filetype lisp nnoremap <F5> :w <bar> exec '!clisp '.shellescape('%') <CR>
 autocmd filetype shell nnoremap <F5> :w <bar> exec '!bash '.shellescape('%') <CR>
 autocmd filetype php nnoremap <F5> :w <bar> exec '!php -f '.shellescape('%') <CR>
