@@ -21,9 +21,64 @@ endif
 call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
-" My Bundles here:
-" Refer to |:NeoBundle-examples|.
-" Note: You don't set neobundle setting in .gvimrc!
+" Theme
+NeoBundle 'tomasr/molokai'
+
+
+" UI
+"NeoBundle 'bling/vim-airline'
+
+" Make Vim Powerful
+NeoBundle 'tpope/vim-repeat'
+
+
+" Command Tool
+NeoBundle 'mileszs/ack.vim'
+NeoBundle 'vim-scripts/cscope_plus.vim'
+
+
+" Useful Tool
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'jistr/vim-nerdtree-tabs'
+NeoBundle 'fidian/hexmode'
+NeoBundle 'kien/ctrlp.vim'
+
+
+" Syntax
+NeoBundle 'Inndy/nginx-vim-syntax'
+
+
+" Powerful Editing
+NeoBundle 'vim-scripts/Auto-Pairs'
+NeoBundle 'junegunn/vim-easy-align'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'ervandew/supertab'
+NeoBundle 'edsono/vim-matchit'
+
+
+" Front-End
+NeoBundle 'mattn/emmet-vim'
+
+NeoBundle 'othree/html5.vim'
+NeoBundle 'othree/html5-syntax.vim'
+
+NeoBundle 'css3-syntax-plus'
+NeoBundle 'gorodinskiy/vim-coloresque'
+
+NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'othree/yajs.vim'
+
+
+" For PHP
+NeoBundle 'vim-scripts/php.vim'
+NeoBundle 'stephpy/vim-php-cs-fixer'
+NeoBundle 'xsbeats/vim-blade'
+
+" For Python
+"NeoBundle 'davidhalter/jedi-vim'
+
+" For CoffeeScript
+NeoBundle 'kchmck/vim-coffee-script'
 
 call neobundle#end()
 filetype plugin indent on
