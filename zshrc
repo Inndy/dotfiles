@@ -119,7 +119,7 @@ ZSH_TMUX_AUTOCONNECT=false
 ZSH_TMUX_AUTOSTART=false
 plugins=(git history-substring-search zsh-syntax-highlighting tmux colored-man urltools laravel brew composer)
 
-export HISTSIZE=1000000
+export HISTSIZE=10000000
 setopt HIST_IGNORE_SPACE CORRECT
 
 # User configuration
