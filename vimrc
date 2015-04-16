@@ -9,6 +9,15 @@ set nocompatible " Be iMproved
 if has('vim_starting')
     set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
+let iCanHazNeoBundle=1
+let NeoBundle_readme=expand('~/.vim/bundle/neobundle.vim/README.md')
+if !filereadable(NeoBundle_readme)
+    echo "Installing NeoBundle.."
+    echo ""
+    silent !mkdir -p ~/.vim/bundle
+    silent !git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+    let iCanHazNeoBundle=0
+endif
 call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
