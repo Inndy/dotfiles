@@ -52,6 +52,7 @@ NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'jistr/vim-nerdtree-tabs'
 NeoBundle 'fidian/hexmode'
 NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'mattn/gist-vim', {'depends': 'mattn/webapi-vim'}
 
 
 " Syntax
