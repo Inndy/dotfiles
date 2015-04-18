@@ -127,6 +127,7 @@ set number
 set ruler
 set shiftwidth=4
 set showcmd
+set smartcase
 set smartindent
 set t_Co=256
 set tabpagemax=100
