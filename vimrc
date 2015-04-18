@@ -57,6 +57,7 @@ NeoBundle 'mattn/gist-vim', {'depends': 'mattn/webapi-vim'}
 
 " Syntax
 NeoBundle 'Inndy/nginx-vim-syntax'
+NeoBundle 'hdima/python-syntax'
 
 
 " Powerful Editing
@@ -230,6 +231,9 @@ let g:ctrlp_custom_ignore = {
 	\ 'dir':  '\v[\/]\.(git|hg|svn)$',
 	\ 'file': '\v\.(exe|so|dll|swp|zip|7z|rar|gz|xz|apk|dmg|iso|jpg|png|pdf)$',
 	\ }
+
+" python-syntax
+let python_highlight_all = 1
 
 "  ___  _   _
 " / _ \| |_| |__   ___ _ __
