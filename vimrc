@@ -117,6 +117,7 @@ set autoindent
 set backspace=indent,eol,start
 set colorcolumn=100
 set cursorline
+set directory=~/.vim/swapfiles//
 set expandtab
 set hlsearch
 set ignorecase
