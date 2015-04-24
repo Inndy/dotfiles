@@ -57,8 +57,12 @@ fi
 
 # pygmentize
 if [ -x "`which pygmentize`" ]; then
-    alias highlight="pygmentize -O encoding=utf8,style=monokai -f 256"
-    alias readcode="highlight | less -R"
+    function highlight() {
+        pygmentize -O encoding=utf8,style=monokai -f 256 $@
+    }
+    function readcode() {
+        highlight $@ | less -R
+    }
 fi
 
 # github-cli
