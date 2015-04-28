@@ -46,6 +46,7 @@ NeoBundle 'tomasr/molokai'
 
 " UI
 "NeoBundle 'bling/vim-airline'
+NeoBundle 'airblade/vim-gitgutter'
 
 " Make Vim Powerful
 NeoBundle 'tpope/vim-repeat'
