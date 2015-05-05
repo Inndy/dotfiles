@@ -190,6 +190,11 @@ imap <c-j> <esc>:call emmet#moveNextPrev(0)<CR>
 nmap <c-k> :call emmet#moveNextPrev(1)<CR>
 imap <c-k> <esc>:call emmet#moveNextPrev(1)<CR>
 
+" gitgutter
+nmap <Leader>ha <Plug>GitGutterStageHunk
+nmap <Leader>hu <Plug>GitGutterRevertHunk
+nmap <Leader>hv <Plug>GitGutterPreviewHunk
+
 " move in panels
 nmap <ESC>h <c-w>h
 nmap <ESC>j <c-w>j
