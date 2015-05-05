@@ -37,3 +37,5 @@ fi
 if [ -f ~/.bashrc.local ]; then
     source ~/.bashrc.local
 fi
+
+export PROMPT_COMMAND='history -a 2>/dev/null'
