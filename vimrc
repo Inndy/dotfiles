@@ -182,7 +182,7 @@ vmap <Enter> <Plug>(EasyAlign)
 " tabs
 nmap <Tab> gt
 nmap <S-Tab> gT
-nmap <ESC>t :tabedit 
+nmap <leader>t :tabedit 
 
 " emmet
 nmap <c-j> :call emmet#moveNextPrev(0)<CR>
