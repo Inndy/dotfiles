@@ -2,7 +2,7 @@
 
 export HISTSIZE=100000
 export HISTFILESIZE=1600000
-export HISTCONTROL=erasedups
+export HISTCONTROL=ignoreboth
 shopt -s histappend
 
 reset_color="\e[00m"
