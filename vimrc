@@ -206,6 +206,7 @@ nmap <ESC>l <c-w>l
 
 " evil shift!
 cab Q q
+cab Qa qa
 cab W w
 cab X x
 cab WQ wq
