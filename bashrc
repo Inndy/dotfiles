@@ -39,3 +39,4 @@ if [ -f ~/.bashrc.local ]; then
 fi
 
 export PROMPT_COMMAND='history -a 2>/dev/null'
+[ -x rvm ] && export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
