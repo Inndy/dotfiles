@@ -63,9 +63,11 @@ NeoBundle 'jistr/vim-nerdtree-tabs'
 NeoBundle 'fidian/hexmode'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'mattn/gist-vim', {'depends': 'mattn/webapi-vim'}
+NeoBundle "majutsushi/tagbar"
 
 
 " Syntax
+NeoBundle 'sheerun/vim-polyglot'
 NeoBundle 'Inndy/nginx-vim-syntax'
 NeoBundle 'hdima/python-syntax'
 
