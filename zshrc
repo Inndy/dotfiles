@@ -30,9 +30,7 @@ alias vim=$VIM
 alias -g "tmux-mode= -t 'tmux ls > /dev/null && tmux a -t 0 || tmux'"
 
 # tmux
-if [ -x "`which tmux`" ]; then
-    alias tm=tmux
-fi
+[ -x "`which tmux`" ] && alias tm=tmux
 
 # ctags for php
 if [ -x "`which ctags`" ]; then
@@ -120,9 +118,8 @@ COMPLETION_WAITING_DOTS="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-ZSH_TMUX_AUTOCONNECT=false
-ZSH_TMUX_AUTOSTART=false
-plugins=(git history-substring-search zsh-syntax-highlighting tmux colored-man urltools laravel brew composer)
+plugins=(git history-substring-search zsh-syntax-highlighting colored-man urltools \
+         rvm laravel brew composer)
 
 export HISTSIZE=10000000
 setopt HIST_IGNORE_SPACE CORRECT
