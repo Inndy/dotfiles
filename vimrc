@@ -181,9 +181,6 @@ nmap <F8> :TagbarToggle<CR>
 inoremap <F10> <ESC>:NERDTreeTabsToggle<CR>
 nnoremap <silent> <F10> :NERDTreeTabsToggle<CR>
 
-" insert line when <Enter> in normal mode
-nmap <CR> o
-
 " EasyAlign
 vmap <Enter> <Plug>(EasyAlign)
 
