@@ -174,6 +174,9 @@ autocmd FileType blade setlocal et sw=2 sts=2
 nnoremap <c-l> :noh<CR>
 inoremap <c-l> <c-o>:noh<CR>
 
+" tagbar
+nmap <F8> :TagbarToggle<CR>
+
 " NERDTree
 inoremap <F10> <ESC>:NERDTreeTabsToggle<CR>
 nnoremap <silent> <F10> :NERDTreeTabsToggle<CR>
