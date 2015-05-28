@@ -118,8 +118,7 @@ COMPLETION_WAITING_DOTS="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git history-substring-search zsh-syntax-highlighting colored-man urltools \
-         rvm laravel brew composer)
+plugins=(git history-substring-search zsh-syntax-highlighting colored-man urltools laravel brew composer)
 
 export HISTSIZE=10000000
 setopt HIST_IGNORE_SPACE CORRECT
@@ -208,4 +207,4 @@ fi
 source $ZSH/oh-my-zsh.sh
 
 [ -r ~/.zshrc.local.after ] && source ~/.zshrc.local.after
-[ -x rvm ] && export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+#[ -x rvm ] && export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
