@@ -27,7 +27,6 @@ alias python2=python2.7
 alias python=python3
 alias ipy=ipython
 alias vim=$VIM
-alias -g "tmux-mode= -t 'tmux ls > /dev/null && tmux a -t 0 || tmux'"
 
 # tmux
 [ -x "`which tmux`" ] && alias tm=tmux
