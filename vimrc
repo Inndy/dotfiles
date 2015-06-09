@@ -201,10 +201,10 @@ nmap <Leader>hu <Plug>GitGutterRevertHunk
 nmap <Leader>hv <Plug>GitGutterPreviewHunk
 
 " move in panels
-nmap <ESC>h <c-w>h
-nmap <ESC>j <c-w>j
-nmap <ESC>k <c-w>k
-nmap <ESC>l <c-w>l
+nmap <leader>h <c-w>h
+nmap <leader>j <c-w>j
+nmap <leader>k <c-w>k
+nmap <leader>l <c-w>l
 
 " evil shift!
 cab Q q
