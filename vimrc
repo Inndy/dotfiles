@@ -135,6 +135,7 @@ set hlsearch
 set ignorecase
 set incsearch
 set nobackup
+set noswapfile
 set nowritebackup
 set number
 set ruler
