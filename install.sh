@@ -71,7 +71,7 @@ function link() {
 
 function install_vim_plugin() {
     echo "Install vim plugins"
-    vim +qall
+    vim -c "NeoBundleInstall" -c "q"
 }
 
 function fix_prev() {
