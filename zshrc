@@ -28,6 +28,7 @@ alias python=python3
 alias ipy=ipython
 alias vim=$VIM
 alias disasm="objdump -D -M intel"
+alias tree="tree -C"
 
 # tmux
 [ -x "`which tmux`" ] && alias tm=tmux
