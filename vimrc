@@ -78,6 +78,7 @@ NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'ervandew/supertab'
 NeoBundle 'edsono/vim-matchit'
+NeoBundle 'python_match.vim'
 
 
 " Front-End
