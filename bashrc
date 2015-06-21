@@ -29,7 +29,7 @@ print_git_branch() {
 PS1="\[${fg_magenta}\]\u@\h \[${fg_blue}\]\W\[${reset_color}\]\[${fg_green}\]\$(print_git_branch)\[${reset_color}\]\$ "
 alias ls="ls --color=auto"
 alias tm=tmux
-[ -x objdump ] && function disasm() { objdump -D -M intel $@ }
+alias disasm="objdump -D -M intel"
 
 if [ -f ~/.phpbrew/bashrc ]; then
     source ~/.phpbrew/bashrc
