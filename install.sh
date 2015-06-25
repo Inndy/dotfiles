@@ -95,6 +95,14 @@ echo ""
 
 fix_prev
 
+if [ -f ~/.bashrc ]; then
+    echo -ne "~/.bashrc found, do you want to append to it?"
+    read append_to_bashrc
+    if [ "$append_to_bashrc" = "y" -o "$append_to_bashrc" = "Y" ]; then
+        echo "source $HOME/.dotfiles/bashrc" >> ~/.bashrc
+    fi
+fi
+
 for file in `echo $files | tr ' ' '\n'`; do
     install_file $file
 done
