@@ -12,7 +12,7 @@
 ## Bootstrap your ubuntu VM
 
 ```
-export EXTRA_PACKAGE="nginx and something else"
+export EXTRA_PACKAGE="ack-grep curl tree"
 wget -qO- https://raw.githubusercontent.com/Inndy/dotfiles/master/bootstrap-ubuntu-vm.sh | bash
 ```
 
