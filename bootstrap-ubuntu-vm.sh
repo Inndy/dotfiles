@@ -18,7 +18,7 @@ ICAgIHxffCAgICAK" | base64 --decode
 
     sudo sh -c "apt-get update &&
         apt-get upgrade -y &&
-        apt-get install -y git-core tmux vim build-essentail g++ python3 python3-dev python3-pip &&
+        apt-get install -y git-core tmux vim build-essential g++ python3 python3-dev python3-pip &&
         pip3 install --upgrade pip &&
         pip3 install requests beautifulsoup4 &&
         apt-get install -y $EXTRA_PACKAGE"
