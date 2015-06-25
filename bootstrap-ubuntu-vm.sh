@@ -26,6 +26,7 @@ function run()
 
     git clone https://github.com/inndy/dotfiles ~/.dotfiles
     cd ~/.dotfiles
+    git checkout ubuntu-vm
     yes | ./install.sh
 }
 
