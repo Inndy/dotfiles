@@ -16,9 +16,6 @@ ICAgIHxffCAgICAK" | base64 --decode
         exit 1
     fi
 
-    echo -ne 'Need extra package?'
-    read EXTRA_PACKAGE
-
     sudo sh -c "apt-get update &&
         apt-get upgrade -y &&
         apt-get install -y git-core tmux vim build-essentail &&

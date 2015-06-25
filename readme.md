@@ -11,7 +11,10 @@
 
 ## Bootstrap your ubuntu VM
 
-`wget -qO- https://raw.githubusercontent.com/Inndy/dotfiles/master/bootstrap-ubuntu-vm.sh | bash`
+```
+export EXTRA_PACKAGE="nginx and something else"
+wget -qO- https://raw.githubusercontent.com/Inndy/dotfiles/master/bootstrap-ubuntu-vm.sh | bash
+```
 
 ## About VIM
 
