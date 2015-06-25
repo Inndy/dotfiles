@@ -9,6 +9,10 @@
 
 `git clone https://github.com/Inndy/dotfiles.git .dotfiles --depth 1 && cd .dotfiles && ./install.sh`
 
+## Bootstrap your ubuntu VM
+
+`wget -qO- https://github.com/Inndy/dotfiles/blob/master/bootstrap-ubuntu-vm.sh | sh`
+
 ## About VIM
 
 - My environment use [neovim](https://github.com/neovim/neovim) by default
