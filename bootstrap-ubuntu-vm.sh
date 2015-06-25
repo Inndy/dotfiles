@@ -16,12 +16,21 @@ ICAgIHxffCAgICAK" | base64 --decode
         exit 1
     fi
 
-    sudo sh -c "apt-get update &&
+    command="apt-get update &&
         apt-get upgrade -y &&
         apt-get install -y git-core tmux vim build-essential g++ python3 python3-dev python3-pip &&
         pip3 install --upgrade pip &&
-        pip3 install --upgrade requests beautifulsoup4 &&
-        apt-get install -y $EXTRA_PACKAGE"
+        pip3 install --upgrade requests beautifulsoup4"
+
+    if [ -n "$EXTRA_PACKAGE" ]; then
+        command="$command && apt-get install -y $EXTRA_PACKAGE"
+    fi
+
+    if [ "$WITH_DOCKER" = "1" ]; then
+        command="$command && wget -qO- https://get.docker.com | sh"
+    fi
+
+    sudo sh -c "$command"
 
     git clone https://github.com/inndy/dotfiles ~/.dotfiles
     cd ~/.dotfiles
