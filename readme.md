@@ -11,7 +11,7 @@
 
 ## Bootstrap your ubuntu VM
 
-`wget -qO- https://github.com/Inndy/dotfiles/blob/master/bootstrap-ubuntu-vm.sh | sh`
+`wget -qO- https://raw.githubusercontent.com/Inndy/dotfiles/master/bootstrap-ubuntu-vm.sh | bash`
 
 ## About VIM
 
