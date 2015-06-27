@@ -16,7 +16,8 @@ ICAgIHxffCAgICAK" | base64 --decode
         exit 1
     fi
 
-    command="apt-get update &&
+    command="echo 'Asia/Taipei' > /etc/timezone &&
+        apt-get update &&
         apt-get upgrade -y &&
         apt-get install -y git-core tmux vim build-essential g++ python3 python3-dev python3-pip &&
         pip3 install --upgrade pip &&
