@@ -17,11 +17,11 @@ ICAgIHxffCAgICAK" | base64 --decode
     fi
 
     command="echo 'Asia/Taipei' > /etc/timezone &&
-        apt-get update &&
-        apt-get upgrade -y &&
-        apt-get install -y git-core tmux vim build-essential g++ python3 python3-dev python3-pip &&
-        pip3 install --upgrade pip &&
-        pip3 install --upgrade requests beautifulsoup4"
+             apt-get update &&
+             apt-get upgrade -y &&
+             apt-get install -y git-core tmux vim build-essential g++ python3 python3-dev python3-pip &&
+             pip3 install --upgrade pip &&
+             pip3 install --upgrade requests beautifulsoup4"
 
     if [ -n "$EXTRA_PACKAGE" ]; then
         command="$command && apt-get install -y $EXTRA_PACKAGE"
