@@ -36,7 +36,27 @@ ICAgIHxffCAgICAK" | base64 --decode
     git clone https://github.com/inndy/dotfiles ~/.dotfiles
     cd ~/.dotfiles
     git checkout ubuntu-vm
-    yes | ./install.sh
+
+    files='ctags
+           gitignore_global
+           tmux.conf
+           vim vimrc
+           nvim nvimrc
+           zshrc
+           inputrc
+           bashrc
+           pythonrc.py
+           gitconfig'
+    for file in `echo $files | tr ' ' '\n'`; do
+        ln -sf $PWD/$file ~/.$file
+    done
+    git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh --depth 1
+    echo "export PATH=\"\$PATH:$PWD/cli-tools/bin\"" >> ~/.zshrc.local
+    echo "export PATH=\"\$PATH:$PWD/cli-tools/bin\"" >> ~/.bashrc.local
+    git submodule init
+    git submodule update
+    git submodule status
+    vim -c "NeoBundleInstall" -c "q"
 }
 
 run
