@@ -208,4 +208,11 @@ fi
 source $ZSH/oh-my-zsh.sh
 
 [ -r ~/.zshrc.local.after ] && source ~/.zshrc.local.after
-#[ -x rvm ] && export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+function enable-rvm()
+{
+    export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+    [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+    plugins="$plugins rvm"
+    source $ZSH/oh-my-zsh.sh
+}
