@@ -194,9 +194,7 @@ nmap <S-Tab> gT
 nmap <leader>t :tabedit 
 
 " emmet
-nmap <c-j> :call emmet#moveNextPrev(0)<CR>
 imap <c-j> <esc>:call emmet#moveNextPrev(0)<CR>
-nmap <c-k> :call emmet#moveNextPrev(1)<CR>
 imap <c-k> <esc>:call emmet#moveNextPrev(1)<CR>
 
 " gitgutter
