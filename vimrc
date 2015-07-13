@@ -79,6 +79,7 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'ervandew/supertab'
 NeoBundle 'edsono/vim-matchit'
 NeoBundle 'python_match.vim'
+NeoBundle 'terryma/vim-multiple-cursors'
 
 
 " Front-End
