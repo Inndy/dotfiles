@@ -149,6 +149,7 @@ set t_Co=256
 set tabpagemax=100
 set tabstop=4
 set timeoutlen=300
+set wildmenu
 
 syntax on
 filetype plugin indent on
