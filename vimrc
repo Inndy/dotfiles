@@ -140,6 +140,7 @@ set noswapfile
 set nowritebackup
 set number
 set ruler
+set scrolloff=3
 set shiftwidth=4
 set showcmd
 set smartcase
