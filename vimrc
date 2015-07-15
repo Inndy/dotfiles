@@ -262,6 +262,13 @@ let g:ctrlp_custom_ignore = {
 " python-syntax
 let python_highlight_all = 1
 
+" vim-css3-syntax
+augroup VimCSS3Syntax
+  autocmd!
+
+  autocmd FileType css setlocal iskeyword+=-
+augroup END
+
 "  ___  _   _
 " / _ \| |_| |__   ___ _ __
 "| | | | __| '_ \ / _ \ '__|
