@@ -88,7 +88,7 @@ NeoBundle 'mattn/emmet-vim'
 NeoBundle 'othree/html5.vim'
 NeoBundle 'othree/html5-syntax.vim'
 
-NeoBundle 'css3-syntax-plus'
+NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'gorodinskiy/vim-coloresque'
 
 NeoBundle 'pangloss/vim-javascript'
