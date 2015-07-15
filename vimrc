@@ -220,8 +220,8 @@ cab wQ wq
 cab Set set
 
 " integration with system clipboard
-map ,p "*p
-map ,y "*y
+map <leader>p "*p
+map <leader>y "*y
 
 " _____                     _   _
 "| ____|_  _____  ___ _   _| |_(_) ___  _ __
