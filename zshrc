@@ -119,7 +119,7 @@ COMPLETION_WAITING_DOTS="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(brew colored-man composer git history-substring-search laravel tmux urltools zsh-syntax-highlighting rvm)
+plugins=(brew colored-man composer git history-substring-search laravel tmux urltools zsh-syntax-highlighting rvm rails)
 
 export HISTSIZE=10000000
 setopt HIST_IGNORE_SPACE CORRECT
@@ -196,6 +196,9 @@ export EDITOR=$VIM
 
 [ -d ~/.phpbrew ] && source ~/.phpbrew/bashrc
 
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
 [ -d /usr/local/opt/android-sdk ] && export ANDROID_HOME=/usr/local/opt/android-sdk
 
 # zsh help
@@ -208,11 +211,3 @@ fi
 source $ZSH/oh-my-zsh.sh
 
 [ -r ~/.zshrc.local.after ] && source ~/.zshrc.local.after
-
-function enable-rvm()
-{
-    export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-    [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-    plugins="$plugins rvm"
-    source $ZSH/oh-my-zsh.sh
-}
