@@ -88,6 +88,7 @@ NeoBundle 'mattn/emmet-vim'
 NeoBundle 'othree/html5.vim'
 NeoBundle 'othree/html5-syntax.vim'
 
+NeoBundle 'cakebaker/scss-syntax.vim'
 NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'gorodinskiy/vim-coloresque'
 
@@ -102,6 +103,9 @@ NeoBundle 'xsbeats/vim-blade'
 
 " For Python
 "NeoBundle 'davidhalter/jedi-vim'
+
+" For Ruby and Rails
+NeoBundle 'vim-ruby/vim-ruby'
 
 " For CoffeeScript
 NeoBundle 'kchmck/vim-coffee-script'
@@ -164,8 +168,10 @@ filetype plugin indent on
 
 autocmd FileType python setlocal et sta sw=4 sts=4 cc=80 completeopt-=preview
 autocmd FileType ruby setlocal et sta sw=2 sts=2
+autocmd FileType eruby setlocal et sta sw=2 sts=2
 autocmd FileType html setlocal et sw=2 sts=2
 autocmd FileType css setlocal et sw=2 sts=2
+autocmd FileType scss setlocal et sw=2 sts=2
 autocmd FileType blade setlocal et sw=2 sts=2
 
 " _  __            __  __                   _
@@ -268,6 +274,10 @@ augroup VimCSS3Syntax
 
   autocmd FileType css setlocal iskeyword+=-
 augroup END
+
+" vim-surround
+let g:surround_45="<% \r %>"   " -
+let g:surround_61="<%= \r %>"  " =
 
 "  ___  _   _
 " / _ \| |_| |__   ___ _ __
