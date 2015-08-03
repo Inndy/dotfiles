@@ -65,6 +65,15 @@ if [ -x "`which pygmentize`" ]; then
     }
 fi
 
+function httpserver()
+{
+    PORT=$(echo "$1" | grep -oP '\d+')
+    if [ -z "$PORT" ]; then
+        PORT=8080
+    fi
+    python3 -m http.server $PORT
+}
+
 # github-cli
 # [ -x "`which hub`" ] && eval "$(hub alias -s)"
 
