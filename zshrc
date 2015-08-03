@@ -192,6 +192,8 @@ export EDITOR=$VIM
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
+export LC_ALL='zh_TW.UTF-8'
+
 [ -r ~/.zshrc.local ] && source ~/.zshrc.local
 
 [ -d ~/.phpbrew ] && source ~/.phpbrew/bashrc
