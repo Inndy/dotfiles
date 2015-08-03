@@ -122,6 +122,7 @@ COMPLETION_WAITING_DOTS="true"
 plugins=(brew colored-man composer git history-substring-search laravel tmux urltools zsh-syntax-highlighting rvm rails)
 
 export HISTSIZE=10000000
+export HISTFILESIZE=10000000
 setopt HIST_IGNORE_SPACE CORRECT
 
 # User configuration
