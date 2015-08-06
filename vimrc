@@ -235,16 +235,16 @@ map <leader>y "*y
 "| |___ >  <  __/ (__| |_| | |_| | (_) | | | |
 "|_____/_/\_\___|\___|\__,_|\__|_|\___/|_| |_|
 
-autocmd filetype c nnoremap <F5> :w <bar> exec '!gcc '.shellescape('%').' -O2 && ./a.out'<CR>
-autocmd filetype cpp nnoremap <F5> :w <bar> exec '!g++ '.shellescape('%').' -std=c++11 -O2 && ./a.out'<CR>
-autocmd filetype cs nnoremap <F5> :w <bar> exec '!mcs '.shellescape('%').' && mono '.shellescape('%:r').'.exe'<CR>
-autocmd filetype java nnoremap <F5> :w <bar> exec '!javac '.shellescape('%').'&&java '.shellescape('%:r') <CR>
+autocmd filetype c          nnoremap <F5> :w <bar> exec '!gcc '.shellescape('%').' -O2 && ./a.out'<CR>
+autocmd filetype cs         nnoremap <F5> :w <bar> exec '!mcs '.shellescape('%').' && mono '.shellescape('%:r').'.exe'<CR>
+autocmd filetype cpp        nnoremap <F5> :w <bar> exec '!g++ '.shellescape('%').' -std=c++11 -O2 && ./a.out'<CR>
+autocmd filetype php        nnoremap <F5> :w <bar> exec '!php -f '.shellescape('%') <CR>
+autocmd filetype ruby       nnoremap <F5> :w <bar> exec '!ruby '.shellescape('%') <CR>
+autocmd filetype java       nnoremap <F5> :w <bar> exec '!javac '.shellescape('%').'&&java '.shellescape('%:r') <CR>
+autocmd filetype lisp       nnoremap <F5> :w <bar> exec '!clisp '.shellescape('%') <CR>
+autocmd filetype shell      nnoremap <F5> :w <bar> exec '!bash '.shellescape('%') <CR>
+autocmd filetype python     nnoremap <F5> :w <bar> exec '!python3 '.shellescape('%')<CR>
 autocmd filetype javascript nnoremap <F5> :w <bar> exec '!nodejs '.shellescape('%') <CR>
-autocmd filetype lisp nnoremap <F5> :w <bar> exec '!clisp '.shellescape('%') <CR>
-autocmd filetype php nnoremap <F5> :w <bar> exec '!php -f '.shellescape('%') <CR>
-autocmd filetype python nnoremap <F5> :w <bar> exec '!python3 '.shellescape('%')<CR>
-autocmd filetype ruby nnoremap <F5> :w <bar> exec '!ruby '.shellescape('%') <CR>
-autocmd filetype shell nnoremap <F5> :w <bar> exec '!bash '.shellescape('%') <CR>
 
 " ____  _             _              ____             __ _
 "|  _ \| |_   _  __ _(_)_ __  ___   / ___|___  _ __  / _(_) __ _
