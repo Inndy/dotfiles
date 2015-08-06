@@ -110,6 +110,12 @@ NeoBundle 'vim-ruby/vim-ruby'
 " For CoffeeScript
 NeoBundle 'kchmck/vim-coffee-script'
 
+
+let local_Vimrc=expand('~/.vimrc.local')
+if filereadable(local_Vimrc)
+    source ~/.vimrc.local
+endif
+
 call neobundle#end()
 filetype plugin indent on
 NeoBundleCheck
