@@ -268,7 +268,7 @@ let g:user_emmet_expandabbr_key = '<c-e>'
 
 " CtrlP
 let g:ctrlp_custom_ignore = {
-	\ 'dir':  '\v[\/]\.(git|hg|svn)$',
+	\ 'dir':  '\v[\/](\.(git|hg|svn)|node_modules)$',
 	\ 'file': '\v\.(exe|so|dll|swp|zip|7z|rar|gz|xz|apk|dmg|iso|jpg|png|pdf)$',
 	\ }
 
