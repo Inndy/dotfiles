@@ -120,8 +120,7 @@ else
 fi
 
 echo "Install cli-tools..."
-git submodule init
-git submodule update
+git submodule update --init cli-tools
 git submodule status
 
 install_vim_plugin
