@@ -75,6 +75,13 @@ function httpserver()
     python3 -m http.server $PORT
 }
 
+if [ $(which adb) ]; then
+    # Genymotion adb
+    function gadb {
+        $( (ps aux | grep Genymotion | grep adb | grep -o -e '[^ ]\+adb'; echo adb) | head -n 1) $@
+    }
+fi
+
 # github-cli
 # [ -x "`which hub`" ] && eval "$(hub alias -s)"
 
@@ -171,11 +178,6 @@ elif [ `uname -s` = 'Darwin' ]; then
     register_man_path "/usr/local/opt/coreutils/libexec/gnuman"
 
     [ -x "`which mono`" ] && export MONO_GAC_PREFIX="/usr/local"
-
-    # Genymotion adb
-    function gadb {
-    $( (ps aux | grep Genymotion | grep adb | grep -o -e '[^ ]\+adb'; echo adb) | head -n 1) $@
-}
 elif [ `uname -o` = 'Cygwin' ]; then
 else
     echo "Oops! What's your OS?" > /dev/stderr
