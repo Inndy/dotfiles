@@ -27,6 +27,7 @@ alias python2=python2.7
 alias python=python3
 alias ipy=ipython
 alias vim=$VIM
+alias vi=$VIM
 alias disasm="objdump -D -M intel"
 alias tree="tree -C"
 
