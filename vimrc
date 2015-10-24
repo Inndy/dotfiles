@@ -98,7 +98,7 @@ NeoBundle 'othree/yajs.vim'
 
 
 " For PHP
-NeoBundle 'vim-scripts/php.vim'
+NeoBundle 'StanAngeloff/php.vim'
 NeoBundle 'stephpy/vim-php-cs-fixer'
 NeoBundle 'xsbeats/vim-blade'
 
