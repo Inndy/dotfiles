@@ -50,6 +50,7 @@ NeoBundle 'airblade/vim-gitgutter'
 
 " Make Vim Powerful
 NeoBundle 'tpope/vim-repeat'
+NeoBundle 'embear/vim-localvimrc'
 
 
 " Command Tool
