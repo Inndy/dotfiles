@@ -75,7 +75,7 @@ function httpserver()
     python3 -m http.server $PORT
 }
 
-if [ $(which adb) ]; then
+if [ -x "$(which adb)" ]; then
     # Genymotion adb
     function gadb {
         $( (ps aux | grep Genymotion | grep adb | grep -o -e '[^ ]\+adb'; echo adb) | head -n 1) $@
