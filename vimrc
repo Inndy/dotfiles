@@ -288,6 +288,9 @@ augroup END
 let g:surround_45="<% \r %>"   " -
 let g:surround_61="<%= \r %>"  " =
 
+" localvimrc
+let g:localvimrc_persistent=1
+
 "  ___  _   _
 " / _ \| |_| |__   ___ _ __
 "| | | | __| '_ \ / _ \ '__|
