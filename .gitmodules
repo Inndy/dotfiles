@@ -31,3 +31,6 @@
 [submodule "cli-tools"]
 	path = cli-tools
 	url = https://github.com/inndy/cli-tools
+[submodule "terminal-themes/Menlo-for-Powerline"]
+	path = terminal-themes/Menlo-for-Powerline
+	url = git@github.com:abertsch/Menlo-for-Powerline.git
