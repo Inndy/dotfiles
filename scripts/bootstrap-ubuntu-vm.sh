@@ -23,6 +23,11 @@ ICAgIHxffCAgICAK" | base64 --decode
              pip3 install --upgrade pip &&
              pip3 install --upgrade requests beautifulsoup4"
 
+    if [ -n "$HACKER" ]; then
+        EXTRA_PACKAGE="$EXTRA_PACKAGE wireshark gdb gcc-multilib p7zip-full nmap hexedit ht python python-dev python-pip"
+        command="$command && pip3 install ipython[notebook] && pip2 install ipython[notebook] pwntools"
+    fi
+
     if [ -n "$EXTRA_PACKAGE" ]; then
         command="$command && apt-get install -y $EXTRA_PACKAGE"
     fi
