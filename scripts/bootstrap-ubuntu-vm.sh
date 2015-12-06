@@ -61,7 +61,7 @@ ICAgIHxffCAgICAK" | base64 --decode
     git submodule init
     git submodule update
     git submodule status
-    vim -c "NeoBundleInstall" -c "q"
+    # vim -c "NeoBundleInstall" -c "q"
 }
 
 run

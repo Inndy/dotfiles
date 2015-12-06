@@ -123,7 +123,7 @@ echo "Install cli-tools..."
 git submodule update --init cli-tools
 git submodule status
 
-install_vim_plugin
+# install_vim_plugin
 
 check_zsh
 if [ $? -eq 0 ]; then
