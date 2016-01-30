@@ -199,6 +199,8 @@ nmap <F8> :TagbarToggle<CR>
 " NERDTree
 inoremap <F10> <ESC>:NERDTreeTabsToggle<CR>
 nnoremap <silent> <F10> :NERDTreeTabsToggle<CR>
+let g:NERDTreeWinSize=22
+let NERDTreeIgnore=['__pycache__', '\.pyc$', '\~$']
 
 " EasyAlign
 vmap <Enter> <Plug>(EasyAlign)
