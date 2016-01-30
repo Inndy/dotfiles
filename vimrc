@@ -68,7 +68,7 @@ NeoBundle "majutsushi/tagbar"
 
 
 " Syntax
-NeoBundle 'sheerun/vim-polyglot'
+"NeoBundle 'sheerun/vim-polyglot'
 NeoBundle 'YAJS--Yet-Another-JavaScript-Syntax'
 NeoBundle 'evanmiller/nginx-vim-syntax'
 NeoBundle 'hdima/python-syntax'
