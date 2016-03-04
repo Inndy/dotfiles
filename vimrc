@@ -55,7 +55,7 @@ NeoBundle 'embear/vim-localvimrc'
 
 " Command Tool
 NeoBundle 'mileszs/ack.vim'
-NeoBundle 'vim-scripts/cscope_plus.vim'
+"NeoBundle 'vim-scripts/cscope_plus.vim'
 
 
 " Useful Tool
@@ -107,7 +107,7 @@ NeoBundle 'xsbeats/vim-blade'
 "NeoBundle 'davidhalter/jedi-vim'
 
 " For Ruby and Rails
-NeoBundle 'vim-ruby/vim-ruby'
+"NeoBundle 'vim-ruby/vim-ruby'
 
 " For CoffeeScript
 NeoBundle 'kchmck/vim-coffee-script'
