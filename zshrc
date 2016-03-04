@@ -179,6 +179,9 @@ elif [ `uname -s` = 'Darwin' ]; then
     register_man_path "/usr/local/opt/coreutils/libexec/gnuman"
 
     [ -x "`which mono`" ] && export MONO_GAC_PREFIX="/usr/local"
+
+    alias pbp=pbpaste
+    alias pbc=pbcopy
 elif [ `uname -o` = 'Cygwin' ]; then
 else
     echo "Oops! What's your OS?" > /dev/stderr
