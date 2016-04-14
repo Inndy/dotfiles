@@ -314,3 +314,7 @@ autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
 hi Search ctermfg=16 ctermbg=226
+
+if has("gui_macvim") || has("gui_vimr")
+   set guifont=Menlo:h14
+endif
