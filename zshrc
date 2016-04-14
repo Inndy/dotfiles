@@ -80,11 +80,9 @@ function httpserver()
 # [ -x "`which hub`" ] && eval "$(hub alias -s)"
 
 # 7z
-if [ -x "`which 7z`" ]; then
-    alias 8z=7z
-    alias zl="7z l"
-    alias zx="7z x"
-fi
+alias 8z=7z
+alias zl="7z l"
+alias zx="7z x"
 
 # minecraft path
 if [ -d "/Users/$USER/Library/Application Support/minecraft" ]; then
