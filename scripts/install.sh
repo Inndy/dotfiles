@@ -149,16 +149,20 @@ if [ $? -ne 0 ]; then
     fi
 fi
 
-if [ -f ~/.zshrc.local ]; then
-    echo "~/.zshrc.local exists, please manual add cli-tools to \$PATH"
-else
-    echo "Write cli-tools path to $HOME/.zshrc.local"
-    echo "export PATH=\"\$PATH:$PWD/cli-tools/bin\"" >> ~/.zshrc.local
-fi
+DOTPATH_REL=$(dirname $0)/..
+DOTPATH=$(abspath $DOTPATH_REL)
 
-if [ -f ~/.bashrc.local ]; then
-    echo "~/.bashrc.local exists, please manual add cli-tools to \$PATH"
-else
-    echo "Write cli-tools path to $HOME/.bashrc.local"
-    echo "export PATH=\"\$PATH:$PWD/cli-tools/bin\"" >> ~/.bashrc.local
-fi
+function write_local_rc_file() {
+    LOCAL_RC_FILE="$1"
+    if [ -f "$LOCAL_RC_FILE" ]; then
+        echo "$LOCAL_RC_FILE exists, please manual add cli-tools to \$PATH"
+    else
+        echo "Write cli-tools path to $LOCAL_RC_FILE"
+        echo "export PATH=\"\$PATH:$PWD/cli-tools/bin\"" >> $LOCAL_RC_FILE
+        echo "export DOTPATH=\"$DOTPATH\"" >> $LOCAL_RC_FILE
+        echo "# source $DOTPATH/ctf/d.sh # provide function `d` and `D`" >> $LOCAL_RC_FILE
+    fi
+}
+
+write_local_rc_file ~/.zshrc.local
+write_local_rc_file ~/.bashrc.local
