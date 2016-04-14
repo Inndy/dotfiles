@@ -61,6 +61,7 @@ if [ -x "`which pygmentize`" ]; then
     function highlight() {
         pygmentize -O encoding=utf8,style=monokai -f 256 $@
     }
+    alias hl=highlight
     function readcode() {
         highlight $@ | less -R
     }
