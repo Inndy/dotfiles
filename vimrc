@@ -293,6 +293,8 @@ augroup END
 " vim-surround
 let g:surround_45="<% \r %>"   " -
 let g:surround_61="<%= \r %>"  " =
+let g:surround_33="<!-- \r -->" "!
+let g:surround_42="/* \r */" "*
 
 " localvimrc
 let g:localvimrc_persistent=1
