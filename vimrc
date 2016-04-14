@@ -51,6 +51,7 @@ NeoBundle 'airblade/vim-gitgutter'
 " Make Vim Powerful
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'embear/vim-localvimrc'
+NeoBundle 'triglav/vim-visual-increment'
 
 
 " Command Tool
@@ -72,6 +73,7 @@ NeoBundle "majutsushi/tagbar"
 NeoBundle 'YAJS--Yet-Another-JavaScript-Syntax'
 NeoBundle 'evanmiller/nginx-vim-syntax'
 NeoBundle 'hdima/python-syntax'
+"NeoBundle 'mxw/vim-jsx'
 
 
 " Powerful Editing
@@ -89,6 +91,8 @@ NeoBundle 'mattn/emmet-vim'
 
 NeoBundle 'othree/html5.vim'
 NeoBundle 'othree/html5-syntax.vim'
+
+"NeoBundle 'slim-template/vim-slim'
 
 "NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'cakebaker/scss-syntax.vim'
