@@ -22,7 +22,7 @@ apt-get install -y \
                 gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf \
                 gcc-powerpc-linux-gnu g++-powerpc-linux-gnu \
                 software-properties-common \
-                build-essential gcc \
+                build-essential gcc gcc-multilib \
                 ipython python-dev python-pip \
                 libjpeg-dev libpng-dev \
                 nasm gdb git-core vim qemu
