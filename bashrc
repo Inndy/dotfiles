@@ -32,7 +32,8 @@ if [ "$(uname)" = "Darwin" ]; then
 else
     alias ls="ls --color=auto"
 fi
-alias tm=tmux
+alias tm='tmux -2'
+alias tmux='tmux -2'
 alias disasm="objdump -D -M intel"
 
 if [ -f ~/.phpbrew/bashrc ]; then
