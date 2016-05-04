@@ -55,7 +55,7 @@ ICAgIHxffCAgICAK" | base64 --decode
     for file in `echo $files | tr ' ' '\n'`; do
         ln -sf ~/.dotfiles/$file ~/.$file
     done
-    ln -sf ~/.dotfiles/vm-tmux.conf ~/.tmux.conf
+    ln -sf ~/.dotfiles/server-tmux.conf ~/.tmux.conf
     git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh --depth 1
     echo "export PATH=\"\$PATH:$PWD/cli-tools/bin\"" >> ~/.zshrc.local
     echo "export PATH=\"\$PATH:$PWD/cli-tools/bin\"" >> ~/.bashrc.local
