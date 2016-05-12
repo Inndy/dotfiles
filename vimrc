@@ -143,30 +143,30 @@ color molokai
 "|____/ \__,_|___/_|\___|  \____\___/|_| |_|_| |_|\__, |
 "                                                 |___/
 
-set autoindent
-set backspace=indent,eol,start
-set colorcolumn=100
-set cursorline
-set directory=~/.vim/swapfiles//
-set expandtab
-set hlsearch
-set ignorecase
-set incsearch
-set nobackup
-set noswapfile
-set nowritebackup
-set number
-set ruler
-set scrolloff=3
-set shiftwidth=4
-set showcmd
-set smartcase
-set smartindent
-set t_Co=256
-set tabpagemax=100
-set tabstop=4
-set timeoutlen=300
-set wildmenu
+set autoindent                   " 自動縮排
+set backspace=indent,eol,start   " 統一 backsapce 功能
+set colorcolumn=100              " 換行提示線
+set cursorline                   " 目前游標所在這行反白
+set directory=~/.vim/swapfiles// " 設定 swapfile 目錄
+set expandtab                    " 把 tab 展開成空白
+set hlsearch                     " 顏色標記被搜尋的文字
+set ignorecase                   " 搜尋忽略大小寫
+set incsearch                    " 往後搜尋
+set nobackup                     " 關閉備份檔案
+set noswapfile                   " 不使用 swapfile
+set nowritebackup                " 關閉備份檔案
+set number                       " 顯示行數
+set ruler                        " 游標位置資訊
+set scrolloff=3                  " 游標距離上下 N 行開始捲動螢幕
+set shiftwidth=4                 " tab 寬度
+set showcmd                      " 顯示命令按鍵
+set smartcase                    " 搜尋時自動判斷是否區分大小寫
+set smartindent                  " 自動縮排
+set t_Co=256                     " 啟用256色彩空間
+set tabpagemax=100               " 一次最多可以開多少tab
+set tabstop=4                    " tab寬度
+set timeoutlen=300               " escape delay
+set wildmenu                     " 自動補完選單
 
 syntax on
 filetype plugin indent on
