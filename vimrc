@@ -179,12 +179,7 @@ filetype plugin indent on
 "                    |___/|_|
 
 autocmd FileType python setlocal et sta sw=4 sts=4 cc=80 completeopt-=preview
-autocmd FileType ruby setlocal noet sta sw=4 sts=4
-autocmd FileType eruby setlocal et sta sw=2 sts=2
 autocmd FileType html setlocal et sw=2 sts=2
-autocmd FileType css setlocal et sw=2 sts=2
-autocmd FileType scss setlocal et sw=2 sts=2
-autocmd FileType blade setlocal et sw=2 sts=2
 
 " _  __            __  __                   _
 "| |/ /___ _   _  |  \/  | __ _ _ __  _ __ (_)_ __   __ _
