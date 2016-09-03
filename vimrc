@@ -24,7 +24,7 @@ if !filereadable(NeoBundle_readme)
     echo "Installing NeoBundle.."
     echo ""
     silent !mkdir -p ~/.vim/bundle
-    silent !git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+    silent !git clone https://github.com/Shougo/neobundle.vim --depth 1 ~/.vim/bundle/neobundle.vim
     let iCanHazNeoBundle=0
 endif
 call neobundle#begin(expand('~/.vim/bundle/'))
