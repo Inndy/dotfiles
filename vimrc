@@ -94,6 +94,8 @@ NeoBundle 'othree/html5-syntax.vim'
 
 "NeoBundle 'slim-template/vim-slim'
 "NeoBundle 'hail2u/vim-css3-syntax'
+
+NeoBundle 'othree/html5.vim'
 NeoBundle 'cakebaker/scss-syntax.vim'
 NeoBundle 'othree/yajs.vim'
 
