@@ -40,6 +40,8 @@ NeoBundle 'Shougo/vimproc.vim', {
 \ }
 NeoBundle 'Shougo/unite.vim'
 
+NeoBundle 'editorconfig/editorconfig-vim'
+
 " Theme
 NeoBundle 'tomasr/molokai'
 
