@@ -72,10 +72,8 @@ NeoBundle "majutsushi/tagbar"
 
 " Syntax
 "NeoBundle 'sheerun/vim-polyglot'
-NeoBundle 'YAJS--Yet-Another-JavaScript-Syntax'
 NeoBundle 'evanmiller/nginx-vim-syntax'
 NeoBundle 'hdima/python-syntax'
-"NeoBundle 'mxw/vim-jsx'
 
 
 " Powerful Editing
@@ -95,28 +93,19 @@ NeoBundle 'othree/html5.vim'
 NeoBundle 'othree/html5-syntax.vim'
 
 "NeoBundle 'slim-template/vim-slim'
-
 "NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'cakebaker/scss-syntax.vim'
-NeoBundle 'gorodinskiy/vim-coloresque'
-
-NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'othree/yajs.vim'
 
 
 " For PHP
-NeoBundle 'StanAngeloff/php.vim'
-NeoBundle 'stephpy/vim-php-cs-fixer'
-NeoBundle 'xsbeats/vim-blade'
+"NeoBundle 'StanAngeloff/php.vim'
 
 " For Python
 "NeoBundle 'davidhalter/jedi-vim'
 
 " For Ruby and Rails
 "NeoBundle 'vim-ruby/vim-ruby'
-
-" For CoffeeScript
-NeoBundle 'kchmck/vim-coffee-script'
 
 
 let local_Vimrc=expand('~/.vimrc.local')
