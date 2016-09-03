@@ -88,9 +88,7 @@ NeoBundle 'terryma/vim-multiple-cursors'
 
 " Front-End
 NeoBundle 'mattn/emmet-vim'
-
-NeoBundle 'othree/html5.vim'
-NeoBundle 'othree/html5-syntax.vim'
+"NeoBundle 'gorodinskiy/vim-coloresque'
 
 "NeoBundle 'slim-template/vim-slim'
 "NeoBundle 'hail2u/vim-css3-syntax'
