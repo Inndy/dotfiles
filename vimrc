@@ -96,6 +96,7 @@ NeoBundle 'mattn/emmet-vim'
 NeoBundle 'othree/html5.vim'
 NeoBundle 'cakebaker/scss-syntax.vim'
 NeoBundle 'othree/yajs.vim'
+NeoBundle 'posva/vim-vue'
 
 
 " For PHP
