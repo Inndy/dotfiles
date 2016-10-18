@@ -2,7 +2,7 @@
 
 export HISTSIZE=800000
 export HISTFILESIZE=64000000
-export HISTCONTROL=ignoreboth
+export HISTCONTROL=ignorespace
 
 shopt -s histappend
 shopt -s checkwinsize
