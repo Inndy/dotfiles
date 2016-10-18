@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-export HISTSIZE=100000
-export HISTFILESIZE=1600000
+export HISTSIZE=800000
+export HISTFILESIZE=64000000
 export HISTCONTROL=ignoreboth
 
 shopt -s histappend
