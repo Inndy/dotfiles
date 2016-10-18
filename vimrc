@@ -16,77 +16,44 @@ let mapleader=" "
 
 set nocompatible " Be iMproved
 call plug#begin('~/.vim/plugged')
-Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-Plug 'Shougo/unite.vim'
-
-Plug 'editorconfig/editorconfig-vim'
-
-" Theme
-Plug 'tomasr/molokai'
-
-
-" UI
-"Plug 'bling/vim-airline'
-Plug 'airblade/vim-gitgutter'
+"Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 
 " Make Vim Powerful
+Plug 'vim-scripts/Auto-Pairs'
+Plug 'kien/ctrlp.vim'
+Plug 'mattn/emmet-vim'
+Plug 'scrooloose/nerdtree'
+Plug 'ervandew/supertab'
+Plug 'majutsushi/tagbar'
+Plug 'junegunn/vim-easy-align'
+Plug 'airblade/vim-gitgutter'
+Plug 'edsono/vim-matchit'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'jistr/vim-nerdtree-tabs'
 Plug 'tpope/vim-repeat'
-Plug 'embear/vim-localvimrc'
+Plug 'tpope/vim-surround'
 Plug 'triglav/vim-visual-increment'
 
 
-" Command Tool
-Plug 'mileszs/ack.vim'
-"Plug 'vim-scripts/cscope_plus.vim'
-
-
-" Useful Tool
-Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
-Plug 'fidian/hexmode'
-Plug 'kien/ctrlp.vim'
-Plug 'mattn/webapi-vim'
-Plug 'mattn/gist-vim'
-Plug 'majutsushi/tagbar'
-
-
 " Syntax
-"Plug 'sheerun/vim-polyglot'
-Plug 'evanmiller/nginx-vim-syntax'
-Plug 'hdima/python-syntax'
-
-
-" Powerful Editing
-Plug 'vim-scripts/Auto-Pairs'
-Plug 'junegunn/vim-easy-align'
-Plug 'tpope/vim-surround'
-Plug 'ervandew/supertab'
-Plug 'edsono/vim-matchit'
-Plug 'python_match.vim'
-Plug 'terryma/vim-multiple-cursors'
-
-
-" Front-End
-Plug 'mattn/emmet-vim'
-"Plug 'gorodinskiy/vim-coloresque'
-
-"Plug 'slim-template/vim-slim'
-"Plug 'hail2u/vim-css3-syntax'
-
 Plug 'othree/html5.vim'
+Plug 'evanmiller/nginx-vim-syntax'
+Plug 'stanangeloff/php.vim'
+Plug 'hdima/python-syntax'
 Plug 'cakebaker/scss-syntax.vim'
+Plug 'hail2u/vim-css3-syntax'
 Plug 'isRuslan/vim-es6'
 Plug 'posva/vim-vue'
 
 
-" For PHP
-"Plug 'StanAngeloff/php.vim'
+" Command Tool
+Plug 'mileszs/ack.vim'
 
-" For Python
-"Plug 'davidhalter/jedi-vim'
 
-" For Ruby and Rails
-"Plug 'vim-ruby/vim-ruby'
+" Misc
+Plug 'mattn/webapi-vim' " dependency for gist-vim
+Plug 'mattn/gist-vim'
+Plug 'editorconfig/editorconfig-vim'
 
 let local_Vimrc=expand('~/.vimrc.local')
 if filereadable(local_Vimrc)
