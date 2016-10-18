@@ -15,108 +15,86 @@ let mapleader=" "
 "
 
 set nocompatible " Be iMproved
-if has('vim_starting')
-    set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
-let iCanHazNeoBundle=1
-let NeoBundle_readme=expand('~/.vim/bundle/neobundle.vim/README.md')
-if !filereadable(NeoBundle_readme)
-    echo "Installing NeoBundle.."
-    echo ""
-    silent !mkdir -p ~/.vim/bundle
-    silent !git clone https://github.com/Shougo/neobundle.vim --depth 1 ~/.vim/bundle/neobundle.vim
-    let iCanHazNeoBundle=0
-endif
-call neobundle#begin(expand('~/.vim/bundle/'))
-NeoBundleFetch 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/vimproc.vim', {
-\ 'build' : {
-\     'windows' : 'tools\\update-dll-mingw',
-\     'cygwin' : 'make -f make_cygwin.mak',
-\     'mac' : 'make -f make_mac.mak',
-\     'linux' : 'make',
-\     'unix' : 'gmake',
-\    },
-\ }
-NeoBundle 'Shougo/unite.vim'
+call plug#begin('~/.vim/plugged')
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'Shougo/unite.vim'
 
-NeoBundle 'editorconfig/editorconfig-vim'
+Plug 'editorconfig/editorconfig-vim'
 
 " Theme
-NeoBundle 'tomasr/molokai'
+Plug 'tomasr/molokai'
 
 
 " UI
-"NeoBundle 'bling/vim-airline'
-NeoBundle 'airblade/vim-gitgutter'
+"Plug 'bling/vim-airline'
+Plug 'airblade/vim-gitgutter'
 
 " Make Vim Powerful
-NeoBundle 'tpope/vim-repeat'
-NeoBundle 'embear/vim-localvimrc'
-NeoBundle 'triglav/vim-visual-increment'
+Plug 'tpope/vim-repeat'
+Plug 'embear/vim-localvimrc'
+Plug 'triglav/vim-visual-increment'
 
 
 " Command Tool
-NeoBundle 'mileszs/ack.vim'
-"NeoBundle 'vim-scripts/cscope_plus.vim'
+Plug 'mileszs/ack.vim'
+"Plug 'vim-scripts/cscope_plus.vim'
 
 
 " Useful Tool
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'jistr/vim-nerdtree-tabs'
-NeoBundle 'fidian/hexmode'
-NeoBundle 'kien/ctrlp.vim'
-NeoBundle 'mattn/gist-vim', {'depends': 'mattn/webapi-vim'}
-NeoBundle "majutsushi/tagbar"
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'fidian/hexmode'
+Plug 'kien/ctrlp.vim'
+Plug 'mattn/webapi-vim'
+Plug 'mattn/gist-vim'
+Plug 'majutsushi/tagbar'
 
 
 " Syntax
-"NeoBundle 'sheerun/vim-polyglot'
-NeoBundle 'evanmiller/nginx-vim-syntax'
-NeoBundle 'hdima/python-syntax'
+"Plug 'sheerun/vim-polyglot'
+Plug 'evanmiller/nginx-vim-syntax'
+Plug 'hdima/python-syntax'
 
 
 " Powerful Editing
-NeoBundle 'vim-scripts/Auto-Pairs'
-NeoBundle 'junegunn/vim-easy-align'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'ervandew/supertab'
-NeoBundle 'edsono/vim-matchit'
-NeoBundle 'python_match.vim'
-NeoBundle 'terryma/vim-multiple-cursors'
+Plug 'vim-scripts/Auto-Pairs'
+Plug 'junegunn/vim-easy-align'
+Plug 'tpope/vim-surround'
+Plug 'ervandew/supertab'
+Plug 'edsono/vim-matchit'
+Plug 'python_match.vim'
+Plug 'terryma/vim-multiple-cursors'
 
 
 " Front-End
-NeoBundle 'mattn/emmet-vim'
-"NeoBundle 'gorodinskiy/vim-coloresque'
+Plug 'mattn/emmet-vim'
+"Plug 'gorodinskiy/vim-coloresque'
 
-"NeoBundle 'slim-template/vim-slim'
-"NeoBundle 'hail2u/vim-css3-syntax'
+"Plug 'slim-template/vim-slim'
+"Plug 'hail2u/vim-css3-syntax'
 
-NeoBundle 'othree/html5.vim'
-NeoBundle 'cakebaker/scss-syntax.vim'
-NeoBundle 'othree/yajs.vim'
-NeoBundle 'posva/vim-vue'
+Plug 'othree/html5.vim'
+Plug 'cakebaker/scss-syntax.vim'
+Plug 'isRuslan/vim-es6'
+Plug 'posva/vim-vue'
 
 
 " For PHP
-"NeoBundle 'StanAngeloff/php.vim'
+"Plug 'StanAngeloff/php.vim'
 
 " For Python
-"NeoBundle 'davidhalter/jedi-vim'
+"Plug 'davidhalter/jedi-vim'
 
 " For Ruby and Rails
-"NeoBundle 'vim-ruby/vim-ruby'
-
+"Plug 'vim-ruby/vim-ruby'
 
 let local_Vimrc=expand('~/.vimrc.local')
 if filereadable(local_Vimrc)
     source ~/.vimrc.local
 endif
 
-call neobundle#end()
+call plug#end()
 filetype plugin indent on
-NeoBundleCheck
 
 " _____ _
 "|_   _| |__   ___ _ __ ___   ___
