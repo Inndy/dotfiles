@@ -150,6 +150,7 @@ filetype plugin indent on
 autocmd FileType python setlocal et sta sw=4 sts=4 cc=80 completeopt-=preview
 autocmd FileType html setlocal et sw=2 sts=2
 autocmd FileType ruby setlocal et sw=2 sts=2
+autocmd FileType php setlocal et
 
 " _  __            __  __                   _
 "| |/ /___ _   _  |  \/  | __ _ _ __  _ __ (_)_ __   __ _
@@ -184,9 +185,9 @@ imap <c-j> <esc>:call emmet#moveNextPrev(0)<CR>
 imap <c-k> <esc>:call emmet#moveNextPrev(1)<CR>
 
 " gitgutter
-nmap <Leader>ha <Plug>GitGutterStageHunk
-nmap <Leader>hu <Plug>GitGutterRevertHunk
-nmap <Leader>hv <Plug>GitGutterPreviewHunk
+nmap <Leader>ha :GitGutterStageHunk<CR>
+nmap <Leader>hu :GitGutterRevertHunk<CR>
+nmap <Leader>hv :GitGutterPreviewHunk<CR>
 
 " move in panels
 nmap <leader>h <c-w>h
