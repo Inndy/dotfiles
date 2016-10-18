@@ -17,7 +17,7 @@ if [ -f ~/.bashrc ]; then
     fi
 fi
 
-for file in ctags gitignore_global tmux.conf vim vimrc nvim nvimrc inputrc bashrc pythonrc.py
+for file in ctags gitignore_global tmux.conf vim vimrc nvim nvimrc inputrc bashrc
 do
 	if [ "$(whoami)" = "inndy" -a "$file" = "gitconfig" ]; then
 		continue

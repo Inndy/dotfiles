@@ -19,20 +19,18 @@ ICAgIHxffCAgICAK" | base64 --decode
     command="echo 'Asia/Taipei' > /etc/timezone &&
              apt-get update &&
              apt-get upgrade -y &&
-             apt-get install -y git-core tmux vim build-essential g++ python3 python3-dev python3-pip &&
-             pip3 install --upgrade pip &&
-             pip3 install --upgrade requests beautifulsoup4"
+             apt-get install -y git-core tmux vim build-essential python3-pip"
 
     if [ -n "$HACKER" ]; then
-        EXTRA_PACKAGE="$EXTRA_PACKAGE wireshark gdb gcc-multilib p7zip-full nmap hexedit ht python python-dev python-pip"
+        PACKAGES="$PACKAGES gdb gcc-multilib p7zip-full nmap hexedit ht python python-dev python-pip"
         command="$command && pip3 install ipython[notebook] && pip2 install ipython[notebook] pwntools"
     fi
 
-    if [ -n "$EXTRA_PACKAGE" ]; then
-        command="$command && apt-get install -y $EXTRA_PACKAGE"
+    if [ -n "$PACKAGES" ]; then
+        command="$command && apt-get install -y $PACKAGES"
     fi
 
-    if [ "$WITH_DOCKER" = "1" ]; then
+    if [ "$DOCKER" = "1" ]; then
         command="$command && wget -qO- https://get.docker.com | sh"
     fi
 
@@ -44,25 +42,17 @@ ICAgIHxffCAgICAK" | base64 --decode
 
     files='ctags
            gitignore_global
-           tmux.conf
            vim vimrc
-           nvim nvimrc
-           zshrc
            inputrc
            bashrc
-           pythonrc.py
            gitconfig'
     for file in `echo $files | tr ' ' '\n'`; do
         ln -sf ~/.dotfiles/$file ~/.$file
     done
     ln -sf ~/.dotfiles/server-tmux.conf ~/.tmux.conf
-    git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh --depth 1
-    echo "export PATH=\"\$PATH:$PWD/cli-tools/bin\"" >> ~/.zshrc.local
-    echo "export PATH=\"\$PATH:$PWD/cli-tools/bin\"" >> ~/.bashrc.local
     git submodule init
     git submodule update
     git submodule status
-    # vim -c "NeoBundleInstall" -c "q"
 }
 
 run
