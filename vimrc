@@ -18,6 +18,8 @@ set nocompatible " Be iMproved
 call plug#begin('~/.vim/plugged')
 "Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 
+Plug 'tomasr/molokai'
+
 " Make Vim Powerful
 Plug 'vim-scripts/Auto-Pairs'
 Plug 'kien/ctrlp.vim'
