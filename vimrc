@@ -79,7 +79,9 @@ filetype plugin indent on
 
 
 let g:rehash256 = 1
-color molokai
+if !empty(glob('~/.vim/autoload/plug.vim'))
+	color molokai
+endif
 
 " ____            _         ____             __ _
 "| __ )  __ _ ___(_) ___   / ___|___  _ __  / _(_) __ _
