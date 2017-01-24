@@ -18,6 +18,7 @@ if ! shopt -oq posix; then
 fi
 
 reset_color="\e[00m"
+vt100_bold="\e[1m"
 fg_black="\e[30m"
 fg_red="\e[31m"
 fg_green="\e[32m"
@@ -26,6 +27,15 @@ fg_blue="\e[34m"
 fg_magenta="\e[35m"
 fg_cyan="\e[36m"
 fg_white="\e[37m"
+bg_black="\e[40m"
+bg_red="\e[41m"
+bg_green="\e[42m"
+bg_yellow="\e[43m"
+bg_blue="\e[44m"
+bg_magenta="\e[45m"
+bg_cyan="\e[46m"
+bg_white="\e[47m"
+bg_gray="\e[100m"
 
 parse_git_branch() {
     git branch --no-color 2> /dev/null | awk '{ if ($1 == "*" ) { print substr($0, 3) } }'
