@@ -51,7 +51,7 @@ print_git_branch() {
     fi
 }
 
-PS1="\[${fg_magenta}\]\u@\h \[${fg_blue}\]\W\[${reset_color}\]\[${fg_green}\]\$(print_git_branch)\[${reset_color}\]\$ "
+PS1="\[${bg_yellow}${fg_magenta}\]\u@\h \[${fg_blue}\]\W\[${reset_color}\]\[${fg_green}\]\$(print_git_branch)\[${reset_color}\]\$ "
 if [ "$(uname)" = "Darwin" ]; then
     alias ls="ls -G"
 else
