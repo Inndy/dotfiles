@@ -101,6 +101,7 @@ set backspace=indent,eol,start   " 統一 backsapce 功能
 set colorcolumn=100              " 換行提示線
 set cursorline                   " 目前游標所在這行反白
 set directory=~/.vim/swapfiles// " 設定 swapfile 目錄
+set fileencodings=utf-8,default,big5,ucs-bom,latin1
 set hlsearch                     " 顏色標記被搜尋的文字
 set ignorecase                   " 搜尋忽略大小寫
 set incsearch                    " 往後搜尋
