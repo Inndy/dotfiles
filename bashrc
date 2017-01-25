@@ -43,8 +43,11 @@ parse_git_branch() {
 
 print_git_branch() {
     branch="$(parse_git_branch)"
-    if [ -n "$branch" ]; then
-        echo -ne " (${branch})"
+    if [ -n "$branch" ]
+    then
+        echo -ne "${fg_green}(${branch})${reset_color}"
+    else
+        echo -ne "${fg_red}(N/A)${reset_color}"
     fi
 }
 
