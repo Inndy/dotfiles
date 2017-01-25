@@ -42,6 +42,8 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'triglav/vim-visual-increment'
 
+"Plug 'Shougo/neocomplete'
+
 
 " Syntax
 Plug 'othree/html5.vim'
@@ -241,6 +243,8 @@ let g:surround_42="/* \r */" "*
 
 " localvimrc
 let g:localvimrc_persistent=1
+
+"source ~/.vim/neocomplete.config.vim
 
 "  ___  _   _
 " / _ \| |_| |__   ___ _ __
