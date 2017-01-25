@@ -53,7 +53,10 @@ Plug 'hdima/python-syntax'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'isRuslan/vim-es6'
+Plug 'pangloss/vim-javascript'
+Plug 'othree/yajs.vim'
 Plug 'posva/vim-vue'
+Plug 'slim-template/vim-slim'
 
 
 " Command Tool
