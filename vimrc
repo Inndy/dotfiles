@@ -126,9 +126,9 @@ filetype plugin indent on
 "|_|   |_|_|\___||_| \__, | .__/ \___| |_| \_\___|_|\__,_|\__\___|\__,_|
 "                    |___/|_|
 
-autocmd FileType python setlocal et sta sw=4 sts=4 cc=80 completeopt-=preview
+autocmd FileType python setlocal et sw=4 sts=4 cc=80
 autocmd FileType html setlocal et sw=2 sts=2
-autocmd FileType ruby setlocal et sw=2 sts=2
+autocmd FileType ruby setlocal noet sw=2 sts=2
 autocmd FileType php setlocal et
 
 " _  __            __  __                   _
