@@ -34,3 +34,6 @@
 [submodule "terminal-themes/Menlo-for-Powerline"]
 	path = terminal-themes/Menlo-for-Powerline
 	url = git@github.com:abertsch/Menlo-for-Powerline.git
+[submodule "peda"]
+	path = peda
+	url = https://github.com/longld/peda
