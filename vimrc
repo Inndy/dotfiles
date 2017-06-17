@@ -41,6 +41,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'triglav/vim-visual-increment'
 Plug 'Buffergator'
+Plug 'matchit.zip'
 
 "Plug 'Shougo/neocomplete'
 
@@ -57,6 +58,9 @@ Plug 'pangloss/vim-javascript'
 Plug 'othree/yajs.vim'
 Plug 'posva/vim-vue'
 Plug 'slim-template/vim-slim'
+Plug 'keith/swift.vim'
+
+Plug 'PProvost/vim-ps1' "ps1
 
 
 " Command Tool
