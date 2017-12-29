@@ -1,7 +1,15 @@
 #!/usr/bin/env bash
 
-export HISTSIZE=800000
-export HISTFILESIZE=64000000
+# Undocumented feature which sets the size to "unlimited".
+# http://stackoverflow.com/questions/9457233/unlimited-bash-history
+export HISTFILESIZE=
+export HISTSIZE=
+# http://superuser.com/questions/575479/bash-history-truncated-to-500-lines-on-each-login
+export HISTFILE=~/.bash_eternal_history
+# Force prompt to write history after every command.
+# http://superuser.com/questions/20900/bash-history-loss
+PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+
 export HISTCONTROL=ignorespace
 
 shopt -s histappend
@@ -51,7 +59,7 @@ print_git_branch() {
     fi
 }
 
-PS1="\[${fg_yellow}[ \$(date '+%m/%d %H:%M:%S') ] \[${fg_magenta}\]\u \[${reset_color}\]@ \[${fg_green}\]\h \[${fg_blue}\]\w \$(print_git_branch)${vt100_bold}\]\n\$\[${reset_color}\] "
+PS1="\[${fg_yellow}\][ \$(date '+%m/%d %H:%M:%S') ] \[${fg_magenta}\]\u \[${reset_color}\]@ \[${fg_green}\]\h \[${fg_blue}\]\w \$(print_git_branch)\[${vt100_bold}\]\n\$\[${reset_color}\] "
 if [ "$(uname)" = "Darwin" ]; then
     alias ls="ls -G"
 else
@@ -69,5 +77,4 @@ if [ -f ~/.bashrc.local ]; then
     source ~/.bashrc.local
 fi
 
-export PROMPT_COMMAND='history -a 2>/dev/null'
 [ -x rvm ] && export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
