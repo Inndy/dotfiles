@@ -48,7 +48,7 @@ Plug 'matchit.zip'
 
 " Syntax
 Plug 'othree/html5.vim'
-Plug 'evanmiller/nginx-vim-syntax'
+Plug 'chr4/nginx.vim'
 Plug 'stanangeloff/php.vim'
 Plug 'hdima/python-syntax'
 Plug 'cakebaker/scss-syntax.vim'
