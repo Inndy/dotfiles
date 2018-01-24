@@ -29,7 +29,6 @@ Plug 'tomasr/molokai'
 " Make Vim Powerful
 Plug 'vim-scripts/Auto-Pairs'
 Plug 'kien/ctrlp.vim'
-Plug 'mattn/emmet-vim'
 Plug 'scrooloose/nerdtree'
 Plug 'ervandew/supertab'
 Plug 'majutsushi/tagbar'
@@ -47,10 +46,19 @@ Plug 'vim-scripts/matchit.zip'
 
 
 " Syntax
-Plug 'othree/html5.vim'
 Plug 'chr4/nginx.vim'
 Plug 'stanangeloff/php.vim'
 Plug 'hdima/python-syntax'
+Plug 'keith/swift.vim'
+
+Plug 'PProvost/vim-ps1' "ps1
+
+
+" only load these web front-end related plugins when we need them
+if filereadable(expand('~/.frontend.vimenv'))
+
+" syntax
+Plug 'othree/html5.vim'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'isRuslan/vim-es6'
@@ -58,11 +66,12 @@ Plug 'pangloss/vim-javascript'
 Plug 'othree/yajs.vim'
 Plug 'posva/vim-vue'
 Plug 'slim-template/vim-slim'
-Plug 'keith/swift.vim'
 Plug 'digitaltoad/vim-pug'
 
-Plug 'PProvost/vim-ps1' "ps1
+" other
+Plug 'mattn/emmet-vim'
 
+endif
 
 " Command Tool
 Plug 'mileszs/ack.vim'
