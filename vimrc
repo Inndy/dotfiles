@@ -73,8 +73,6 @@ Plug 'mattn/webapi-vim' " dependency for gist-vim
 Plug 'mattn/gist-vim'
 Plug 'editorconfig/editorconfig-vim'
 
-Plug 'shime/vim-livedown'
-
 let local_Vimrc=expand('~/.vimrc.local')
 if filereadable(local_Vimrc)
     source ~/.vimrc.local
