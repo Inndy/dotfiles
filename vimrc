@@ -40,8 +40,8 @@ Plug 'jistr/vim-nerdtree-tabs'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'triglav/vim-visual-increment'
-Plug 'Buffergator'
-Plug 'matchit.zip'
+Plug 'vim-scripts/Buffergator'
+Plug 'vim-scripts/matchit.zip'
 
 "Plug 'Shougo/neocomplete'
 
@@ -59,6 +59,7 @@ Plug 'othree/yajs.vim'
 Plug 'posva/vim-vue'
 Plug 'slim-template/vim-slim'
 Plug 'keith/swift.vim'
+Plug 'digitaltoad/vim-pug'
 
 Plug 'PProvost/vim-ps1' "ps1
 
