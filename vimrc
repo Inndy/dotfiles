@@ -263,6 +263,11 @@ let g:localvimrc_persistent=1
 
 "source ~/.vim/neocomplete.config.vim
 
+" ack.vim
+if executable('ag')
+	let g:ackprg = 'ag --vimgrep'
+endif
+
 "  ___  _   _
 " / _ \| |_| |__   ___ _ __
 "| | | | __| '_ \ / _ \ '__|
