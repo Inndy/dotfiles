@@ -176,10 +176,6 @@ nmap <Tab> gt
 nmap <S-Tab> gT
 nmap <leader>t :tabedit 
 
-" emmet
-imap <c-j> <esc>:call emmet#moveNextPrev(0)<CR>
-imap <c-k> <esc>:call emmet#moveNextPrev(1)<CR>
-
 " gitgutter
 nmap <Leader>ha :GitGutterStageHunk<CR>
 nmap <Leader>hu :GitGutterRevertHunk<CR>
