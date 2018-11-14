@@ -3,7 +3,7 @@
 echo ""
 echo "  +------------------------------------------------+"
 echo "  |                                                |\\"
-echo "  |    Inndy's config file install script v0.4.0  | \\"
+echo "  |    Inndy's config file install script v0.4.1  | \\"
 echo "  |                                                | |"
 echo "  +------------------------------------------------+ |"
 echo "   \\________________________________________________\\|"
@@ -27,5 +27,8 @@ git submodule update --init peda
 git submodule status
 
 echo<<__LOCAL_RC_FILE__ >> ~/.bashrc.local
-export PATH="\$PATH:\$HOME/.bin:\$HOME/.dotfiles/cli-tools/bin"
+if [ -z "\$(which x256-test.sh 2>&1)" ]
+then
+    export PATH="\$PATH:\$HOME/.bin:\$HOME/.dotfiles/cli-tools/bin"
+fi
 __LOCAL_RC_FILE__
