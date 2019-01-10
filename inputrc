@@ -1,8 +1,5 @@
 # arrow key: up, down
 "\e[A": history-search-backward
 "\e[B": history-search-forward
-# Alt-j, Alt-k
-"\ek": history-search-backward
-"\ej": history-search-forward
 set show-all-if-ambiguous on
 set completion-ignore-case on
