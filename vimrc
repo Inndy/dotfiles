@@ -24,6 +24,8 @@ set nocompatible " Be iMproved
 call plug#begin('~/.vim/plugged')
 "Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 
+Plug 'tomlion/vim-solidity'
+
 Plug 'tomasr/molokai'
 
 " Make Vim Powerful
@@ -51,7 +53,9 @@ Plug 'stanangeloff/php.vim'
 Plug 'hdima/python-syntax'
 Plug 'keith/swift.vim'
 
+" Cyber Security
 Plug 'PProvost/vim-ps1' "ps1
+Plug 's3rvac/vim-syntax-yara'
 
 
 " only load these web front-end related plugins when we need them
