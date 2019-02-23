@@ -251,8 +251,6 @@ let g:surround_42="/* \r */" "*
 " localvimrc
 let g:localvimrc_persistent=1
 
-"source ~/.vim/neocomplete.config.vim
-
 " ack.vim
 if executable('ag')
 	let g:ackprg = 'ag --vimgrep'
@@ -273,7 +271,3 @@ autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
 hi Search ctermfg=16 ctermbg=226
-
-if has("gui_macvim") || has("gui_vimr")
-   set guifont=Menlo:h14
-endif
