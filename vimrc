@@ -191,16 +191,6 @@ nmap <leader>j <c-w>j
 nmap <leader>k <c-w>k
 nmap <leader>l <c-w>l
 
-" evil shift!
-cab Q q
-cab Qa qa
-cab W w
-cab X x
-cab WQ wq
-cab Wq wq
-cab wQ wq
-cab Set set
-
 " integration with system clipboard
 map <leader>p "*p
 map <leader>y "*y
