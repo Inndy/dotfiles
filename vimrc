@@ -22,12 +22,11 @@ endif
 
 set nocompatible " Be iMproved
 call plug#begin('~/.vim/plugged')
-"Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 
 Plug 'tomasr/molokai'
 
 " Make Vim Powerful
-Plug 'vim-scripts/Auto-Pairs'
+Plug 'jiangmiao/auto-pairs'
 Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'ervandew/supertab'
@@ -39,9 +38,7 @@ Plug 'jistr/vim-nerdtree-tabs'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'triglav/vim-visual-increment'
-Plug 'vim-scripts/matchit.zip'
-
-"Plug 'Shougo/neocomplete'
+Plug 'andymass/vim-matchup'
 
 
 " Syntax
