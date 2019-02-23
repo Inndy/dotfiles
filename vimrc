@@ -178,12 +178,9 @@ vmap <Enter> <Plug>(EasyAlign)
 " tabs
 nmap <Tab> gt
 nmap <S-Tab> gT
-nmap <leader>t :tabedit 
 
 " gitgutter
 nmap <Leader>ha :GitGutterStageHunk<CR>
-nmap <Leader>hu :GitGutterRevertHunk<CR>
-nmap <Leader>hv :GitGutterPreviewHunk<CR>
 
 " move in panels
 nmap <leader>h <c-w>h

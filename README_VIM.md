@@ -8,12 +8,9 @@
 | F10            | Toggle NERDTree                                 | NERDTree  |
 | Tab (N)        | Next tab                                        | (None)    |
 | Shift - Tab    | Previous tab                                    | (None)    |
-| `<leader>r`    | `:tabedit `                                     | (None)    |
 | Tab (I)        | Auto complete                                   | supertab  |
 | Ctrl - L       | Clean search highlight                          | (None)    |
 | Ctrl - E (I)   | Expand expression                               | emmet     |
-| Ctrl - K (I/N) | Previous edit point                             | emmet     |
-| Ctrl - J (I/N) | Next edit point                                 | emmet     |
 | Ctrl - ]       | Goto defination                                 | ctags.vim |
 | Ctrl - T       | Go back                                         | ctags.vim |
 | `<leader>y`    | Copy to system clipboard                        | (None)    |
