@@ -24,8 +24,6 @@ set nocompatible " Be iMproved
 call plug#begin('~/.vim/plugged')
 "Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 
-Plug 'tomlion/vim-solidity'
-
 Plug 'tomasr/molokai'
 
 " Make Vim Powerful
@@ -41,7 +39,6 @@ Plug 'jistr/vim-nerdtree-tabs'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'triglav/vim-visual-increment'
-Plug 'vim-scripts/Buffergator'
 Plug 'vim-scripts/matchit.zip'
 
 "Plug 'Shougo/neocomplete'
@@ -52,8 +49,7 @@ Plug 'chr4/nginx.vim'
 Plug 'stanangeloff/php.vim'
 Plug 'hdima/python-syntax'
 Plug 'keith/swift.vim'
-
-" Cyber Security
+Plug 'tomlion/vim-solidity'
 Plug 'PProvost/vim-ps1' "ps1
 Plug 's3rvac/vim-syntax-yara'
 
