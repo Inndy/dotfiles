@@ -55,9 +55,15 @@ parse_git_branch() {
 
 print_git_branch() {
     branch="$(parse_git_branch)"
-    if [ -n "$branch" ]
-    then
-        echo -ne "${fg_green}(${branch})${reset_color}"
+	if [ -z "$(git status --short 2>&1)" ]; then
+		# git repo is clean
+		git_status_color="${fg_green}"
+	else
+		git_status_color="${fg_orange}"
+	fi
+
+    if [ -n "$branch" ]; then
+        echo -ne "${git_status_color}(${branch})${reset_color}"
     fi
 }
 
