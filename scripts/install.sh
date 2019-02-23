@@ -20,6 +20,10 @@ do
     ln -s ~/.dotfiles/$file ~/.$file
 done
 
+mkdir -p ~/.config
+ln -s ~/.vim ~/.config/nvim
+ln -s ~/.vimrc ~/.config/nvim/init.vim
+
 
 echo "Init submodules..."
 git submodule update --init cli-tools
