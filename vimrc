@@ -172,6 +172,9 @@ vmap <Enter> <Plug>(EasyAlign)
 nmap <Tab> gt
 nmap <S-Tab> gT
 
+" ctags
+nmap g<enter> <c-]>
+
 " move in panels
 nmap <leader>h <c-w>h
 nmap <leader>j <c-w>j
