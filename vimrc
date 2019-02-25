@@ -172,9 +172,6 @@ vmap <Enter> <Plug>(EasyAlign)
 nmap <Tab> gt
 nmap <S-Tab> gT
 
-" gitgutter
-nmap <Leader>ha :GitGutterStageHunk<CR>
-
 " move in panels
 nmap <leader>h <c-w>h
 nmap <leader>j <c-w>j
