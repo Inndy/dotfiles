@@ -25,6 +25,9 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'tomasr/molokai'
 
+" harden
+Plug 'ciaranm/securemodelines'
+
 " Make Vim Powerful
 Plug 'jiangmiao/auto-pairs'
 Plug 'kien/ctrlp.vim'
