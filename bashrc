@@ -75,7 +75,6 @@ else
 fi
 
 alias tm=tmux
-alias disasm="objdump -D -M intel"
 
 if [ -f ~/.bashrc.local ]; then
     source ~/.bashrc.local
