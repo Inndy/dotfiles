@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+[ -z "$BASHENV_INIT" -a -f ~/.bashenv ] && . ~/.bashenv && export BASHENV_INIT=1
 
 # Undocumented feature which sets the size to "unlimited".
 # http://stackoverflow.com/questions/9457233/unlimited-bash-history
@@ -76,6 +77,5 @@ fi
 
 alias tm=tmux
 
-if [ -f ~/.bashrc.local ]; then
-    source ~/.bashrc.local
-fi
+[ -d "$DOTFILES"/bash ] && for f in "$DOTFILES"/bash/*; do . $f; done
+[ -f ~/.bashrc.local ] && . ~/.bashrc.local

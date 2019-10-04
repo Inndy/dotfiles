@@ -20,3 +20,8 @@ wget -qO- https://raw.githubusercontent.com/Inndy/dotfiles/master/scripts/bootst
 
 - My environment use [neovim](https://github.com/neovim/neovim) by default
 - [README for VIM config](README_VIM.md)
+
+## TODO
+
+- [ ] Add docuemnt for .bashenv
+- [ ] Add docuemnt for bash plugin strucutre and bash plugins
