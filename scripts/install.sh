@@ -3,7 +3,7 @@
 echo ""
 echo "  +------------------------------------------------+"
 echo "  |                                                |\\"
-echo "  |    Inndy's config file install script v0.6.0   | \\"
+echo "  |    Inndy's config file install script v0.6.1   | \\"
 echo "  |                                                | |"
 echo "  +------------------------------------------------+ |"
 echo "   \\________________________________________________\\|"
@@ -75,8 +75,6 @@ while [[ $# -gt 0 ]]; do
 done
 set -- "${POSITIONAL[@]}"
 
-set -x
-
 LINK_DOT_FILES="inputrc"
 
 function add_dotfiles()
@@ -95,12 +93,6 @@ add_dotfiles_unless $NO_VIM vim vimrc
 # only install gitconfig if user is inndy
 [ "$(whoami)" = "inndy" ] && add_dotfiles_unless $NO_GIT gitconfig
 
-if [ -z "$NO_VIM" ]; then
-	mkdir -p ~/.config
-	ln -s ~/.vim ~/.config/nvim
-	ln -s ~/.vimrc ~/.config/nvim/init.vim
-fi
-
 
 [ -z "$NO_CLI" ] && git submodule update --init cli-tools
 
@@ -111,7 +103,8 @@ fi
 
 if [ -z "$NO_BASH" ]; then
 add_dotfiles $NO_BASH bashrc
-echo "source $DOTFILES/bashrc" >> ~/.bashrc
+
+[ ! -f ~/.bashrc.local ] && echo "source $DOTFILES/bashrc" >> ~/.bashrc
 
 cat<<__LOCAL_RC_FILE__ >> ~/.bashenv
 #!/bin/bash
@@ -129,5 +122,11 @@ fi
 for file in $LINK_DOT_FILES; do
     ln -s "$DOTFILES"/$file ~/.$file
 done
+
+if [ -z "$NO_VIM" ]; then
+	mkdir -p ~/.config
+	ln -s ~/.vim ~/.config/nvim
+	ln -s ~/.vimrc ~/.config/nvim/init.vim
+fi
 
 git submodule status
