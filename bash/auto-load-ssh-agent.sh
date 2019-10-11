@@ -1,25 +1,22 @@
 test_ssh_agent()
 {
-	[ -r "$1" -a -w "$1" ] && \
-	ps -q "$2" >/dev/null
+	SSH_AUTH_SOCK="$1" ssh-add -l 2>&- >/dev/null
+	[ $? -eq 2 ] && return 1
+	return 0
 }
 
 auto_load_ssh_agent()
 {
 
-	test_ssh_agent "$SSH_AUTH_SOCK" "$SSH_AGENT_PID" && return
+	test_ssh_agent "$SSH_AUTH_SOCK" && return
 
 	for f in /tmp/ssh-*/agent.*
 	do
 		[ ! -e "$f" ] && continue
 
-		pid=${f##*.}
-		test_ssh_agent "$f" "$pid" && \
+		test_ssh_agent "$f" && \
 			export SSH_AUTH_SOCK="$f" && \
-			export SSH_AGENT_PID="$pid" && \
 			return
-
-		rm -r "$(dirname $f)"
 	done
 
 	eval `ssh-agent` >/dev/null
