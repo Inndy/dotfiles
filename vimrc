@@ -71,6 +71,8 @@ Plug 'digitaltoad/vim-pug'
 " other
 Plug 'mattn/emmet-vim'
 
+source ~/.frontend.vimenv
+
 endif
 
 " Command Tool
