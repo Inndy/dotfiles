@@ -87,11 +87,11 @@ function add_dotfiles_unless()
 	[ -z "$1" ] && shift && add_dotfiles "$*"
 }
 
-add_dotfiles_unless $NO_TMUX tmux.conf
-add_dotfiles_unless $NO_VIM vim vimrc
+add_dotfiles_unless "$NO_TMUX" tmux.conf
+add_dotfiles_unless "$NO_VIM" vim vimrc
 
 # only install gitconfig if user is inndy
-[ "$(whoami)" = "inndy" ] && add_dotfiles_unless $NO_GIT gitconfig
+[ "$(whoami)" = "inndy" ] && add_dotfiles_unless "$NO_GIT" gitconfig
 
 
 [ -z "$NO_CLI" ] && git submodule update --init cli-tools
