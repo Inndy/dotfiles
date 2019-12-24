@@ -54,7 +54,21 @@ parse_git_branch() {
     git branch --no-color 2>&- | awk '{ if ($1 == "*" ) { print substr($0, 3) } }'
 }
 
+disable_git_branch_status() {
+	export DISABLE_GIT_PARSING=1
+}
+
+enable_git_branch_status() {
+	export DISABLE_GIT_PARSING=
+}
+
 print_git_branch() {
+	if [ -n "$DISABLE_GIT_PARSING" ]
+	then
+		echo -ne "\e[01;38;5;8m(*disabled*)${reset_color}"
+		return
+	fi
+
     branch="$(parse_git_branch)"
 	if [ -z "$(git status --short 2>&1)" ]; then
 		# git repo is clean
