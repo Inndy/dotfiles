@@ -106,6 +106,10 @@ add_dotfiles $NO_BASH bashrc
 
 [ ! -f ~/.bashrc.local ] && echo "source $DOTFILES/bashrc" >> ~/.bashrc
 
+if [ -f ~/.bashenv ]
+then
+	echo -e "\e[1;4;5m[!] Warning: ~/.bashenv exists, will not append any data to it.\e[0m"
+else
 cat<<__LOCAL_RC_FILE__ >> ~/.bashenv
 #!/bin/bash
 export DOTFILES="$DOTFILES"
@@ -115,6 +119,7 @@ if [ -z "$NO_CLI" ]; then
 cat<<__LOCAL_RC_FILE_CLITOOLS_PATH__ >> ~/.bashenv
 export PATH="\$PATH:$DOTFILES/cli-tools/bin"
 __LOCAL_RC_FILE_CLITOOLS_PATH__
+fi
 fi
 
 fi
