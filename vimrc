@@ -130,6 +130,7 @@ set shiftwidth=4                 " tab 寬度
 set showcmd                      " 顯示命令按鍵
 set smartcase                    " 搜尋時自動判斷是否區分大小寫
 set smartindent                  " 自動縮排
+set splitright                   " :vsplit on right side
 set t_Co=256                     " 啟用256色彩空間
 set tabpagemax=100               " 一次最多可以開多少tab
 set tabstop=4                    " tab寬度
