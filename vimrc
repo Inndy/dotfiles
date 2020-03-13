@@ -42,6 +42,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'triglav/vim-visual-increment'
 Plug 'andymass/vim-matchup'
+Plug 'fs111/pydoc.vim'
 
 
 " Syntax
@@ -250,6 +251,9 @@ let g:localvimrc_persistent=1
 if executable('ag')
 	let g:ackprg = 'ag --vimgrep'
 endif
+
+" pydoc.vim
+let g:pydoc_open_cmd = 'vsplit'
 
 "  ___  _   _
 " / _ \| |_| |__   ___ _ __
