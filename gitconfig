@@ -33,3 +33,5 @@
 	trustExitCode = true
 [github]
 	user = inndy
+[pull]
+	rebase = true
