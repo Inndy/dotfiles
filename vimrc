@@ -53,6 +53,7 @@ Plug 'keith/swift.vim'
 Plug 'tomlion/vim-solidity'
 Plug 'PProvost/vim-ps1' "ps1
 Plug 's3rvac/vim-syntax-yara'
+Plug 'cespare/vim-toml'
 
 
 " only load these web front-end related plugins when we need them
