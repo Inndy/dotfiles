@@ -1,1 +1,2 @@
 vim/init.vim
+vim/autoload/plug.vim
