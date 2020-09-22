@@ -49,8 +49,6 @@ Plug 'fs111/pydoc.vim'
 Plug 'chr4/nginx.vim'
 Plug 'stanangeloff/php.vim'
 Plug 'hdima/python-syntax'
-Plug 'keith/swift.vim'
-Plug 'tomlion/vim-solidity'
 Plug 'PProvost/vim-ps1' "ps1
 Plug 's3rvac/vim-syntax-yara'
 Plug 'cespare/vim-toml'
@@ -63,15 +61,14 @@ if filereadable(expand('~/.frontend.vimenv'))
 Plug 'othree/html5.vim'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'hail2u/vim-css3-syntax'
-"Plug 'isRuslan/vim-es6'
-"Plug 'pangloss/vim-javascript'
-"Plug 'othree/yajs.vim'
+Plug 'othree/yajs.vim'
 Plug 'posva/vim-vue'
 Plug 'slim-template/vim-slim'
 Plug 'digitaltoad/vim-pug'
 
 " other
-Plug 'mattn/emmet-vim'
+" Everyone uses template engine, but you can add it into .frontend.vimenv
+"Plug 'mattn/emmet-vim'
 
 source ~/.frontend.vimenv
 
@@ -82,8 +79,6 @@ Plug 'mileszs/ack.vim'
 
 
 " Misc
-Plug 'mattn/webapi-vim' " dependency for gist-vim
-Plug 'mattn/gist-vim'
 Plug 'editorconfig/editorconfig-vim'
 
 let local_Vimrc=expand('~/.vimrc.local')
@@ -221,9 +216,6 @@ autocmd filetype javascript nnoremap <leader>r :w <bar> exec '!nodejs '.shellesc
 " Ctags
 let g:ctags_statusline = 1
 
-" Emmet
-let g:user_emmet_expandabbr_key = '<c-e>'
-
 " CtrlP
 let g:ctrlp_custom_ignore = {
 	\ 'dir':  '\v[\/](\.(git|hg|svn)|node_modules)$',
@@ -245,9 +237,6 @@ let g:surround_45="<% \r %>"   " -
 let g:surround_61="<%= \r %>"  " =
 let g:surround_33="<!-- \r -->" "!
 let g:surround_42="/* \r */" "*
-
-" localvimrc
-let g:localvimrc_persistent=1
 
 " ack.vim
 if executable('ag')
