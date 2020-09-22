@@ -1,9 +1,8 @@
 # Inndy's config files
 
-## Notice
+## It's not an open source project
 
-> I don't promise anything for these setting files,
-> so you should check all files before you install it.
+> READ IT BEFORE USE IT. I AM NOT RESPONSIBLE FOR ANY DAMANGE.
 
 ## Install
 
@@ -15,13 +14,3 @@
 export EXTRA_PACKAGE="ack-grep curl htop iftop tree"
 wget -qO- https://raw.githubusercontent.com/Inndy/dotfiles/master/scripts/bootstrap-ubuntu-vm.sh | bash
 ```
-
-## About VIM
-
-- My environment use [neovim](https://github.com/neovim/neovim) by default
-- [README for VIM config](README_VIM.md)
-
-## TODO
-
-- [ ] Add docuemnt for .bashenv
-- [ ] Add docuemnt for bash plugin strucutre and bash plugins
