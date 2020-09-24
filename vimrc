@@ -35,7 +35,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'ervandew/supertab'
 Plug 'majutsushi/tagbar'
 Plug 'junegunn/vim-easy-align'
-Plug 'airblade/vim-gitgutter'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'tpope/vim-repeat'
@@ -43,6 +42,13 @@ Plug 'tpope/vim-surround'
 Plug 'triglav/vim-visual-increment'
 Plug 'andymass/vim-matchup'
 Plug 'fs111/pydoc.vim'
+
+" disable following plugins for better performance
+if filereadable(expand('~/.vimenv.fastcomputer'))
+Plug 'airblade/vim-gitgutter'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+endif
 
 
 " Syntax
@@ -246,6 +252,12 @@ endif
 " pydoc.vim
 let g:pydoc_open_cmd = 'vsplit'
 let g:pydoc_cmd = 'python3 -m pydoc'
+
+" ultisnips
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsEditSplit="vertical"
 
 "  ___  _   _
 " / _ \| |_| |__   ___ _ __
