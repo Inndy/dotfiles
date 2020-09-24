@@ -245,6 +245,7 @@ endif
 
 " pydoc.vim
 let g:pydoc_open_cmd = 'vsplit'
+let g:pydoc_cmd = 'python3 -m pydoc'
 
 "  ___  _   _
 " / _ \| |_| |__   ___ _ __
