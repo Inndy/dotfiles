@@ -1,6 +1,0 @@
-[submodule "cli-tools"]
-	path = cli-tools
-	url = https://github.com/inndy/cli-tools
-[submodule "peda"]
-	path = peda
-	url = https://github.com/longld/peda
