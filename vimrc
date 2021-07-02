@@ -46,8 +46,8 @@ Plug 'fs111/pydoc.vim'
 " disable following plugins for better performance
 if filereadable(expand('~/.vimenv.fastcomputer'))
 Plug 'airblade/vim-gitgutter'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+"Plug 'SirVer/ultisnips'
+"Plug 'honza/vim-snippets'
 endif
 
 
