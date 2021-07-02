@@ -3,7 +3,7 @@
 echo ""
 echo "  +------------------------------------------------+"
 echo "  |                                                |\\"
-echo "  |    Inndy's config file install script v0.6.1   | \\"
+echo "  |    Inndy's config file install script v0.7.0   | \\"
 echo "  |                                                | |"
 echo "  +------------------------------------------------+ |"
 echo "   \\________________________________________________\\|"
@@ -24,14 +24,6 @@ while [[ $# -gt 0 ]]; do
 				NO_BASH=Y
 				shift
 				;;
-			-P|--no-peda)
-				NO_PEDA=Y
-				shift
-				;;
-			-C|--no-cli)
-				NO_CLI=Y
-				shift
-				;;
 			-V|--no-vim)
 				NO_VIM=Y
 				shift
@@ -49,8 +41,6 @@ while [[ $# -gt 0 ]]; do
 				echo ""
 				echo "  options:"
 				echo "    -B, --no-bashrc         Do not install bashrc related files"
-				echo "    -P, --no-peda           Do not install gdb plugin peda"
-				echo "    -C, --no-cli            Do not install cli-tools"
 				echo "    -V, --no-vim            Do not install vim profiles"
 				echo "    -T, --no-tmux           Do not install tmux profiles"
 				echo "    -G, --no-git            Do not install git profiles"
@@ -93,34 +83,20 @@ add_dotfiles_unless "$NO_VIM" vim vimrc
 # only install gitconfig if user is inndy
 [ "$(whoami)" = "inndy" ] && add_dotfiles_unless "$NO_GIT" gitconfig
 
-
-[ -z "$NO_CLI" ] && git submodule update --init cli-tools
-
-if [ -z "$NO_PEDA" ]; then
-	echo "source $DOTFILES/peda/peda.py" >> ~/.gdbinit
-	git submodule update --init peda
-fi
-
 if [ -z "$NO_BASH" ]; then
-add_dotfiles $NO_BASH bashrc
 
-[ ! -f ~/.bashrc.local ] && echo "source $DOTFILES/bashrc" >> ~/.bashrc
+	newline="source $DOTFILES/bashrc"
+	grep -F "$newline" ~/.bashrc || echo "$newline" >> ~/.bashrc
 
-if [ -f ~/.bashenv ]
-then
-	echo -e "\e[1;4;5m[!] Warning: ~/.bashenv exists, will not append any data to it.\e[0m"
-else
-cat<<__LOCAL_RC_FILE__ >> ~/.bashenv
-#!/bin/bash
-export DOTFILES="$DOTFILES"
-__LOCAL_RC_FILE__
-
-if [ -z "$NO_CLI" ]; then
-cat<<__LOCAL_RC_FILE_CLITOOLS_PATH__ >> ~/.bashenv
-export PATH="\$PATH:$DOTFILES/cli-tools/bin"
-__LOCAL_RC_FILE_CLITOOLS_PATH__
-fi
-fi
+	if [ -f ~/.bashenv ]
+	then
+		echo -e "\e[1;4;5m[!] Warning: ~/.bashenv exists, will not append any data to it.\e[0m"
+	else
+		{
+			echo '#!/bin/bash'
+			echo "export DOTFILES=\"$DOTFILES\""
+		} >> ~/.bashenv
+	fi
 
 fi
 
@@ -133,5 +109,3 @@ if [ -z "$NO_VIM" ]; then
 	ln -s ~/.vim ~/.config/nvim
 	ln -s ~/.vimrc ~/.config/nvim/init.vim
 fi
-
-git submodule status
