@@ -7,6 +7,11 @@ test_ssh_agent()
 
 auto_load_ssh_agent()
 {
+	if [ -n "$WSL_AUTH_SOCK" ]
+	then
+		export SSH_AUTH_SOCK="$WSL_AUTH_SOCK"
+		return
+	fi
 
 	test_ssh_agent "$SSH_AUTH_SOCK" && return
 
