@@ -161,6 +161,8 @@ autocmd FileType php    setlocal et
 "|_|\_\___|\__, | |_|  |_|\__,_| .__/| .__/|_|_| |_|\__, |
 "          |___/               |_|   |_|            |___/
 
+imap jk <esc>
+
 " clear search result
 nnoremap <c-l> :noh<CR>
 inoremap <c-l> <c-o>:noh<CR>
