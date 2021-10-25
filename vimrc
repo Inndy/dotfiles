@@ -71,6 +71,8 @@ Plug 'othree/yajs.vim'
 Plug 'posva/vim-vue'
 Plug 'slim-template/vim-slim'
 Plug 'digitaltoad/vim-pug'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc-vetur'
 
 " other
 " Everyone uses template engine, but you can add it into .frontend.vimenv
