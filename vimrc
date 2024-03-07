@@ -186,6 +186,8 @@ vmap <Enter> <Plug>(EasyAlign)
 " tabs
 nmap <Tab> gt
 nmap <S-Tab> gT
+nmap <A-]> gt
+nmap <A-[> gT
 
 " ctags
 nmap g<enter> <c-]>
