@@ -253,7 +253,7 @@ let g:surround_33="<!-- \r -->" "!
 let g:surround_42="/* \r */" "*
 
 " ack.vim
-if executable('ag')
+if executable('ag') || executable('ag.exe')
 	let g:ackprg = 'ag --vimgrep'
 endif
 
@@ -333,3 +333,16 @@ autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
 hi Search ctermfg=16 ctermbg=226
+
+if executable('win32yank.exe')
+	let g:clipboard = {
+	\   'name': 'win32yank-wsl',
+	\   'copy': {
+	\      '*': 'win32yank.exe -i --crlf',
+	\    },
+	\   'paste': {
+	\      '*': 'win32yank.exe -o --lf',
+	\   },
+	\   'cache_enabled': 0,
+	\ }
+endif
