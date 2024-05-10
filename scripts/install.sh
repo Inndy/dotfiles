@@ -80,13 +80,17 @@ function add_dotfiles_unless()
 add_dotfiles_unless "$NO_TMUX" tmux.conf
 add_dotfiles_unless "$NO_VIM" vim vimrc
 
-# only install gitconfig if user is inndy
 [ "$(whoami)" = "inndy" ] && add_dotfiles_unless "$NO_GIT" gitconfig
-if [ -z "$NO_GIT" -a ! -f ~/.gitconfig.local ]; then
-cat << _EOF_ > ~/.gitconfig.local
+if [ -z "$NO_GIT" ]; then
+	[ ! -f ~/.gitconfig ] && cat << _EOF_ > ~/.gitconfig
 [user]
 	name = Inndy
 	email = inndy.tw@gmail.com
+_EOF_
+
+	grep -qF "$DOTFILES" || cat << _EOF_ >> ~/.gitconfig
+[include]
+	path = $DOTFILES/gitconfig
 _EOF_
 fi
 
