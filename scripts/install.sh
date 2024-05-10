@@ -9,6 +9,10 @@ echo "  +------------------------------------------------+ |"
 echo "   \\________________________________________________\\|"
 echo ""
 
+-warn() {
+	printf "\e[1;4;5m[!] Warning: %s\e[0m\n" "$*"
+}
+
 SCRIPT=`realpath "$0"`
 SCRIPTS=`dirname "$SCRIPT"`
 DOTFILES=`dirname "$SCRIPTS"`
@@ -82,7 +86,7 @@ add_dotfiles_unless "$NO_VIM" vim vimrc
 
 [ "$(whoami)" = "inndy" ] && add_dotfiles_unless "$NO_GIT" gitconfig
 if [ -z "$NO_GIT" ]; then
-	[ ! -f ~/.gitconfig ] && cat << _EOF_ > ~/.gitconfig
+	[ ! -f ~/.gitconfig ] && grep -vqF 'name = Inndy' && cat << _EOF_ > ~/.gitconfig
 [user]
 	name = Inndy
 	email = inndy.tw@gmail.com
@@ -101,7 +105,7 @@ if [ -z "$NO_BASH" ]; then
 
 	if [ -f ~/.bashenv ]
 	then
-		echo -e "\e[1;4;5m[!] Warning: ~/.bashenv exists, will not append any data to it.\e[0m"
+		-warn "~/.bashenv exists, will not append any data to it."
 	else
 		{
 			echo '#!/bin/bash'
@@ -112,11 +116,16 @@ if [ -z "$NO_BASH" ]; then
 fi
 
 for file in $LINK_DOT_FILES; do
-    ln -s "$DOTFILES"/$file ~/.$file
+	if [ -e ~/."$file" ]
+	then
+		-warn "~/.$file exists, will not create link"
+	else
+		ln -s "$DOTFILES"/$file ~/.$file
+	fi
 done
 
 if [ -z "$NO_VIM" ]; then
 	mkdir -p ~/.config
-	ln -s ~/.vim ~/.config/nvim
-	ln -s ~/.vimrc ~/.config/nvim/init.vim
+	[ ! -e ~/.config/nvim ] && ln -s ~/.vim ~/.config/nvim
+	[ ! -e ~/.config/nvim/init.vim ] && ln -s ~/.vimrc ~/.config/nvim/init.vim
 fi
