@@ -1,8 +1,6 @@
-[user]
-	name = Inndy
-	email = inndy.tw@gmail.com
 [push]
-	default = matching
+	default = simple
+
 [alias]
 	a = add
 	b = branch
@@ -16,22 +14,38 @@
 	diff = diff --color=auto
 	f = fetch
 	g = grep --break --heading --line-number --color=auto
-	l = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%ai%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+	ls = log --graph --abbrev-commit --abbrev=9 --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%ai%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
+	l = ls --all
 	m = merge
 	p = pull
 	s = status
+
 [merge]
-	tool = vimdiff
+	conflictstyle = diff3
+	tool = nvim -d
+
 [core]
-	editor = vim
+	editor = nvim
+	pager = delta
 	excludesfile = ~/.gitignore_global
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
-[github]
-	user = inndy
+
 [pull]
 	rebase = true
+
+[init]
+	defaultBranch = main
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true    # use n and N to move between diff sections
+	light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+	plus-style = syntax "#0A6847"
+	minus-style = syntax "#860d0d"
+
+[diff]
+	colorMoved = default
+
+[include]
+	path = ~/.gitconfig.local
