@@ -2,7 +2,7 @@ if [ -n "$WSL_DISTRO_NAME" -o -n "$WSLENV" ]
 then
 	function paste()
 	{
-		powershell.exe -Command Get-Clipboard
+		powershell.exe -Command '[Console]::OutputEncoding = [Text.UTF8Encoding]::UTF8; Get-Clipboard'
 	}
 
 	function copy()
