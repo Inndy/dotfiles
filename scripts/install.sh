@@ -88,7 +88,7 @@ if [ -z "$NO_GIT" ]; then
 	email = inndy.tw@gmail.com
 _EOF_
 
-	grep -qF "$DOTFILES" || cat << _EOF_ >> ~/.gitconfig
+	grep -qF "$DOTFILES/gitconfig" ~/.gitconfig || cat << _EOF_ >> ~/.gitconfig
 [include]
 	path = $DOTFILES/gitconfig
 _EOF_
@@ -97,7 +97,7 @@ fi
 if [ -z "$NO_BASH" ]; then
 
 	newline="source $DOTFILES/bashrc"
-	grep -F "$newline" ~/.bashrc || echo "$newline" >> ~/.bashrc
+	grep -qF "$newline" ~/.bashrc || echo "$newline" >> ~/.bashrc
 
 	if [ -f ~/.bashenv ]
 	then
