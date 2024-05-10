@@ -82,6 +82,13 @@ add_dotfiles_unless "$NO_VIM" vim vimrc
 
 # only install gitconfig if user is inndy
 [ "$(whoami)" = "inndy" ] && add_dotfiles_unless "$NO_GIT" gitconfig
+if [ -z "$NO_GIT" -a ! -f ~/.gitconfig.local ]; then
+cat << _EOF_ > ~/.gitconfig.local
+[user]
+	name = Inndy
+	email = inndy.tw@gmail.com
+_EOF_
+fi
 
 if [ -z "$NO_BASH" ]; then
 
