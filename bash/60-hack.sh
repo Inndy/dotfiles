@@ -16,7 +16,7 @@ function hack()
 					;;
 				-*)
 					echo "Unkown option $key" >&2
-					exit 1
+					return 1
 					;;
 				*)
 					POSITIONAL+=("$1")
