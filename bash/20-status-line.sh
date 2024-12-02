@@ -3,11 +3,11 @@ parse_git_branch() {
 }
 
 disable_git_branch_status() {
-	export DISABLE_GIT_PARSING=1
+	DISABLE_GIT_PARSING=1
 }
 
 enable_git_branch_status() {
-	export DISABLE_GIT_PARSING=
+	DISABLE_GIT_PARSING=
 }
 
 print_git_branch() {
@@ -17,13 +17,13 @@ print_git_branch() {
 		return
 	fi
 
-    branch="$(parse_git_branch)"
+    local branch="$(parse_git_branch)"
 	if [ -z "$(git status --short 2>&1)" ]
 	then
 		# git repo is clean
-		git_status_color="${fg_green}"
+		local git_status_color="${fg_green}"
 	else
-		git_status_color="${fg_orange}"
+		local git_status_color="${fg_orange}"
 	fi
 
     [ -z "$branch" ] && return
