@@ -45,7 +45,7 @@ function __prompt_command() {
 		PS1+=" ${fg_yellow}(venv:\${__ps1_venv_name})${reset_color}"
 	}
 	PS1+="\n"
-	PS1+="\[${vt100_bold}\]\$\[${reset_color}\] "
+	PS1+="\[${vt100_bold}${reset_color}\]\$ "
 }
 
 PROMPT_COMMAND="__prompt_command${PROMPT_COMMAND:+; $PROMPT_COMMAND}"
