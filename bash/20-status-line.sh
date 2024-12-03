@@ -48,4 +48,5 @@ function __prompt_command() {
 	PS1+="\[${vt100_bold}${reset_color}\]\$ "
 }
 
-PROMPT_COMMAND="__prompt_command${PROMPT_COMMAND:+; $PROMPT_COMMAND}"
+[[ -z "$PROMPT_COMMAND" || ! "$PROMPT_COMMAND" =~ "__prompt_command" ]] && \
+	PROMPT_COMMAND="__prompt_command${PROMPT_COMMAND:+; $PROMPT_COMMAND}"
