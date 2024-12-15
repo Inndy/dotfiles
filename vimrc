@@ -55,8 +55,6 @@ endif
 
 " Syntax
 Plug 'chr4/nginx.vim'
-Plug 'stanangeloff/php.vim'
-Plug 'hdima/python-syntax'
 Plug 'PProvost/vim-ps1' "ps1
 Plug 's3rvac/vim-syntax-yara'
 Plug 'cespare/vim-toml'
