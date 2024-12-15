@@ -140,6 +140,7 @@ set tabpagemax=100               " 一次最多可以開多少tab
 set tabstop=4                    " tab寬度
 set timeoutlen=300               " escape delay
 set wildmenu                     " 自動補完選單
+set termguicolors
 
 syntax on
 filetype plugin indent on
