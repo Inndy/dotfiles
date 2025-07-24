@@ -201,24 +201,6 @@ nmap <leader>l <c-w>l
 map <leader>p "*p
 map <leader>y "*y
 
-" _____                     _   _
-"| ____|_  _____  ___ _   _| |_(_) ___  _ __
-"|  _| \ \/ / _ \/ __| | | | __| |/ _ \| '_ \
-"| |___ >  <  __/ (__| |_| | |_| | (_) | | | |
-"|_____/_/\_\___|\___|\__,_|\__|_|\___/|_| |_|
-
-autocmd filetype c          nnoremap <leader>r :w <bar> exec '!gcc '.shellescape('%').' -std=c99 -O2 && ./a.out'<CR>
-autocmd filetype cs         nnoremap <leader>r :w <bar> exec '!mcs '.shellescape('%').' && mono '.shellescape('%:r').'.exe'<CR>
-autocmd filetype cpp        nnoremap <leader>r :w <bar> exec '!g++ '.shellescape('%').' -std=c++17 -O2 && ./a.out'<CR>
-autocmd filetype php        nnoremap <leader>r :w <bar> exec '!php -f '.shellescape('%') <CR>
-autocmd filetype java       nnoremap <leader>r :w <bar> exec '!javac '.shellescape('%').'&&java '.shellescape('%:r') <CR>
-autocmd filetype lisp       nnoremap <leader>r :w <bar> exec '!clisp '.shellescape('%') <CR>
-autocmd filetype perl       nnoremap <leader>r :w <bar> exec '!perl '.shellescape('%') <CR>
-autocmd filetype ruby       nnoremap <leader>r :w <bar> exec '!ruby '.shellescape('%') <CR>
-autocmd filetype shell      nnoremap <leader>r :w <bar> exec '!bash '.shellescape('%') <CR>
-autocmd filetype python     nnoremap <leader>r :w <bar> exec '!python3 '.shellescape('%')<CR>
-autocmd filetype javascript nnoremap <leader>r :w <bar> exec '!nodejs '.shellescape('%') <CR>
-
 " ____  _             _              ____             __ _
 "|  _ \| |_   _  __ _(_)_ __  ___   / ___|___  _ __  / _(_) __ _
 "| |_) | | | | |/ _` | | '_ \/ __| | |   / _ \| '_ \| |_| |/ _` |
