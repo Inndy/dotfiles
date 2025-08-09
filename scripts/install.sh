@@ -81,6 +81,7 @@ function add_dotfiles_unless()
 	[ -z "$1" ] && shift && add_dotfiles "$*"
 }
 
+add_dotfiles claude
 add_dotfiles_unless "$NO_TMUX" tmux.conf
 add_dotfiles_unless "$NO_VIM" vim vimrc
 
