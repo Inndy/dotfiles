@@ -35,7 +35,7 @@ __print_git_branch() {
 function __prompt_command() {
 	local last_program_status="$?"
 	PS1="\[${fg_yellow}\][ \$(date '+%m/%d %H:%M:%S') ] "
-	PS1+="\[${fg_magenta}\]\u \[${reset_color}\]@ \[${fg_green}\]\h "
+	PS1+="\[${fg_magenta}\]\u \[${reset_color}\]@ \[${fg_green}\]\${_dot_host_prefix}\h "
 	PS1+="\[${fg_lightblue}\]\w"
 	[ $last_program_status -ne 0 ] && PS1+=" \[${fg_pink}\](exit=$last_program_status)"
 	__ps1_git_info="$(__print_git_branch)"
