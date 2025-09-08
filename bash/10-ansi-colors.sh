@@ -11,10 +11,10 @@ fg_cyan="\e[36m"
 fg_white="\e[37m"
 
 # molokai std color
-fg_cyan="\e[01;38;5;81m"
-fg_gray="\e[33;00m"
-fg_green="\e[01;38;5;82m"
-fg_magenta="\e[01;38;5;177m"
-fg_orange="\e[01;38;5;208m"
-fg_pink="\e[01;38;5;197m"
-fg_white="\e[01;37m"
+fg_cyan="\e[38;5;81m"
+fg_gray="\e[33m" # actually yellow
+fg_green="\e[38;5;82m"
+fg_magenta="\e[38;5;177m"
+fg_orange="\e[38;5;208m"
+fg_pink="\e[38;5;197m" # actually deep-pink
+fg_white="\e[37m"
