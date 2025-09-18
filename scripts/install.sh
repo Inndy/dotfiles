@@ -87,7 +87,7 @@ add_dotfiles_unless "$NO_VIM" vim vimrc
 
 [ "$(whoami)" = "inndy" ] && add_dotfiles_unless "$NO_GIT" gitconfig
 if [ -z "$NO_GIT" ]; then
-	[ ! -f ~/.gitconfig ] && grep -vqF 'name = Inndy' ~/.gitconfig && cat << _EOF_ > ~/.gitconfig
+	grep -qF 'name = Inndy' ~/.gitconfig || cat << _EOF_ >> ~/.gitconfig
 [user]
 	name = Inndy
 	email = inndy.tw@gmail.com
