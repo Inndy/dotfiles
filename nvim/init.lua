@@ -397,8 +397,8 @@ vim.keymap.set("n", "<leader>l", "<C-w>l", { desc = "Move to right window" })
 vim.keymap.set({ "n", "v" }, "<leader>y", '"*y', { desc = "Yank to system clipboard" })
 vim.keymap.set("n", "<leader>p", '"*p', { desc = "Paste from system clipboard" })
 
-vim.g.surround_33 = "<!-- \r -->"
-vim.g.surround_42 = "/* \r */"
+vim.g.surround_33 = "<!-- \r -->" -- '!'
+vim.g.surround_42 = "/* \r */" -- '*'
 
 if vim.fn.executable("win32yank.exe") == 1 then
   vim.g.clipboard = {
@@ -426,8 +426,16 @@ vim.cmd([[
 ]])
 
 if vim.fn.has("gui_running") == 1 then
-  vim.keymap.set("i", "<C-S-v>", "<C-r>*", { noremap = true, silent = true, desc = "Paste from clipboard" })
-  vim.opt.guifont = "Cascadia Mono:h12"
+  if vim.loop.os_uname().sysname == "Windows_NT" then
+    -- insert mode: ctrl-shift-v
+    vim.keymap.set("i", "<C-S-v>", "<C-r>*", { noremap = true, silent = true, desc = "Paste from clipboard" })
+    vim.opt.guifont = "IntoneMono Nerd Font,Cascadia Mono NF,Intel One Mono,Cascadia Mono:h12"
+  end
+  if vim.loop.os_uname().sysname == "Darwin" then
+    -- insert mode: command-v
+    vim.keymap.set("i", "<D-v>", "<C-r>*", { noremap = true, silent = true, desc = "Paste from clipboard" })
+    vim.opt.guifont = "IntoneMono Nerd Font,InconsolataGo Nerd Font Mono:h18"
+  end
 end
 
--- vim: set sw=2 :
+-- vim: set et sw=2 :
