@@ -1,7 +1,4 @@
-/ide
-/config
-/projects
-/statsig
-/.anthropic
-/shell-snapshots
-/todos
+*
+!.gitignore
+!CLAUDE.md
+!commands
