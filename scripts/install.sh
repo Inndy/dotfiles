@@ -127,6 +127,18 @@ done
 
 if [ -z "$NO_VIM" ]; then
 	mkdir -p ~/.config
-	[ ! -e ~/.config/nvim ] && ln -s ~/.vim ~/.config/nvim
-	[ ! -e ~/.config/nvim/init.vim ] && ln -s ~/.vimrc ~/.config/nvim/init.vim
+
+	NVIM_CONFIG="$HOME/.config/nvim"
+	NVIM_DOTFILES="$DOTFILES/nvim"
+
+	if [ -L "$NVIM_CONFIG" ]; then
+		if [ "$(readlink "$NVIM_CONFIG")" != "$NVIM_DOTFILES" ]; then
+			rm "$NVIM_CONFIG"
+			ln -s "$NVIM_DOTFILES" "$NVIM_CONFIG"
+		fi
+	elif [ -e "$NVIM_CONFIG" ]; then
+		-warn "$NVIM_CONFIG exists, will not replace it"
+	else
+		ln -s "$NVIM_DOTFILES" "$NVIM_CONFIG"
+	fi
 fi
