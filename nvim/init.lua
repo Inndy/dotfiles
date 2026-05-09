@@ -88,6 +88,9 @@ require("lazy").setup({
     {
       "ctrlpvim/ctrlp.vim",
       cmd = { "CtrlP", "CtrlPBuffer", "CtrlPMixed", "CtrlPMRU" },
+      keys = {
+        { "<C-p>", "<cmd>CtrlP<cr>", desc = "CtrlP" },
+      },
       init = function()
         vim.g.ctrlp_custom_ignore = {
           dir = [[\v[\/](\.(git|hg|svn)|node_modules)$]],
