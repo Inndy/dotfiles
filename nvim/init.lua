@@ -63,6 +63,7 @@ require("lazy").setup({
           custom_hlgroups = {
             Normal = { fg = palette.white, bg = palette.base2 },
             NormalNC = { fg = palette.white, bg = palette.base2 },
+            TabLineSel = { fg = palette.base2, bg = palette.base8 },
           },
         })
       end,
