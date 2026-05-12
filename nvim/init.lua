@@ -110,6 +110,12 @@ require("lazy").setup({
         vim.g.pydoc_cmd = "python -m pydoc"
       end,
     },
+
+    {
+      "mason-org/mason.nvim",
+      --cmd = { "MasonInstall", },
+      opts = {},
+    },
     {
       "neovim/nvim-lspconfig",
       lazy = false,
@@ -118,15 +124,17 @@ require("lazy").setup({
         { "gy", vim.lsp.buf.type_definition, desc = "Go to type definition" },
         { "K", vim.lsp.buf.hover, desc = "Hover documentation" },
         { "gi", vim.lsp.buf.implementation, desc = "Go to implementation" },
-        { "<C-k>", vim.lsp.buf.signature_help, desc = "Signature help" },
+        { "<C-k>", vim.lsp.buf.signature_help, mode = { "i", "n", }, desc = "Signature help" },
         { "<leader>rn", vim.lsp.buf.rename, desc = "Rename symbol" },
         { "<leader>ca", vim.lsp.buf.code_action, desc = "Code actions" },
         { "gr", vim.lsp.buf.references, desc = "Find references" },
-        { "[g", vim.diagnostic.goto_prev, desc = "Previous diagnostic" },
-        { "]g", vim.diagnostic.goto_next, desc = "Next diagnostic" },
+        { "[g", function() vim.diagnostic.jump({ float = true, count = -1 }) end, desc = "Previous diagnostic" },
+        { "]g", function() vim.diagnostic.jump({ float = true, count =  1 }) end, desc = "Next diagnostic" },
         { "<leader>e", vim.diagnostic.open_float, desc = "Open diagnostic float" },
+        { "<leader>dl", vim.diagnostic.setloclist, desc = "Open diagnostic list" },
       },
     },
+
     {
       "lewis6991/gitsigns.nvim",
       event = { "BufReadPre", "BufNewFile" },
@@ -291,7 +299,7 @@ require("lazy").setup({
 })
 
 vim.lsp.config("clangd", {
-  filetypes = { "c", "cc", "cxx", "cpp", "objc", "objcpp" },
+  filetypes = { "c", "cpp", "objc", "objcpp" },
 })
 
 vim.lsp.config("gopls", {
@@ -332,7 +340,7 @@ vim.lsp.config("pyright", {
   },
 })
 
-vim.lsp.enable({ "clangd", "pyright", "gopls" })
+vim.lsp.enable({ "clangd", "pyright", "gopls", "csharp_ls", })
 
 vim.opt.autoindent = true
 vim.opt.backup = false
