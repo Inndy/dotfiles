@@ -417,6 +417,7 @@ vim.opt.fileencodings = "utf-8,default,big5,ucs-bom,latin1"
 vim.opt.hlsearch = true
 vim.opt.ignorecase = true
 vim.opt.incsearch = true
+vim.opt.mouse = 'a'
 vim.opt.number = true
 vim.opt.scrolloff = 3
 vim.opt.shiftwidth = 4
