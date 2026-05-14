@@ -324,6 +324,42 @@ require("lazy").setup({
         separator = "─",
       },
     },
+
+    {
+      "nvim-treesitter/nvim-treesitter-textobjects",
+      dependencies = { "nvim-treesitter/nvim-treesitter" },
+      opts = {
+        enable = true,
+        lookahead = true, -- Automatically jump forward to textobj
+        keymaps = {
+          -- "af" selects the entire function definition
+          ["af"] = "@function.outer",
+          -- "if" selects only the contents inside the function
+          ["if"] = "@function.inner",
+          -- You can also add class selections
+          ["ac"] = "@class.outer",
+          ["ic"] = "@class.inner",
+        },
+        -- Force line-wise visual selection (V) for entire functions
+        selection_modes = {
+          ['@function.outer'] = 'V',
+        },
+      },
+      config = function(_, opts)
+        local keymaps = opts.keymaps
+        opts.keymaps = nil
+
+        require("nvim-treesitter-textobjects").setup(opts)
+
+        local select = require("nvim-treesitter-textobjects.select").select_textobject
+
+        for lhs, query in pairs(keymaps) do
+          vim.keymap.set({ "x", "o" }, lhs, function()
+            select(query, "textobjects")
+          end)
+        end
+      end,
+    },
   },
   checker = { enabled = true },
 })
