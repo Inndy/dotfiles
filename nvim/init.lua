@@ -43,6 +43,10 @@ local treesitter_parsers = {
 
 require("lazy").setup({
   lockfile = lazy_lockfile,
+  checker = {
+    enabled = true,
+    frequency = 86400,
+  },
   spec = {
     {
       "tanvirtin/monokai.nvim",
