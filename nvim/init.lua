@@ -39,6 +39,7 @@ local treesitter_parsers = {
   "python",
   "c",
   "cpp",
+  "c_sharp",
 }
 
 require("lazy").setup({
@@ -137,6 +138,30 @@ require("lazy").setup({
         { "<leader>e", vim.diagnostic.open_float, desc = "Open diagnostic float" },
         { "<leader>dl", vim.diagnostic.setloclist, desc = "Open diagnostic list" },
       },
+      init = function()
+        vim.api.nvim_create_autocmd("FileType", {
+          pattern = "qf",
+          callback = function()
+            vim.keymap.set("n", "<C-t>", "<C-w><CR><C-w>T", { buffer = true, desc = "Open in new tab" })
+
+            vim.keymap.set("x", "<C-t>", function()
+              local meta = vim.fn.getqflist({ context = 1 })
+              local idx = vim.fn.line(".")
+              vim.cmd("tab cc " .. idx)  -- Opens the reference item in a new tab
+              -- Only run if this specific quickfix list was created by your 'gr' mapping
+              if meta.context and meta.context.is_lsp_refs == true then
+                local idx = vim.fn.line(".")
+                vim.cmd("cclose")          -- Closes the quickfix window (CoC style)
+                vim.cmd("tab cc " .. idx)  -- Opens the reference item in a new tab
+              else
+                -- Fallback: passes <C-t> back to Neovim for non-LSP lists
+                --local key = vim.api.nvim_replace_termcodes("<C-t>", true, true, true)
+                --vim.api.nvim_feedkeys(key, "n", false)
+              end
+            end, { buffer = true, silent = true, desc = "LSP open reference in tab" })
+          end,
+        })
+      end,
     },
 
     {
@@ -253,6 +278,7 @@ require("lazy").setup({
         }
       end,
     },
+
     {
       "nvim-treesitter/nvim-treesitter",
       lazy = false,
