@@ -490,6 +490,8 @@ if vim.fn.executable("win32yank.exe") == 1 then
     },
     cache_enabled = 0,
   }
+elseif vim.env.SSH_TTY or vim.env.SSH_CONNECTION or vim.env.TMUX then
+  vim.g.clipboard = "osc52"
 end
 
 vim.cmd([[
