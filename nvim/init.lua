@@ -177,17 +177,20 @@ require("lazy").setup({
             vim.keymap.set(mode, lhs, rhs, opts)
           end
 
-          map("n", "]h", function()
+          map('n', '<leader>gs', gitsigns.stage_hunk)
+          map('n', '<leader>gr', gitsigns.reset_hunk)
+
+          map("n", "<leader>gn", function()
             if vim.wo.diff then
-              vim.cmd.normal({ "]c", bang = true })
+              vim.cmd.normal({ "<leader>gn", bang = true })
             else
               gitsigns.nav_hunk("next")
             end
           end, { desc = "Next git hunk" })
 
-          map("n", "[h", function()
+          map("n", "<leader>gp", function()
             if vim.wo.diff then
-              vim.cmd.normal({ "[c", bang = true })
+              vim.cmd.normal({ "<leader>gp", bang = true })
             else
               gitsigns.nav_hunk("prev")
             end
