@@ -321,7 +321,7 @@ require("lazy").setup({
         max_lines = 4,
         min_window_height = 25,
         mode = "cursor",
-        separator = "-",
+        separator = "─",
       },
     },
   },
