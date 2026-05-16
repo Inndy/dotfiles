@@ -1,0 +1,115 @@
+#!/usr/bin/env bash
+# Env config (shell syntax, sourced before launch):
+#   ~/.claude-accounts/env           global, all accounts
+#   ~/.claude-accounts/<name>/env    per-account
+
+set -euo pipefail
+
+CLAUDE_BASE="${HOME}/.dotfiles/claude"
+ACCOUNTS_DIR="${HOME}/.claude-accounts"
+DEFAULT_FILE="${ACCOUNTS_DIR}/.default"
+
+die() { echo "${0##*/}: $*" >&2; exit 1; }
+
+_link_account_dir() {
+  local dir="$1"
+  mkdir -p "$dir"
+  shopt -s dotglob nullglob
+  for item in "${CLAUDE_BASE}"/*; do
+    local base="${item##*/}"
+    [[ "$base" == ".credentials.json" ]] && continue
+    [[ -e "${dir}/${base}" || -L "${dir}/${base}" ]] && continue
+    ln -s "$item" "${dir}/${base}"
+  done
+  shopt -u dotglob nullglob
+}
+
+case "${1-}" in
+  -h|--help|help)
+    cat <<EOF
+Usage: ${0##*/} [COMMAND] [OPTIONS] [ARGS]
+
+Commands:
+  setup <name>        create account dir + launch to authenticate
+  use <name>          set default account
+  list                list accounts with credential status
+  -h, --help, help    show this help
+
+Launch options (when no command):
+  -a, --account <name>  use specific account (default: from ~/.claude-accounts/.default)
+  --yolo                --dangerously-skip-permissions
+
+Env config (optional, sourced before launch):
+  ~/.claude-accounts/env          global env vars for all accounts
+  ~/.claude-accounts/<name>/env   per-account env vars (takes precedence)
+
+Examples:
+  cc setup work           # create 'work' account, authenticate
+  cc use work             # set 'work' as default
+  cc                      # launch with default account
+  cc -a personal          # launch with 'personal' account
+  cc --yolo               # launch without permission prompts
+  DEBUG=1 cc              # inline env vars (merged with config files)
+EOF
+    exit 0
+    ;;
+
+  setup)
+    name="${2:?Usage: cc setup <name>}"
+    dir="${ACCOUNTS_DIR}/${name}"
+    _link_account_dir "$dir"
+    echo "Launching claude for '${name}' — log in to save credentials..."
+    export CLAUDE_CONFIG_DIR="$dir"
+    exec claude
+    ;;
+
+  use)
+    name="${2:?Usage: cc use <name>}"
+    [[ -d "${ACCOUNTS_DIR}/${name}" ]] || die "Unknown account: ${name}"
+    echo "$name" > "$DEFAULT_FILE"
+    echo "Default: ${name}"
+    exit 0
+    ;;
+
+  list)
+    default=""; [[ -f "$DEFAULT_FILE" ]] && default=$(< "$DEFAULT_FILE")
+    shopt -s nullglob
+    for d in "${ACCOUNTS_DIR}"/*/; do
+      name="${d%/}"; name="${name##*/}"
+      marker="  "; [[ "$name" == "$default" ]] && marker="* "
+      creds="${d}.credentials.json"
+      if [[ -f "$creds" ]]; then
+        tier=$(python3 -c "import json; d=json.load(open('${creds}')); print(d.get('claudeAiOauth',{}).get('rateLimitTier','?'))" 2>/dev/null || echo "?")
+      else
+        tier="no credentials"
+      fi
+      echo "${marker}${name}  [${tier}]"
+    done
+    exit 0
+    ;;
+esac
+
+# Parse launch flags
+ACCOUNT=""; CLAUDE_ARGS=()
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -a|--account) ACCOUNT="$2"; shift 2 ;;
+    --yolo)       CLAUDE_ARGS+=("--dangerously-skip-permissions"); shift ;;
+    *)            CLAUDE_ARGS+=("$1"); shift ;;
+  esac
+done
+
+[[ -z "$ACCOUNT" && -f "$DEFAULT_FILE" ]] && ACCOUNT=$(< "$DEFAULT_FILE")
+
+# Load env files (global, then per-account)
+_load_env() { [[ -f "$1" ]] && set -a && source "$1" && set +a; true; }
+_load_env "${ACCOUNTS_DIR}/env"
+
+if [[ -n "$ACCOUNT" ]]; then
+  dir="${ACCOUNTS_DIR}/${ACCOUNT}"
+  [[ -d "$dir" ]] || die "Unknown account: ${ACCOUNT} (run: cc setup ${ACCOUNT})"
+  export CLAUDE_CONFIG_DIR="$dir"
+  _load_env "${dir}/env"
+fi
+
+exec claude "${CLAUDE_ARGS[@]}"

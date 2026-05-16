@@ -114,6 +114,10 @@ if [ -z "$NO_BASH" ]; then
 		} >> ~/.bashenv
 	fi
 
+	# alias (not symlink) so `cc` stays interactive-only and doesn't shadow the C compiler in scripts
+	cc_alias='alias cc="$DOTFILES/bin/claude-launcher"'
+	grep -qF "$cc_alias" ~/.bashrc.local 2>/dev/null || echo "$cc_alias" >> ~/.bashrc.local
+
 fi
 
 for file in $LINK_DOT_FILES; do
