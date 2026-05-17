@@ -112,4 +112,5 @@ if [[ -n "$ACCOUNT" ]]; then
   _load_env "${dir}/env"
 fi
 
+export CC_ACCOUNT="${ACCOUNT:-default}"
 exec claude "${CLAUDE_ARGS[@]}"
