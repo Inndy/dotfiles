@@ -24,8 +24,9 @@ fg_cyan="\e[38;5;81m"
 fg_red="\e[38;5;196m"
 
 CLAUDE_DIR="${CLAUDE_CONFIG_DIR:-$HOME/.claude}"
-USAGE_CACHE="$CLAUDE_DIR/usage-cache.json"
-USAGE_LOCK="$CLAUDE_DIR/usage-cache.lock"
+# `cc-` prefix flags these as wrapper-owned, not part of claude itself.
+USAGE_CACHE="$CLAUDE_DIR/cc-usage-cache.json"
+USAGE_LOCK="$CLAUDE_DIR/cc-usage-cache.lock"
 
 get_claude_usage() {
     local is_stale=0
@@ -38,15 +39,13 @@ get_claude_usage() {
         if [ "$lock_held" = "0" ]; then
             touch "$USAGE_LOCK"
             (
-                TOKEN=$(jq -r '.claudeAiOauth.accessToken // empty' "$CLAUDE_DIR/.credentials.json" 2>/dev/null)
-                if [ -n "$TOKEN" ]; then
-                    RESULT=$(curl -sf --max-time 10 \
-                        -H "Authorization: Bearer $TOKEN" \
-                        -H "Content-Type: application/json" \
-                        https://api.anthropic.com/api/oauth/usage 2>/dev/null)
-                    if echo "$RESULT" | jq -e '.five_hour' >/dev/null 2>&1; then
-                        echo "$RESULT" > "$USAGE_CACHE"
-                    fi
+                # cc handles auth + API; statusline owns the cache.
+                # `usage --json` honors inherited CC_ACCOUNT / CLAUDE_CONFIG_DIR
+                # per the launcher contract — works in all three modes.
+                LAUNCHER="${DOTFILES:-$HOME/.dotfiles}/bin/claude-launcher"
+                RESULT=$("$LAUNCHER" usage --json 2>/dev/null)
+                if echo "$RESULT" | jq -e '.five_hour' >/dev/null 2>&1; then
+                    echo "$RESULT" > "$USAGE_CACHE"
                 fi
                 rm -f "$USAGE_LOCK"
             ) &>/dev/null &
