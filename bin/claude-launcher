@@ -99,13 +99,39 @@ EOF
     ;;
 esac
 
+_get_oauth_token() {
+  local config_dir="$1"
+  local token=""
+
+  if [[ "$(uname)" == "Darwin" ]]; then
+    # On macOS, credentials live in Keychain as JSON.
+    # Service name includes a sha256 hash suffix for non-default config dirs
+    # (mirrors the logic in src/utils/secureStorage/macOsKeychainHelpers.ts).
+    local service="Claude Code-credentials"
+    if [[ -n "${CLAUDE_CONFIG_DIR:-}" ]]; then
+      local hash
+      hash=$(printf '%s' "$config_dir" | shasum -a 256 | cut -c1-8)
+      service="Claude Code-credentials-${hash}"
+    fi
+
+    token=$(security find-generic-password -a "$USER" -w -s "$service" 2>/dev/null |
+      jq -r '.claudeAiOauth.accessToken // empty' 2>/dev/null || true)
+  fi
+
+  # Fallback: plain-text .credentials.json (Linux default, or macOS keychain miss)
+  if [[ -z "$token" ]]; then
+    local creds="${config_dir}/.credentials.json"
+    [[ -f "$creds" ]] && token=$(jq -r '.claudeAiOauth.accessToken // empty' "$creds" 2>/dev/null)
+  fi
+
+  echo "$token"
+}
+
 _show_usage() {
   local config_dir="$1" account_label="$2"
-  local creds="${config_dir}/.credentials.json"
-  [[ -f "$creds" ]] || die "No credentials found at ${creds}"
   local token
-  token=$(jq -r '.claudeAiOauth.accessToken // empty' "$creds" 2>/dev/null)
-  [[ -z "$token" ]] && die "No OAuth token in ${creds}"
+  token=$(_get_oauth_token "$config_dir")
+  [[ -z "$token" ]] && die "No OAuth token found for account: ${account_label}"
   local result
   result=$(curl -sf --max-time 10 \
     -H "Authorization: Bearer $token" \
