@@ -8,13 +8,18 @@
 # below is invented by this wrapper and is invisible to claude itself.
 #
 # Wrapper-owned env vars
-#   CC_ACCOUNT         Canonical account name. Set by the wrapper after
-#                      a successful resolution; read by other wrapper
-#                      tools (statusline, hooks, nested `cc` calls).
-#                      Never read by claude.
+#   CC_ACCOUNT         The account *name*. In wrapper-managed mode the
+#                      wrapper sets it from the resolved account and the
+#                      name drives where CLAUDE_CONFIG_DIR points. In
+#                      raw passthrough it becomes a display-only label
+#                      (like a venv name) — read by other wrapper tools
+#                      (statusline, hooks, nested `cc` calls). Never
+#                      read by claude.
 #   CLAUDE_CONFIG_DIR  Shared with claude. The wrapper sets it from the
 #                      resolved account directory, or unsets it to mean
-#                      "use native ~/.claude".
+#                      "use native ~/.claude". When pre-set by the
+#                      caller it's treated as a *location* ("store my
+#                      claude config here") and the wrapper honors it.
 #
 # Reserved name
 #   default            Virtual account meaning "native ~/.claude — do
@@ -46,13 +51,15 @@
 #                     $CC_ACCOUNT="default", only the global env file
 #                     is sourced.
 #
-#   Raw passthrough   $CLAUDE_CONFIG_DIR is set but doesn't point to a
-#                     known account dir. The wrapper keeps the dir
-#                     as-is, unsets $CC_ACCOUNT (no wrapper context),
-#                     sources only the global env file. Downstream
-#                     tools treat empty $CC_ACCOUNT as "no wrapper
-#                     context" (e.g. statusline hides its chip).
-#                     `cc usage` still works against the chosen dir.
+#   Raw passthrough   $CLAUDE_CONFIG_DIR was pre-set by the caller.
+#                     The wrapper keeps the dir as-is and leaves any
+#                     inherited $CC_ACCOUNT untouched — in this mode
+#                     $CC_ACCOUNT is a display-only label (like a venv
+#                     name), not a resolution input. Only the global
+#                     env file is sourced; per-account env is the
+#                     caller's responsibility now that they took
+#                     control of the dir. `cc usage` still works
+#                     against the chosen dir.
 #
 # Deactivation
 #   `cc -a default` always unsets $CLAUDE_CONFIG_DIR — even when one
@@ -113,15 +120,12 @@ _resolve_account() {
   #   -a > pre-set CLAUDE_CONFIG_DIR > inherited CC_ACCOUNT > .default > "default"
   if [[ -z "$ACCOUNT" ]]; then
     if [[ -n "${CLAUDE_CONFIG_DIR:-}" ]]; then
-      # Caller set CLAUDE_CONFIG_DIR — sacred. Derive account name if it
-      # points to a known account dir, else stay nameless (raw passthrough).
-      if [[ "$CLAUDE_CONFIG_DIR" == "${ACCOUNTS_DIR}/"* ]]; then
-        local rest="${CLAUDE_CONFIG_DIR#${ACCOUNTS_DIR}/}"
-        local name="${rest%%/*}"
-        [[ -d "${ACCOUNTS_DIR}/${name}" ]] && ACCOUNT="$name"
-      fi
-      # Protect caller's CLAUDE_CONFIG_DIR through env-file loads.
+      # Caller set CLAUDE_CONFIG_DIR — that's where their config lives.
+      # Raw passthrough: don't derive ACCOUNT, don't touch CC_ACCOUNT
+      # (it's a display label, like a venv name). Load only the global env.
       snapshot+=$'\n'$(declare -p CLAUDE_CONFIG_DIR)
+      _load_env "${ACCOUNTS_DIR}/env" "$snapshot"
+      return
     elif [[ -n "${CC_ACCOUNT:-}" ]]; then
       ACCOUNT="$CC_ACCOUNT"
     elif [[ -f "$DEFAULT_FILE" ]]; then
@@ -289,7 +293,9 @@ cmd_usage() {
     *)      die "Usage: cc usage [--json]" ;;
   esac
   _resolve_account
-  _show_usage "${CLAUDE_CONFIG_DIR:-$HOME/.claude}" "${ACCOUNT:-default}" "$raw_json"
+  # Display label: resolved ACCOUNT if set, else inherited CC_ACCOUNT (raw
+  # passthrough display label), else "default".
+  _show_usage "${CLAUDE_CONFIG_DIR:-$HOME/.claude}" "${ACCOUNT:-${CC_ACCOUNT:-default}}" "$raw_json"
 }
 
 cmd_launch() {
@@ -302,15 +308,13 @@ cmd_launch() {
     esac
   done
   _resolve_account
-  # Set CC_ACCOUNT to keep it consistent with the resolved CLAUDE_CONFIG_DIR.
-  # Raw passthrough (CLAUDE_CONFIG_DIR set, no derivable account) → unset
-  # CC_ACCOUNT so any stale inherited value doesn't leak downstream.
+  # Set CC_ACCOUNT to the resolved account name. Raw passthrough
+  # (CLAUDE_CONFIG_DIR set, ACCOUNT empty) leaves any inherited CC_ACCOUNT
+  # alone — in that mode it's a display-only label (like a venv name).
   if [[ -n "$ACCOUNT" ]]; then
     export CC_ACCOUNT="$ACCOUNT"
   elif [[ -z "${CLAUDE_CONFIG_DIR:-}" ]]; then
     export CC_ACCOUNT="default"
-  else
-    unset CC_ACCOUNT
   fi
   exec claude "${claude_args[@]}"
 }
