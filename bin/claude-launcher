@@ -33,6 +33,7 @@ Commands:
   setup <name>        create account dir + launch to authenticate
   use <name>          set default account
   list                list accounts with credential status
+  usage               show quota usage for current/specified account
   -h, --help, help    show this help
 
 Launch options (when no command):
@@ -50,6 +51,8 @@ Examples:
   cc -a personal          # launch with 'personal' account
   cc --yolo               # launch without permission prompts
   DEBUG=1 cc              # inline env vars (merged with config files)
+  cc usage                # show quota usage for default account
+  cc -a main usage        # show quota usage for 'main' account
 EOF
     exit 0
     ;;
@@ -89,12 +92,37 @@ EOF
     ;;
 esac
 
+_show_usage() {
+  local config_dir="$1" account_label="$2"
+  local creds="${config_dir}/.credentials.json"
+  [[ -f "$creds" ]] || die "No credentials found at ${creds}"
+  local token
+  token=$(jq -r '.claudeAiOauth.accessToken // empty' "$creds" 2>/dev/null)
+  [[ -z "$token" ]] && die "No OAuth token in ${creds}"
+  local result
+  result=$(curl -sf --max-time 10 \
+    -H "Authorization: Bearer $token" \
+    -H "Content-Type: application/json" \
+    https://api.anthropic.com/api/oauth/usage) || die "API request failed"
+  echo "$result" | jq -e '.five_hour' >/dev/null 2>&1 || die "Unexpected API response: $result"
+  echo "$result" > "${config_dir}/usage-cache.json"
+  local five_h five_reset seven_d seven_reset
+  five_h=$(echo "$result"   | jq -r '.five_hour.utilization // "?"')
+  five_reset=$(echo "$result"  | jq -r '.five_hour.resets_at // "?"')
+  seven_d=$(echo "$result"  | jq -r '.seven_day.utilization // "?"')
+  seven_reset=$(echo "$result" | jq -r '.seven_day.resets_at // "?"')
+  echo "Account  : ${account_label}"
+  printf "5h limit : %s%% used  (resets %s)\n" "$five_h" "$five_reset"
+  printf "7d limit : %s%% used  (resets %s)\n" "$seven_d" "$seven_reset"
+}
+
 # Parse launch flags
-ACCOUNT=""; CLAUDE_ARGS=()
+ACCOUNT=""; CLAUDE_ARGS=(); SUBCOMMAND=""
 while [[ $# -gt 0 ]]; do
   case "$1" in
     -a|--account) ACCOUNT="$2"; shift 2 ;;
     --yolo)       CLAUDE_ARGS+=("--dangerously-skip-permissions"); shift ;;
+    usage)        SUBCOMMAND="usage"; shift ;;
     *)            CLAUDE_ARGS+=("$1"); shift ;;
   esac
 done
@@ -112,5 +140,15 @@ if [[ -n "$ACCOUNT" ]]; then
   _load_env "${dir}/env"
 fi
 
+if [[ "$SUBCOMMAND" == "usage" ]]; then
+  config_dir="${CLAUDE_CONFIG_DIR:-$HOME/.claude}"
+  _show_usage "$config_dir" "${ACCOUNT:-default}"
+  exit 0
+fi
+
+# export CC_ACCOUNT so we know which account we are using in Claude Code session.
+# This is mainly for hook scripts and statusline script
 export CC_ACCOUNT="${ACCOUNT:-default}"
 exec claude "${CLAUDE_ARGS[@]}"
+
+# vim: set et sw=2 :
