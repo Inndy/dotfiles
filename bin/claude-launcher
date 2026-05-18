@@ -1,7 +1,59 @@
 #!/usr/bin/env bash
-# Env config (shell syntax, sourced before launch):
-#   ~/.claude-accounts/env           global, all accounts
-#   ~/.claude-accounts/<name>/env    per-account
+#
+# claude-launcher — named-account wrapper for `claude` (Claude Code).
+#
+# ── CONTRACT ───────────────────────────────────────────────────────────────
+#
+# Claude Code reads ONE env var: $CLAUDE_CONFIG_DIR. Everything else
+# below is invented by this wrapper and is invisible to claude itself.
+#
+# Wrapper-owned env vars
+#   CC_ACCOUNT         Canonical account name. Set by the wrapper after
+#                      a successful resolution; read by other wrapper
+#                      tools (statusline, hooks, nested `cc` calls).
+#                      Never read by claude.
+#   CLAUDE_CONFIG_DIR  Shared with claude. The wrapper sets it from the
+#                      resolved account directory, or unsets it to mean
+#                      "use native ~/.claude".
+#
+# Reserved name
+#   default            Virtual account meaning "native ~/.claude — do
+#                      not switch". Valid for `cc -a default` and `cc
+#                      use default`; rejected by `cc setup default`.
+#
+# Account resolution (first match wins)
+#   1. `-a <name>` on the command line
+#   2. inherited $CC_ACCOUNT
+#   3. ~/.claude-accounts/.default
+#   4. virtual `default` (native)
+#
+# Operating modes
+#   Wrapper-managed   Any of (1)–(4) resolves a name. The wrapper
+#                     exports $CC_ACCOUNT, sets or unsets
+#                     $CLAUDE_CONFIG_DIR to match, and sources env
+#                     files (see below).
+#
+#   Raw passthrough   Caller pre-set $CLAUDE_CONFIG_DIR with no `-a`
+#                     and no inherited $CC_ACCOUNT. The wrapper stays
+#                     out of the way: $CLAUDE_CONFIG_DIR is not
+#                     touched, $CC_ACCOUNT is not exported, per-account
+#                     env is not sourced. Downstream wrapper tools
+#                     treat an empty $CC_ACCOUNT as "no wrapper
+#                     context" (e.g. statusline hides its account
+#                     chip). `cc usage` still works — it operates on
+#                     whatever $CLAUDE_CONFIG_DIR points to.
+#
+# Deactivation
+#   `cc -a default` always unsets $CLAUDE_CONFIG_DIR — even when one
+#   was inherited — so nested calls can drop back to native.
+#
+# Env config (sourced before launch; shell syntax)
+#   ~/.claude-accounts/env           global; sourced in both modes
+#   ~/.claude-accounts/<name>/env    per-account; overrides global;
+#                                    sourced only in wrapper-managed
+#                                    mode
+#
+# ───────────────────────────────────────────────────────────────────────────
 
 set -euo pipefail
 
@@ -27,8 +79,25 @@ _link_account_dir() {
 _load_env() { [[ -f "$1" ]] && set -a && source "$1" && set +a; true; }
 
 _resolve_account() {
-  [[ -z "$ACCOUNT" && -f "$DEFAULT_FILE" ]] && ACCOUNT=$(< "$DEFAULT_FILE")
+  local explicit_a="${ACCOUNT:+1}"
+
+  if [[ -z "$ACCOUNT" ]]; then
+    if [[ -n "${CC_ACCOUNT:-}" ]]; then
+      ACCOUNT="$CC_ACCOUNT"
+    elif [[ -n "${CLAUDE_CONFIG_DIR:-}" ]]; then
+      # Raw passthrough mode — see CONTRACT at top of file.
+      _load_env "${ACCOUNTS_DIR}/env"
+      return
+    elif [[ -f "$DEFAULT_FILE" ]]; then
+      ACCOUNT=$(< "$DEFAULT_FILE")
+    fi
+  fi
   _load_env "${ACCOUNTS_DIR}/env"
+  if [[ "$ACCOUNT" == "default" ]]; then
+    ACCOUNT=""
+    # Explicit `-a default` deactivates even an inherited CLAUDE_CONFIG_DIR.
+    [[ "$explicit_a" == "1" ]] && unset CLAUDE_CONFIG_DIR
+  fi
   if [[ -n "$ACCOUNT" ]]; then
     local dir="${ACCOUNTS_DIR}/${ACCOUNT}"
     [[ -d "$dir" ]] || die "Unknown account: ${ACCOUNT} (run: cc setup ${ACCOUNT})"
@@ -82,7 +151,6 @@ _show_usage() {
     return
   fi
   echo "$result" | jq -e '.five_hour' >/dev/null 2>&1 || die "Unexpected API response: $result"
-  echo "$result" > "${config_dir}/usage-cache.json"
   local five_h five_reset seven_d seven_reset
   five_h=$(echo "$result"   | jq -r '.five_hour.utilization // "?"')
   five_reset=$(echo "$result"  | jq -r '.five_hour.resets_at // "?"')
@@ -105,7 +173,11 @@ Commands:
   -h, --help, help    show this help
 
 Global options (before subcommand):
-  -a, --account <name>  use specific account (default: from ~/.claude-accounts/.default)
+  -a, --account <name>  use specific account. Resolution order when omitted:
+                        inherited \$CC_ACCOUNT > ~/.claude-accounts/.default > 'default'
+
+Reserved account name:
+  default               virtual — do NOT switch; use native ~/.claude
 
 Launch options (when no subcommand):
   --yolo                --dangerously-skip-permissions
@@ -118,13 +190,15 @@ Env config (optional, sourced before launch):
 Examples:
   cc setup work           # create 'work' account, authenticate
   cc use work             # set 'work' as default
-  cc                      # launch with default account
+  cc use default          # pin native ~/.claude as default
+  cc                      # launch with resolved account
   cc -a personal          # launch with 'personal' account
+  cc -a default           # launch with native ~/.claude (no switching)
   cc --yolo               # launch without permission prompts
   cc -- -h                # show claude's own help
   cc -a work -- -h        # show claude's help under 'work' account
   DEBUG=1 cc              # inline env vars (merged with config files)
-  cc usage                # quota usage for default account
+  cc usage                # quota usage for resolved account
   cc usage --json         # raw JSON from the quota API
   cc -a work usage        # quota usage for 'work' account
 EOF
@@ -132,6 +206,7 @@ EOF
 
 cmd_setup() {
   local name="${1:?Usage: cc setup <name>}"
+  [[ "$name" == "default" ]] && die "'default' is reserved (means native ~/.claude); pick a different name"
   local dir="${ACCOUNTS_DIR}/${name}"
   _link_account_dir "$dir"
   echo "Launching claude for '${name}' — log in to save credentials..."
@@ -141,13 +216,18 @@ cmd_setup() {
 
 cmd_use() {
   local name="${1:?Usage: cc use <name>}"
-  [[ -d "${ACCOUNTS_DIR}/${name}" ]] || die "Unknown account: ${name}"
+  if [[ "$name" != "default" ]]; then
+    [[ -d "${ACCOUNTS_DIR}/${name}" ]] || die "Unknown account: ${name}"
+  fi
   echo "$name" > "$DEFAULT_FILE"
   echo "Default: ${name}"
 }
 
 cmd_list() {
   local default=""; [[ -f "$DEFAULT_FILE" ]] && default=$(< "$DEFAULT_FILE")
+  [[ -z "$default" ]] && default="default"
+  local marker="  "; [[ "$default" == "default" ]] && marker="* "
+  echo "${marker}default  [native ~/.claude]"
   shopt -s nullglob
   for d in "${ACCOUNTS_DIR}"/*/; do
     local name="${d%/}"; name="${name##*/}"
@@ -184,8 +264,14 @@ cmd_launch() {
     esac
   done
   _resolve_account
-  # export CC_ACCOUNT so hook scripts and the statusline can see which account is active.
-  export CC_ACCOUNT="${ACCOUNT:-default}"
+  # Wrapper-managed mode (named account or virtual default): export CC_ACCOUNT
+  # so downstream tools see the active name. Raw passthrough (ACCOUNT empty
+  # AND CLAUDE_CONFIG_DIR set) intentionally leaves CC_ACCOUNT unexported.
+  if [[ -n "$ACCOUNT" ]]; then
+    export CC_ACCOUNT="$ACCOUNT"
+  elif [[ -z "${CLAUDE_CONFIG_DIR:-}" ]]; then
+    export CC_ACCOUNT="default"
+  fi
   exec claude "${claude_args[@]}"
 }
 
