@@ -24,80 +24,18 @@ _link_account_dir() {
   shopt -u dotglob nullglob
 }
 
-case "${1-}" in
-  -h|--help|help)
-    cat <<EOF
-Usage: ${0##*/} [COMMAND] [OPTIONS] [ARGS]
+_load_env() { [[ -f "$1" ]] && set -a && source "$1" && set +a; true; }
 
-Commands:
-  setup <name>        create account dir + launch to authenticate
-  use <name>          set default account
-  list                list accounts with credential status
-  usage               show quota usage for current/specified account
-  -h, --help, help    show this help
-
-Launch options (when no command):
-  -a, --account <name>  use specific account (default: from ~/.claude-accounts/.default)
-  --yolo                --dangerously-skip-permissions
-
-Env config (optional, sourced before launch):
-  ~/.claude-accounts/env          global env vars for all accounts
-  ~/.claude-accounts/<name>/env   per-account env vars (takes precedence)
-
-Examples:
-  cc setup work           # create 'work' account, authenticate
-  cc use work             # set 'work' as default
-  cc                      # launch with default account
-  cc -a personal          # launch with 'personal' account
-  cc --yolo               # launch without permission prompts
-  DEBUG=1 cc              # inline env vars (merged with config files)
-  cc usage                # show quota usage for default account
-  cc -a main usage        # show quota usage for 'main' account
-EOF
-    exit 0
-    ;;
-
-  setup)
-    name="${2:?Usage: cc setup <name>}"
-    dir="${ACCOUNTS_DIR}/${name}"
-    _link_account_dir "$dir"
-    echo "Launching claude for '${name}' — log in to save credentials..."
+_resolve_account() {
+  [[ -z "$ACCOUNT" && -f "$DEFAULT_FILE" ]] && ACCOUNT=$(< "$DEFAULT_FILE")
+  _load_env "${ACCOUNTS_DIR}/env"
+  if [[ -n "$ACCOUNT" ]]; then
+    local dir="${ACCOUNTS_DIR}/${ACCOUNT}"
+    [[ -d "$dir" ]] || die "Unknown account: ${ACCOUNT} (run: cc setup ${ACCOUNT})"
     export CLAUDE_CONFIG_DIR="$dir"
-    exec claude
-    ;;
-
-  use)
-    name="${2:?Usage: cc use <name>}"
-    [[ -d "${ACCOUNTS_DIR}/${name}" ]] || die "Unknown account: ${name}"
-    echo "$name" > "$DEFAULT_FILE"
-    echo "Default: ${name}"
-    exit 0
-    ;;
-
-  list)
-    default=""; [[ -f "$DEFAULT_FILE" ]] && default=$(< "$DEFAULT_FILE")
-    shopt -s nullglob
-    for d in "${ACCOUNTS_DIR}"/*/; do
-      name="${d%/}"; name="${name##*/}"
-      marker="  "; [[ "$name" == "$default" ]] && marker="* "
-      creds="${d}.credentials.json"
-      if [[ -f "$creds" ]]; then
-        tier=$(python3 -c "import json; d=json.load(open('${creds}')); print(d.get('claudeAiOauth',{}).get('rateLimitTier','?'))" 2>/dev/null || echo "?")
-      else
-        tier="no credentials"
-      fi
-      echo "${marker}${name}  [${tier}]"
-    done
-    exit 0
-    ;;
-
-  --)
-    # XXX: We have two cli flags parsing logic
-    # "cc -- -h" will pass to claude
-    # but "cc -a account -- -h" will not work as expected
-    shift
-    ;;
-esac
+    _load_env "${dir}/env"
+  fi
+}
 
 _get_oauth_token() {
   local config_dir="$1"
@@ -128,7 +66,7 @@ _get_oauth_token() {
 }
 
 _show_usage() {
-  local config_dir="$1" account_label="$2"
+  local config_dir="$1" account_label="$2" raw_json="$3"
   local token
   token=$(_get_oauth_token "$config_dir")
   [[ -z "$token" ]] && die "No OAuth token found for account: ${account_label}"
@@ -137,6 +75,12 @@ _show_usage() {
     -H "Authorization: Bearer $token" \
     -H "Content-Type: application/json" \
     https://api.anthropic.com/api/oauth/usage) || die "API request failed"
+
+  if [ -n "$raw_json" ]
+  then
+    printf '%s\n' "$result"
+    return
+  fi
   echo "$result" | jq -e '.five_hour' >/dev/null 2>&1 || die "Unexpected API response: $result"
   echo "$result" > "${config_dir}/usage-cache.json"
   local five_h five_reset seven_d seven_reset
@@ -149,39 +93,119 @@ _show_usage() {
   printf "7d limit : %s%% used  (resets %s)\n" "$seven_d" "$seven_reset"
 }
 
-# Parse launch flags
-ACCOUNT=""; CLAUDE_ARGS=(); SUBCOMMAND=""
+cmd_help() {
+  cat <<EOF
+Usage: ${0##*/} [GLOBAL OPTIONS] [COMMAND] [ARGS]
+
+Commands:
+  setup <name>        create account dir + launch to authenticate
+  use <name>          set default account
+  list                list accounts with credential status
+  usage [--json]      show quota usage for current/specified account
+  -h, --help, help    show this help
+
+Global options (before subcommand):
+  -a, --account <name>  use specific account (default: from ~/.claude-accounts/.default)
+
+Launch options (when no subcommand):
+  --yolo                --dangerously-skip-permissions
+  --                    end of launcher options; remaining args go to claude
+
+Env config (optional, sourced before launch):
+  ~/.claude-accounts/env          global env vars for all accounts
+  ~/.claude-accounts/<name>/env   per-account env vars (takes precedence)
+
+Examples:
+  cc setup work           # create 'work' account, authenticate
+  cc use work             # set 'work' as default
+  cc                      # launch with default account
+  cc -a personal          # launch with 'personal' account
+  cc --yolo               # launch without permission prompts
+  cc -- -h                # show claude's own help
+  cc -a work -- -h        # show claude's help under 'work' account
+  DEBUG=1 cc              # inline env vars (merged with config files)
+  cc usage                # quota usage for default account
+  cc usage --json         # raw JSON from the quota API
+  cc -a work usage        # quota usage for 'work' account
+EOF
+}
+
+cmd_setup() {
+  local name="${1:?Usage: cc setup <name>}"
+  local dir="${ACCOUNTS_DIR}/${name}"
+  _link_account_dir "$dir"
+  echo "Launching claude for '${name}' — log in to save credentials..."
+  export CLAUDE_CONFIG_DIR="$dir"
+  exec claude
+}
+
+cmd_use() {
+  local name="${1:?Usage: cc use <name>}"
+  [[ -d "${ACCOUNTS_DIR}/${name}" ]] || die "Unknown account: ${name}"
+  echo "$name" > "$DEFAULT_FILE"
+  echo "Default: ${name}"
+}
+
+cmd_list() {
+  local default=""; [[ -f "$DEFAULT_FILE" ]] && default=$(< "$DEFAULT_FILE")
+  shopt -s nullglob
+  for d in "${ACCOUNTS_DIR}"/*/; do
+    local name="${d%/}"; name="${name##*/}"
+    local marker="  "; [[ "$name" == "$default" ]] && marker="* "
+    local creds="${d}.credentials.json"
+    local tier
+    if [[ -f "$creds" ]]; then
+      tier=$(python3 -c "import json; d=json.load(open('${creds}')); print(d.get('claudeAiOauth',{}).get('rateLimitTier','?'))" 2>/dev/null || echo "?")
+    else
+      tier="no credentials"
+    fi
+    echo "${marker}${name}  [${tier}]"
+  done
+}
+
+cmd_usage() {
+  local raw_json=""
+  case "${1-}" in
+    "")     ;;
+    --json) raw_json=1 ;;
+    *)      die "Usage: cc usage [--json]" ;;
+  esac
+  _resolve_account
+  _show_usage "${CLAUDE_CONFIG_DIR:-$HOME/.claude}" "${ACCOUNT:-default}" "$raw_json"
+}
+
+cmd_launch() {
+  local claude_args=()
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --yolo) claude_args+=("--dangerously-skip-permissions"); shift ;;
+      --)     shift; claude_args+=("$@"); break ;;
+      *)      claude_args+=("$1"); shift ;;
+    esac
+  done
+  _resolve_account
+  # export CC_ACCOUNT so hook scripts and the statusline can see which account is active.
+  export CC_ACCOUNT="${ACCOUNT:-default}"
+  exec claude "${claude_args[@]}"
+}
+
+# ---- main: phase 1 (global opts) → phase 2 (dispatch) ----
+
+ACCOUNT=""
 while [[ $# -gt 0 ]]; do
   case "$1" in
     -a|--account) ACCOUNT="$2"; shift 2 ;;
-    --yolo)       CLAUDE_ARGS+=("--dangerously-skip-permissions"); shift ;;
-    usage)        SUBCOMMAND="usage"; shift ;;
-    *)            CLAUDE_ARGS+=("$1"); shift ;;
+    *) break ;;
   esac
 done
 
-[[ -z "$ACCOUNT" && -f "$DEFAULT_FILE" ]] && ACCOUNT=$(< "$DEFAULT_FILE")
-
-# Load env files (global, then per-account)
-_load_env() { [[ -f "$1" ]] && set -a && source "$1" && set +a; true; }
-_load_env "${ACCOUNTS_DIR}/env"
-
-if [[ -n "$ACCOUNT" ]]; then
-  dir="${ACCOUNTS_DIR}/${ACCOUNT}"
-  [[ -d "$dir" ]] || die "Unknown account: ${ACCOUNT} (run: cc setup ${ACCOUNT})"
-  export CLAUDE_CONFIG_DIR="$dir"
-  _load_env "${dir}/env"
-fi
-
-if [[ "$SUBCOMMAND" == "usage" ]]; then
-  config_dir="${CLAUDE_CONFIG_DIR:-$HOME/.claude}"
-  _show_usage "$config_dir" "${ACCOUNT:-default}"
-  exit 0
-fi
-
-# export CC_ACCOUNT so we know which account we are using in Claude Code session.
-# This is mainly for hook scripts and statusline script
-export CC_ACCOUNT="${ACCOUNT:-default}"
-exec claude "${CLAUDE_ARGS[@]}"
+case "${1-}" in
+  -h|--help|help) cmd_help ;;
+  setup) shift; cmd_setup "$@" ;;
+  use)   shift; cmd_use   "$@" ;;
+  list)  shift; cmd_list  "$@" ;;
+  usage) shift; cmd_usage "$@" ;;
+  *)     cmd_launch "$@" ;;
+esac
 
 # vim: set et sw=2 :
