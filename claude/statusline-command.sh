@@ -42,7 +42,10 @@ get_claude_usage() {
                 # cc handles auth + API; statusline owns the cache.
                 # `usage --json` honors inherited CC_ACCOUNT / CLAUDE_CONFIG_DIR
                 # per the launcher contract — works in all three modes.
-                LAUNCHER="${DOTFILES:-$HOME/.dotfiles}/bin/claude-launcher"
+                # Prefer PATH (for users who installed claude-launcher into their
+                # own bin/); fall back to the dotfiles install location.
+                LAUNCHER=$(command -v claude-launcher 2>/dev/null \
+                    || echo "${DOTFILES:-$HOME/.dotfiles}/bin/claude-launcher")
                 RESULT=$("$LAUNCHER" usage --json 2>/dev/null)
                 if echo "$RESULT" | jq -e '.five_hour' >/dev/null 2>&1; then
                     echo "$RESULT" > "$USAGE_CACHE"
