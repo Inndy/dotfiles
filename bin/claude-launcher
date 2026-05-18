@@ -90,6 +90,13 @@ EOF
     done
     exit 0
     ;;
+
+  --)
+    # XXX: We have two cli flags parsing logic
+    # "cc -- -h" will pass to claude
+    # but "cc -a account -- -h" will not work as expected
+    shift
+    ;;
 esac
 
 _show_usage() {
