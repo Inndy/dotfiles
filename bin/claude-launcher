@@ -43,30 +43,38 @@
 # Operating modes (consequence of resolution, not separate decisions)
 #   Wrapper-managed   ACCOUNT resolves to a named account dir under
 #                     $ACCOUNTS_DIR. Wrapper exports $CC_ACCOUNT, sets
-#                     $CLAUDE_CONFIG_DIR to the account dir, and
-#                     sources both env files (see below).
-#
+#                     $CLAUDE_CONFIG_DIR to the account dir, sources
+#                     both env files.
 #   Virtual default   ACCOUNT resolves to native (`-a default`, or no
-#                     signal at all). $CLAUDE_CONFIG_DIR is unset,
-#                     $CC_ACCOUNT="default", only the global env file
-#                     is sourced.
-#
+#                     signal at all). $CLAUDE_CONFIG_DIR unset,
+#                     $CC_ACCOUNT="default", only global env sourced.
 #   Raw passthrough   $CLAUDE_CONFIG_DIR was pre-set by the caller.
-#                     The wrapper keeps the dir as-is and leaves any
-#                     inherited $CC_ACCOUNT untouched — in this mode
-#                     $CC_ACCOUNT is a display-only label (like a venv
-#                     name), not a resolution input. Only the global
-#                     env file is sourced; per-account env is the
-#                     caller's responsibility now that they took
-#                     control of the dir. `cc usage` still works
-#                     against the chosen dir.
+#                     Dir kept as-is, inherited $CC_ACCOUNT left
+#                     untouched as a display-only label (like a venv
+#                     name). Only global env sourced — per-account env
+#                     is the caller's responsibility now. `cc usage`
+#                     still works against the chosen dir.
 #
-# Deactivation
-#   `cc -a default` always unsets $CLAUDE_CONFIG_DIR — even when one
-#   was inherited — so nested calls can drop back to native.
+# Behavior table (PREFIX = ~/.claude-accounts; `-` = unset; `*` = any value)
+#
+#   inputs                                output env passed to claude
+#   `cc -a`   CC_ACCOUNT   CCD              CC_ACCOUNT     CCD               behavior
+#   -------   ----------   ------           ----------     ---------------   -----------------------------
+#   acc_a     *            *                acc_a          PREFIX/acc_a      -a wins: activate acc_a
+#   default   *            *                default        -                 -a wins: deactivate to native
+#   -         acc_b        -                acc_b          PREFIX/acc_b      CC_ACCOUNT drives activation
+#   -         default      -                default        -                 virtual default (native)
+#   -         acc_b        /tmp/b           acc_b          /tmp/b            raw passthrough; acc_b = label
+#   -         default      /tmp/b           default        /tmp/b            raw passthrough; default label
+#   -         -            /tmp/b           -              /tmp/b            raw passthrough; no label
+#   -         -            -                <see below>    <see below>       fall through to .default file
+#
+#   Last row depends on ~/.claude-accounts/.default contents:
+#     real account name  →  CC_ACCOUNT=<name>,   CCD=PREFIX/<name>
+#     "default" / absent →  CC_ACCOUNT="default", CCD unset (native)
 #
 # Env config (sourced before launch; shell syntax)
-#   ~/.claude-accounts/env           global; sourced in both modes
+#   ~/.claude-accounts/env           global; sourced in all modes
 #   ~/.claude-accounts/<name>/env    per-account; overrides global;
 #                                    sourced only in wrapper-managed
 #                                    mode
