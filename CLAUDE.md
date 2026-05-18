@@ -38,7 +38,7 @@ This is the most non-obvious component. It's a multi-account wrapper for the `cl
 - `cc -a <name>` overrides the default for one invocation.
 - `cc usage [--json]` fetches the OAuth quota API (token from `.credentials.json` or macOS Keychain). Pure fetch+display — no file side effects. The statusline owns the cache file separately.
 
-**Read the contract docblock at the top of the script before changing resolution logic.** It defines: claude itself only reads `$CLAUDE_CONFIG_DIR`; `$CC_ACCOUNT` and the rest are wrapper-internal; the reserved virtual `default` name; the resolution precedence (`-a` > inherited `CC_ACCOUNT` > `.default` file > virtual `default`); the two operating modes (wrapper-managed vs raw passthrough when caller pre-sets `CLAUDE_CONFIG_DIR`); and the `cc -a default` deactivation rule. The docblock is the source of truth — don't duplicate it here.
+**Read the contract docblock at the top of the script before changing resolution logic.** It defines: claude itself only reads `$CLAUDE_CONFIG_DIR`; `$CC_ACCOUNT` and the rest are wrapper-internal; the reserved virtual `default` name; the resolution precedence (`-a` > pre-set `$CLAUDE_CONFIG_DIR` > inherited `$CC_ACCOUNT` > `.default` file > virtual `default` — more-specific overrides less-specific, args beat env); the three operating modes (wrapper-managed, virtual default, raw passthrough); the env-file no-override rule; and the `cc -a default` deactivation rule. The docblock is the source of truth — don't duplicate it here.
 
 When editing the launcher, preserve the **two-phase argument parser**: phase 1 consumes global options (`-a/--account`) before the subcommand, phase 2 dispatches to `cmd_*` functions. Anything after `--` is passed through to `claude` verbatim.
 
