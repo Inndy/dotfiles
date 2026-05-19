@@ -161,6 +161,27 @@ require("lazy").setup({
             end, { buffer = true, silent = true, desc = "LSP open reference in tab" })
           end,
         })
+
+        vim.opt.completeopt = { "menu", "menuone", "noselect" }
+
+        vim.api.nvim_create_autocmd('LspAttach', {
+          callback = function(args)
+            local client = vim.lsp.get_client_by_id(args.data.client_id)
+            if not client then return end
+
+            -- Enable Neovim's native trigger mechanism (e.g. typing .)
+            vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
+
+            -- 3. FIX: Bind Ctrl+n and Ctrl+p to invoke the modern completion engine manually
+            vim.keymap.set('i', '<C-n>', function()
+              vim.lsp.completion.get()
+            end )
+            -- Also enable a manual trigger fallback for convenience
+            vim.keymap.set('i', '<C-Space>', function()
+              vim.lsp.completion.get()
+            end )
+          end,
+        })
       end,
     },
 
