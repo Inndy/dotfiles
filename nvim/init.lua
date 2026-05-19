@@ -497,24 +497,17 @@ vim.keymap.set("n", "<leader>j", "<C-w>j", { desc = "Move to lower window" })
 vim.keymap.set("n", "<leader>k", "<C-w>k", { desc = "Move to upper window" })
 vim.keymap.set("n", "<leader>l", "<C-w>l", { desc = "Move to right window" })
 
-vim.keymap.set({ "n", "v" }, "<leader>y", '"*y', { desc = "Yank to system clipboard" })
-vim.keymap.set("n", "<leader>p", '"*p', { desc = "Paste from system clipboard" })
+vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { desc = "Yank to system clipboard" })
+vim.keymap.set("n", "<leader>p", '"+p', { desc = "Paste from system clipboard" })
 
 vim.g.surround_33 = "<!-- \r -->" -- '!'
 vim.g.surround_42 = "/* \r */" -- '*'
 
+local is_gui = vim.fn.has("gui_running") == 1 or vim.g.neovide == true
+
 if vim.fn.executable("win32yank.exe") == 1 then
-  vim.g.clipboard = {
-    name = "win32yank",
-    copy = {
-      ["*"] = "win32yank.exe -i --crlf",
-    },
-    paste = {
-      ["*"] = "win32yank.exe -o --lf",
-    },
-    cache_enabled = 0,
-  }
-elseif vim.env.SSH_TTY or vim.env.SSH_CONNECTION or vim.env.TMUX then
+  vim.g.clipboard = "win32yank"
+elseif not is_gui and (vim.env.SSH_TTY or vim.env.SSH_CONNECTION) then
   vim.g.clipboard = "osc52"
 end
 
@@ -530,17 +523,17 @@ vim.cmd([[
   augroup END
 ]])
 
-if vim.fn.has("gui_running") == 1 then
+if is_gui then
   if vim.loop.os_uname().sysname == "Windows_NT" then
     -- insert mode: ctrl-shift-v
-    vim.keymap.set("i", "<C-S-v>", "<C-r>*", { noremap = true, silent = true, desc = "Paste from clipboard" })
+    vim.keymap.set("i", "<C-S-v>", "<C-r>+", { noremap = true, silent = true, desc = "Paste from clipboard" })
     vim.opt.guifont = "IntoneMono Nerd Font,Cascadia Mono NF,Intel One Mono,Cascadia Mono:h12"
   end
   if vim.loop.os_uname().sysname == "Darwin" then
     -- insert mode: command-v
-    vim.keymap.set("i", "<D-v>", "<C-r>*", { noremap = true, silent = true, desc = "Paste from clipboard" })
+    vim.keymap.set("i", "<D-v>", "<C-r>+", { noremap = true, silent = true, desc = "Paste from clipboard" })
     vim.opt.guifont = "IntoneMono Nerd Font,InconsolataGo Nerd Font Mono:h18"
   end
 end
 
--- vim: set et sw=2 :
+-- vim: set et sw=2 ft=lua :
