@@ -94,6 +94,25 @@ DEFAULT_FILE="${ACCOUNTS_DIR}/.default"
 
 die() { echo "${0##*/}: $*" >&2; exit 1; }
 
+_spawn_headless() {
+  # Spawns "$@" in a detached background session and waits for it to exit.
+  # First arg is a session name used by the multiplexer.
+  # TODO: add GNU screen fallback for environments without tmux
+  local session="$1"; shift
+  if command -v tmux &>/dev/null; then
+    tmux kill-session -t "=${session}" 2>/dev/null || true
+    local eargs=()
+    local v
+    for v in CC_HI_SESSION CLAUDE_CONFIG_DIR CC_ACCOUNT; do
+      [[ -n "${!v:-}" ]] && eargs+=(-e "${v}=${!v}")
+    done
+    tmux new-session -d -s "$session" "${eargs[@]}" -- "$@"
+    while tmux has-session -t "=${session}" 2>/dev/null; do sleep 0.2; done
+  else
+    "$@"
+  fi
+}
+
 _link_account_dir() {
   local dir="$1"
   mkdir -p "$dir"
@@ -305,7 +324,7 @@ cmd_hi() {
   # bash -c forks a child; $$ inside is that child's PID. exec claude then
   # replaces the child in-place, so CC_HI_SESSION_PID == claude's PID.
   mkdir -p /tmp/.cc-hi-workdir
-  bash -c 'cd /tmp/.cc-hi-workdir && export CC_HI_SESSION_PID=$$; exec claude --model haiku "Reply with exactly one word: Hi"' || true
+  _spawn_headless "cc-hi" bash -c 'cd /tmp/.cc-hi-workdir && export CC_HI_SESSION_PID=$$; exec claude --model haiku "Reply with exactly one word: Hi"' || true
   # Cleanup after claude fully exits — the stop hook only sends SIGINT; if we
   # deleted here in the hook, claude would recreate the dir during its own
   # shutdown flush. Deleting here guarantees we run after the process is gone.
