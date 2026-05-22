@@ -2,3 +2,5 @@
 !.gitignore
 !CLAUDE.md
 !commands
+!telegram-notify.py
+!install-settings.py
