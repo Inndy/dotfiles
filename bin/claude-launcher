@@ -220,6 +220,7 @@ Commands:
   use <name>          set default account
   list                list accounts with credential status
   usage [--json]      show quota usage for current/specified account
+  hi                  trigger 5h window (Haiku ping; auto-closes via stop hook)
   -h, --help, help    show this help
 
 Global options (before subcommand):
@@ -293,6 +294,39 @@ cmd_list() {
   done
 }
 
+cmd_hi() {
+  _resolve_account
+  if [[ -n "$ACCOUNT" ]]; then
+    export CC_ACCOUNT="$ACCOUNT"
+  elif [[ -z "${CLAUDE_CONFIG_DIR:-}" ]]; then
+    export CC_ACCOUNT="default"
+  fi
+  export CC_HI_SESSION=1
+  # bash -c forks a child; $$ inside is that child's PID. exec claude then
+  # replaces the child in-place, so CC_HI_SESSION_PID == claude's PID.
+  mkdir -p /tmp/.cc-hi-workdir
+  bash -c 'cd /tmp/.cc-hi-workdir && export CC_HI_SESSION_PID=$$; exec claude --model haiku "Reply with exactly one word: Hi"' || true
+  # Cleanup after claude fully exits — the stop hook only sends SIGINT; if we
+  # deleted here in the hook, claude would recreate the dir during its own
+  # shutdown flush. Deleting here guarantees we run after the process is gone.
+  local config_dir="${CLAUDE_CONFIG_DIR:-$HOME/.claude}"
+  local project_dir="${config_dir}/projects/-tmp--cc-hi-workdir"
+  local f session_id
+  for f in "${project_dir}"/*.jsonl; do
+    [[ -f "$f" ]] || continue
+    session_id="${f%.jsonl}"; session_id="${session_id##*/}"
+    [[ -n "$session_id" ]] && rm -rf "${config_dir}/file-history/${session_id}"
+  done
+  rm -rf "$project_dir"
+  cmd_usage
+}
+
+cmd_hi_cleanup_hook() {
+  [[ "${CC_HI_SESSION:-}" == "1" ]] || return 0
+  cat > /dev/null
+  [[ -n "${CC_HI_SESSION_PID:-}" ]] && kill -INT "$CC_HI_SESSION_PID" 2>/dev/null || true
+}
+
 cmd_usage() {
   local raw_json=""
   case "${1-}" in
@@ -343,7 +377,9 @@ case "${1-}" in
   use)   shift; cmd_use   "$@" ;;
   list)  shift; cmd_list  "$@" ;;
   usage) shift; cmd_usage "$@" ;;
-  *)     cmd_launch "$@" ;;
+  hi)              cmd_hi ;;
+  hi-cleanup-hook) cmd_hi_cleanup_hook ;;
+  *)               cmd_launch "$@" ;;
 esac
 
 # vim: set et sw=2 :
