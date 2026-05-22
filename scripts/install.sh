@@ -146,3 +146,5 @@ if [ -z "$NO_VIM" ]; then
 		ln -s "$NVIM_DOTFILES" "$NVIM_CONFIG"
 	fi
 fi
+
+python3 "$DOTFILES/claude/install-settings.py"
