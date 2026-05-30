@@ -11,8 +11,8 @@
 
 input=$(cat)
 cwd=$(echo "$input" | jq -r '.workspace.current_dir // .cwd')
-
-env > /tmp/cc-env.txt
+model=$(echo "$input" | jq -r '.model.display_name // empty')
+model=${model/ (1M context)/ [1M]}
 
 reset="\e[00m"
 fg_yellow="\e[33m"
@@ -22,6 +22,7 @@ fg_orange="\e[38;5;208m"
 fg_magenta="\e[38;5;177m"
 fg_cyan="\e[38;5;81m"
 fg_red="\e[38;5;196m"
+fg_purple="\e[38;5;141m"
 
 CLAUDE_DIR="${CLAUDE_CONFIG_DIR:-$HOME/.claude}"
 # `cc-` prefix flags these as wrapper-owned, not part of claude itself.
@@ -96,8 +97,11 @@ fi
 account_part=""
 [ -n "$CC_ACCOUNT" ] && account_part=" ${fg_magenta}«${CC_ACCOUNT}»${reset}"
 
+model_part=""
+[ -n "$model" ] && model_part=" ${fg_purple}${model}${reset}"
+
 usage_part=""
 usage_text=$(get_claude_usage)
 [ -n "$usage_text" ] && usage_part=" $usage_text"
 
-printf "%b %b%b %b%b%b" "$time_part" "$host_part" "$account_part" "$cwd_part" "$git_part" "$usage_part"
+printf "%b %b%b %b%b%b%b" "$time_part" "$host_part" "$account_part" "$cwd_part" "$git_part" "$model_part" "$usage_part"
