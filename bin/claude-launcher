@@ -148,14 +148,22 @@ _spawn_headless() {
   # TODO: add GNU screen fallback for environments without tmux
   local session="$1"; shift
   if command -v tmux &>/dev/null; then
-    tmux kill-session -t "=${session}" 2>/dev/null || true
+    local socket="${session}-$$-${RANDOM}"
     local eargs=()
     local v
     for v in CC_HI_SESSION CLAUDE_CONFIG_DIR CC_ACCOUNT; do
       [[ -n "${!v:-}" ]] && eargs+=(-e "${v}=${!v}")
     done
-    tmux new-session -d -s "$session" "${eargs[@]}" -- "$@"
-    while tmux has-session -t "=${session}" 2>/dev/null; do sleep 0.2; done
+    local pane pane_dead
+    if ! pane=$(tmux -L "$socket" -f /dev/null new-session -d -P -F '#{pane_id}' -s "$session" "${eargs[@]}" -- "$@"); then
+      tmux -L "$socket" kill-server 2>/dev/null || true
+      return 1
+    fi
+    while pane_dead=$(tmux -L "$socket" display-message -p -t "$pane" '#{pane_dead}' 2>/dev/null); do
+      [[ "$pane_dead" == "0" ]] || break
+      sleep 0.2
+    done
+    tmux -L "$socket" kill-server 2>/dev/null || true
   else
     "$@"
   fi
@@ -425,6 +433,22 @@ cmd_list() {
   done
 }
 
+_cleanup_hi_project_dir() {
+  local config_dir="$1" workdir="$2"
+  local project_slug="${workdir//[^A-Za-z0-9_-]/-}"
+  local project_dir="${config_dir}/projects/${project_slug}"
+  local f session_id
+
+  shopt -s nullglob
+  for f in "${project_dir}"/*.jsonl; do
+    [[ -f "$f" ]] || continue
+    session_id="${f%.jsonl}"; session_id="${session_id##*/}"
+    [[ -n "$session_id" ]] && rm -rf "${config_dir}/file-history/${session_id}"
+  done
+  shopt -u nullglob
+  rm -rf "$project_dir"
+}
+
 cmd_hi() {
   _resolve_account
   if [[ -n "$ACCOUNT" ]]; then
@@ -433,22 +457,21 @@ cmd_hi() {
     export CC_ACCOUNT="default"
   fi
   export CC_HI_SESSION=1
+  local run_id="$$-${RANDOM}"
+  local workdir
+  workdir=$(mktemp -d "/tmp/.cc-hi-workdir.${run_id}.XXXXXX") || die "Failed to create cc hi workdir"
   # bash -c forks a child; $$ inside is that child's PID. exec claude then
   # replaces the child in-place, so CC_HI_SESSION_PID == claude's PID.
-  mkdir -p /tmp/.cc-hi-workdir
-  _spawn_headless "cc-hi" bash -c 'cd /tmp/.cc-hi-workdir && export CC_HI_SESSION_PID=$$; exec claude --model haiku "Reply with exactly one word: Hi"' || true
+  _spawn_headless "cc-hi-${run_id}" bash -c 'cd "$1" && export CC_HI_SESSION_PID=$$; exec claude --model haiku "Reply with exactly one word: Hi"' bash "$workdir" || true
   # Cleanup after claude fully exits — the stop hook only sends SIGINT; if we
   # deleted here in the hook, claude would recreate the dir during its own
   # shutdown flush. Deleting here guarantees we run after the process is gone.
   local config_dir="${CLAUDE_CONFIG_DIR:-$HOME/.claude}"
-  local project_dir="${config_dir}/projects/-tmp--cc-hi-workdir"
-  local f session_id
-  for f in "${project_dir}"/*.jsonl; do
-    [[ -f "$f" ]] || continue
-    session_id="${f%.jsonl}"; session_id="${session_id##*/}"
-    [[ -n "$session_id" ]] && rm -rf "${config_dir}/file-history/${session_id}"
-  done
-  rm -rf "$project_dir"
+  local physical_workdir
+  physical_workdir=$(cd "$workdir" && pwd -P 2>/dev/null || printf '%s' "$workdir")
+  _cleanup_hi_project_dir "$config_dir" "$workdir"
+  [[ "$physical_workdir" == "$workdir" ]] || _cleanup_hi_project_dir "$config_dir" "$physical_workdir"
+  rm -rf "$workdir"
   cmd_usage
 }
 
