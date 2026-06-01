@@ -251,6 +251,62 @@ _get_oauth_token() {
   echo "$token"
 }
 
+_human_reset_time() {
+  local iso="$1"
+
+  if ! command -v python3 >/dev/null 2>&1; then
+    printf '%s\n' "$iso"
+    return
+  fi
+
+  python3 - "$iso" <<'PY' || printf '%s\n' "$iso"
+import sys
+from datetime import datetime, timezone
+
+iso = sys.argv[1]
+
+try:
+    reset = datetime.fromisoformat(iso)
+except ValueError:
+    print(iso)
+    raise SystemExit(0)
+
+if reset.tzinfo is None:
+    reset = reset.replace(tzinfo=timezone.utc)
+
+now = datetime.now(timezone.utc)
+local_now = now.astimezone()
+local_reset = reset.astimezone()
+
+seconds = int((reset - now).total_seconds())
+sign = "+"
+if seconds < 0:
+    sign = "-"
+    seconds = abs(seconds)
+
+days, rem = divmod(seconds, 86400)
+hours, rem = divmod(rem, 3600)
+minutes, seconds = divmod(rem, 60)
+
+parts = []
+if days:
+    parts.append(f"{days}d")
+if hours:
+    parts.append(f"{hours}h")
+if minutes:
+    parts.append(f"{minutes}m")
+if seconds or not parts:
+    parts.append(f"{seconds}s")
+
+if local_reset.date() == local_now.date():
+    when = local_reset.strftime("%H:%M")
+else:
+    when = local_reset.strftime("%m/%d %H:%M")
+
+print(f"{when} ({sign}{''.join(parts)})")
+PY
+}
+
 _show_usage() {
   local config_dir="$1" account_label="$2" raw_json="$3"
   local token
@@ -282,8 +338,8 @@ _show_usage() {
   seven_d=$(echo "$result"     | jq -r '.seven_day.utilization // "?"')
   seven_reset=$(echo "$result" | jq -r '.seven_day.resets_at // "?"')
   echo "Account  : ${account_label}"
-  printf "5h limit : %s%% used  (resets %s)\n" "$five_h" "$five_reset"
-  printf "7d limit : %s%% used  (resets %s)\n" "$seven_d" "$seven_reset"
+  printf "5h limit : %s%% used  resets %s\n" "$five_h" "$(_human_reset_time "$five_reset")"
+  printf "7d limit : %s%% used  resets %s\n" "$seven_d" "$(_human_reset_time "$seven_reset")"
 }
 
 cmd_help() {
