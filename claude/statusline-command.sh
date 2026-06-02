@@ -13,6 +13,7 @@ input=$(cat)
 cwd=$(echo "$input" | jq -r '.workspace.current_dir // .cwd')
 model=$(echo "$input" | jq -r '.model.display_name // empty')
 model=${model/ (1M context)/ [1M]}
+transcript_path=$(echo "$input" | jq -r '.transcript_path // empty')
 
 reset="\e[00m"
 fg_yellow="\e[33m"
@@ -72,7 +73,32 @@ get_claude_usage() {
     else color="$fg_cyan"
     fi
 
-    printf "%b[5h:%d%% 7d:%d%%]%b" "$color" "$five_h" "$seven_d" "$reset"
+    printf "%b5h:%d%% 7d:%d%%%b" "$color" "$five_h" "$seven_d" "$reset"
+}
+
+get_context_usage() {
+    [ -z "$transcript_path" ] || [ ! -f "$transcript_path" ] && return
+
+    local tokens
+    tokens=$(tac "$transcript_path" 2>/dev/null | jq -rc \
+        'select(.type=="assistant" and (.isSidechain|not) and .message.usage!=null)
+         | (.message.usage.input_tokens + .message.usage.cache_read_input_tokens
+            + .message.usage.cache_creation_input_tokens)' 2>/dev/null | head -1)
+    [[ "$tokens" =~ ^[0-9]+$ ]] || return
+
+    local window=200000
+    [[ "$model" == *1M* ]] && window=1000000
+
+    local pct k color
+    pct=$(( tokens * 100 / window ))
+    k=$(( (tokens + 500) / 1000 ))
+    if   [ "$pct" -ge 90 ]; then color="$fg_red"
+    elif [ "$pct" -ge 75 ]; then color="$fg_orange"
+    elif [ "$pct" -ge 50 ]; then color="$fg_yellow"
+    else color="$fg_cyan"
+    fi
+
+    printf "%bctx:%dk %d%%%b" "$color" "$k" "$pct" "$reset"
 }
 
 time_part="${fg_yellow}[$(date '+%H:%M')]${reset}"
@@ -100,8 +126,15 @@ account_part=""
 model_part=""
 [ -n "$model" ] && model_part=" ${fg_purple}${model}${reset}"
 
-usage_part=""
-usage_text=$(get_claude_usage)
-[ -n "$usage_text" ] && usage_part=" $usage_text"
+status_part=""
+for seg in "$(get_claude_usage)" "$(get_context_usage)"; do
+    [ -z "$seg" ] && continue
+    if [ -z "$status_part" ]; then
+        status_part="$seg"
+    else
+        status_part="$status_part · $seg"
+    fi
+done
+[ -n "$status_part" ] && status_part=" [$status_part]"
 
-printf "%b %b%b %b%b%b%b" "$time_part" "$host_part" "$account_part" "$cwd_part" "$git_part" "$model_part" "$usage_part"
+printf "%b %b%b %b%b%b%b" "$time_part" "$host_part" "$account_part" "$cwd_part" "$git_part" "$model_part" "$status_part"
