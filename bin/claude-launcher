@@ -208,11 +208,19 @@ _show_usage() {
   local token
   token=$(_get_oauth_token "$config_dir")
   [[ -z "$token" ]] && die "No OAuth token found for account: ${account_label}"
-  local result
-  result=$(curl -sf --max-time 10 \
+  local result http
+  result=$(curl -s --max-time 10 -w $'\n%{http_code}' \
     -H "Authorization: Bearer $token" \
     -H "Content-Type: application/json" \
-    https://api.anthropic.com/api/oauth/usage) || die "API request failed"
+    https://api.anthropic.com/api/oauth/usage) || die "API request failed (network error)"
+  http="${result##*$'\n'}"; result="${result%$'\n'*}"
+  if [[ "$http" != "200" ]]; then
+    case "$http" in
+      401) die "API returned 401 for '${account_label}' — token expired; run: cc setup ${account_label}" ;;
+      429) die "API returned 429 for '${account_label}' — rate limited, try again later" ;;
+      *)   die "API returned HTTP ${http} for '${account_label}': ${result}" ;;
+    esac
+  fi
 
   if [ -n "$raw_json" ]
   then
