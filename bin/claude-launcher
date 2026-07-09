@@ -88,7 +88,7 @@
 
 set -euo pipefail
 
-CLAUDE_BASE="${HOME}/.dotfiles/claude"
+CLAUDE_BASE="${HOME}/.claude"
 ACCOUNTS_DIR="${HOME}/.claude-accounts"
 DEFAULT_FILE="${ACCOUNTS_DIR}/.default"
 
