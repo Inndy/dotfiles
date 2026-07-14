@@ -94,6 +94,54 @@ DEFAULT_FILE="${ACCOUNTS_DIR}/.default"
 
 die() { echo "${0##*/}: $*" >&2; exit 1; }
 
+# All JSON reads below use jq. On a box without jq, shim the SUBSET this script
+# uses via python3 (python3 is far likelier than jq to be present on a machine
+# already running claude). The shim runs ONLY where jq is absent, so it is never
+# exercised on a dev box that has jq — a divergence would surface only on
+# jq-less hosts. MAINTAINER: the shim understands just `-r` and a
+# `.dotted.path` filter with an optional `// "str"` or `// empty` fallback. Any
+# richer jq filter (arrays, select, pipes, @-filters) makes it die with
+# "jq-shim: unsupported". Extend the shim or require real jq; never let it
+# silently diverge.
+if ! command -v jq >/dev/null 2>&1; then
+  jq() {
+    local raw=0
+    while [[ "${1:-}" == -* ]]; do
+      case "$1" in
+        -r) raw=1 ;;
+        *)  die "jq-shim: unsupported flag: $1" ;;
+      esac
+      shift
+    done
+    python3 -c '
+import json, sys
+filt, raw = sys.argv[1], sys.argv[2] == "1"
+src = sys.argv[3:]
+path, sep, dflt = filt.partition("//")
+path = path.strip()
+if not path.startswith(".") or any(c in path for c in "[]|()?*@ \t"):
+    sys.stderr.write("jq-shim: unsupported filter: %s\n" % filt)
+    sys.exit(2)
+default = None
+if sep:
+    d = dflt.strip()
+    default = "" if d == "empty" else d.strip("\x27\"")
+try:
+    doc = json.load(open(src[0])) if src else json.load(sys.stdin)
+except Exception:
+    sys.exit(4)
+node = doc
+for key in [k for k in path.lstrip(".").split(".") if k]:
+    node = node.get(key) if isinstance(node, dict) else None
+    if node is None:
+        break
+if node is None:
+    node = default if default is not None else ""
+print(node if raw else json.dumps(node))
+' "$1" "$raw" "${@:2}"
+  }
+fi
+
 _spawn_headless() {
   # Spawns "$@" in a detached background session and waits for it to exit.
   # First arg is a session name used by the multiplexer.
@@ -227,11 +275,11 @@ _show_usage() {
     printf '%s\n' "$result"
     return
   fi
-  echo "$result" | jq -e '.five_hour' >/dev/null 2>&1 || die "Unexpected API response: $result"
   local five_h five_reset seven_d seven_reset
-  five_h=$(echo "$result"   | jq -r '.five_hour.utilization // "?"')
+  five_h=$(echo "$result"      | jq -r '.five_hour.utilization // empty')
+  [[ -z "$five_h" ]] && die "Unexpected API response: $result"
   five_reset=$(echo "$result"  | jq -r '.five_hour.resets_at // "?"')
-  seven_d=$(echo "$result"  | jq -r '.seven_day.utilization // "?"')
+  seven_d=$(echo "$result"     | jq -r '.seven_day.utilization // "?"')
   seven_reset=$(echo "$result" | jq -r '.seven_day.resets_at // "?"')
   echo "Account  : ${account_label}"
   printf "5h limit : %s%% used  (resets %s)\n" "$five_h" "$five_reset"
@@ -313,7 +361,7 @@ cmd_list() {
     local creds="${d}.credentials.json"
     local tier
     if [[ -f "$creds" ]]; then
-      tier=$(python3 -c "import json; d=json.load(open('${creds}')); print(d.get('claudeAiOauth',{}).get('rateLimitTier','?'))" 2>/dev/null || echo "?")
+      tier=$(jq -r '.claudeAiOauth.rateLimitTier // "?"' "$creds" 2>/dev/null || echo "?")
     else
       tier="no credentials"
     fi
