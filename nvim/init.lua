@@ -222,7 +222,7 @@ require("lazy").setup({
     {
       "nvim-tree/nvim-tree.lua",
       version = "*",
-      dependencies = { "auditview.nvim" },
+--    dependencies = { "auditview.nvim" },
       cmd = { "NvimTreeToggle" },
       keys = {
         { "<F10>", "<cmd>NvimTreeToggle<CR>", mode = "n", desc = "Toggle NvimTree" },
@@ -264,15 +264,15 @@ require("lazy").setup({
           vim.keymap.set("n", "<MiddleRelease>", api.node.open.tab, opts("Open: New Tab"))
         end,
       },
-      config = function(_, opts)
-        opts.renderer.decorators = {
-          "Git", "Open", "Hidden", "Modified",
-          "Bookmark", "Diagnostics", "Copied",
-          require("auditview.integrations.nvim_tree").setup(),
-          "Cut",
-        }
-        require("nvim-tree").setup(opts)
-      end,
+--    config = function(_, opts)
+--      opts.renderer.decorators = {
+--        "Git", "Open", "Hidden", "Modified",
+--        "Bookmark", "Diagnostics", "Copied",
+--        require("auditview.integrations.nvim_tree").setup(),
+--        "Cut",
+--      }
+--      require("nvim-tree").setup(opts)
+--    end,
     },
     {
       "junegunn/vim-easy-align",
@@ -398,6 +398,7 @@ require("lazy").setup({
     {
       dir = "/home/inndy/auditview-nvim/nvim",
       name = "auditview.nvim",
+      enabled = false,
       event = "BufReadPre",
       cmd = {
         "AuditviewMark", "AuditviewUnmark", "AuditviewProgress",
